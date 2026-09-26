@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "target": "LN_IC50",
+  "group": "SANGER_MODEL_ID",
+  "qc_rmse_max": 0.3,
+  "qc_sensitivity_thresholds": [0.15, 0.2, 0.25, 0.3],
+  "test_size": 0.2,
+  "cv_folds": 4,
+  "metadata_features": ["DRUG_ID", "CANCER_TYPE"],
+  "molecular_drug_ids": [],
+  "molecular_max_drugs": 3,
+  "molecular_min_development_lines": 25,
+  "molecular_min_test_lines": 5,
+  "bootstrap_repetitions": 1000
+}
