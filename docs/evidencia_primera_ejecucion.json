@@ -1,0 +1,482 @@
+{
+  "description": "Instantánea documental de la primera ejecución. No reentrena ni cambia el protocolo.",
+  "captured_at_utc": "2026-09-26T03:58:57.896908+00:00",
+  "input_manifest": [
+    {
+      "file": "GDSC2_fitted_dose_response_27Oct23.xlsx",
+      "bytes": 22112537,
+      "sha256": "0e99120a14a003dcbd3c27c020f1cfd35e38ee091067a2406f66c0d4dbc1c899",
+      "origin": "Adjunto aportado por el usuario; identidad con distribución oficial no verificada"
+    },
+    {
+      "file": "GBMGliomafiltrado.csv",
+      "bytes": 1685689,
+      "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+      "origin": "Adjunto aportado por el usuario; identidad con distribución oficial no verificada"
+    },
+    {
+      "file": "GBMGliomafiltrado.xlsx",
+      "bytes": 1069474,
+      "sha256": "6c8fb03a46cf8878255154611fa19f5879f4cfd6f11fa70e848c216ae3d8cf4e",
+      "origin": "Adjunto aportado por el usuario; identidad con distribución oficial no verificada"
+    },
+    {
+      "file": "Aislados T98G - Hoja 1.csv",
+      "bytes": 39175,
+      "sha256": "575f6ee3414bdcc81e57e509f9e9fd44b019fcd36c894b450e18ffec5845d377",
+      "origin": "Adjunto aportado por el usuario; identidad con distribución oficial no verificada"
+    }
+  ],
+  "relationships": {
+    "glioma_csv_equals_xlsx": true,
+    "glioma_subset_gdsc2": true,
+    "t98g_subset_glioma": true,
+    "float_tolerance": 1e-12,
+    "originals_changed": false
+  },
+  "inventory": [
+    {
+      "dataset": "gdsc2",
+      "file": "GDSC2_fitted_dose_response_27Oct23.xlsx",
+      "rows": 242036,
+      "columns": 16,
+      "cell_lines": 969,
+      "drug_ids": 295,
+      "drug_names": 286,
+      "duplicate_rows": 0,
+      "duplicate_curve_ids": 0,
+      "duplicate_model_drug": 0
+    },
+    {
+      "dataset": "glioma_csv",
+      "file": "GBMGliomafiltrado.csv",
+      "rows": 12001,
+      "columns": 16,
+      "cell_lines": 51,
+      "drug_ids": 295,
+      "drug_names": 286,
+      "duplicate_rows": 0,
+      "duplicate_curve_ids": 0,
+      "duplicate_model_drug": 0
+    },
+    {
+      "dataset": "glioma_xlsx",
+      "file": "GBMGliomafiltrado.xlsx",
+      "rows": 12001,
+      "columns": 16,
+      "cell_lines": 51,
+      "drug_ids": 295,
+      "drug_names": 286,
+      "duplicate_rows": 0,
+      "duplicate_curve_ids": 0,
+      "duplicate_model_drug": 0
+    },
+    {
+      "dataset": "t98g",
+      "file": "Aislados T98G - Hoja 1.csv",
+      "rows": 280,
+      "columns": 16,
+      "cell_lines": 1,
+      "drug_ids": 280,
+      "drug_names": 271,
+      "duplicate_rows": 0,
+      "duplicate_curve_ids": 0,
+      "duplicate_model_drug": 0
+    }
+  ],
+  "quality_counts": [
+    {
+      "rows": 0,
+      "flag": "invalid_target"
+    },
+    {
+      "rows": 0,
+      "flag": "invalid_rmse"
+    },
+    {
+      "rows": 0,
+      "flag": "invalid_auc"
+    },
+    {
+      "rows": 0,
+      "flag": "invalid_concentrations"
+    },
+    {
+      "rows": 0,
+      "flag": "missing_key"
+    },
+    {
+      "rows": 12001,
+      "flag": "keep"
+    },
+    {
+      "rows": 36,
+      "flag": "ic50_below_range"
+    },
+    {
+      "rows": 9181,
+      "flag": "ic50_above_range"
+    }
+  ],
+  "rmse_sensitivity": [
+    {
+      "rmse_max": 0.15,
+      "retained_rows": 11327,
+      "removed_rows": 674,
+      "retained_lines": 51
+    },
+    {
+      "rmse_max": 0.2,
+      "retained_rows": 11839,
+      "removed_rows": 162,
+      "retained_lines": 51
+    },
+    {
+      "rmse_max": 0.25,
+      "retained_rows": 11968,
+      "removed_rows": 33,
+      "retained_lines": 51
+    },
+    {
+      "rmse_max": 0.3,
+      "retained_rows": 12001,
+      "removed_rows": 0,
+      "retained_lines": 51
+    }
+  ],
+  "line_split": [
+    {
+      "SANGER_MODEL_ID": "SIDM00083",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00084",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00085",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00095",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00111",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00206",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00207",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00208",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00209",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00212",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00273",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00315",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00316",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00343",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00379",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00382",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00490",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00492",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00504",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00532",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00542",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00555",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00573",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00574",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00575",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00581",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00607",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00612",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00613",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00620",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00622",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00659",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00666",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00684",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00685",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00732",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00799",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00852",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00867",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00947",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00982",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM00998",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01021",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01055",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01155",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01164",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01171",
+      "partition": "test"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01189",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01193",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01210",
+      "partition": "development"
+    },
+    {
+      "SANGER_MODEL_ID": "SIDM01220",
+      "partition": "development"
+    }
+  ],
+  "cv_summary": [
+    {
+      "model": "drug_mean",
+      "cv_mae": 0.9188439672,
+      "cv_fold_std": 0.0562141374,
+      "best_params": "{}"
+    },
+    {
+      "model": "extra_trees_metadata",
+      "cv_mae": 0.9379964792,
+      "cv_fold_std": 0.0609183251,
+      "best_params": "{\"regressor__max_features\": 1.0, \"regressor__min_samples_leaf\": 5}"
+    },
+    {
+      "model": "elastic_net_metadata",
+      "cv_mae": 0.9944877203,
+      "cv_fold_std": 0.0567943049,
+      "best_params": "{\"regressor__alpha\": 0.001, \"regressor__l1_ratio\": 0.5}"
+    },
+    {
+      "model": "global_mean",
+      "cv_mae": 2.040013742,
+      "cv_fold_std": 0.0257215645,
+      "best_params": "{}"
+    }
+  ],
+  "test_metrics": [
+    {
+      "model": "global_mean",
+      "n": 2677,
+      "mae": 2.0803407285,
+      "prediction_rmse": 2.7732330316,
+      "r2": -0.0000233167,
+      "spearman": null,
+      "macro_drug_mae": 2.0632030532,
+      "macro_line_mae": 2.1026890149
+    },
+    {
+      "model": "drug_mean",
+      "n": 2677,
+      "mae": 0.9389098014,
+      "prediction_rmse": 1.2869451642,
+      "r2": 0.7846437491,
+      "spearman": 0.8210895263,
+      "macro_drug_mae": 0.93935587,
+      "macro_line_mae": 0.9810063106
+    },
+    {
+      "model": "elastic_net_metadata",
+      "n": 2677,
+      "mae": 1.020579887,
+      "prediction_rmse": 1.3540405342,
+      "r2": 0.7616030316,
+      "spearman": 0.8224552992,
+      "macro_drug_mae": 1.0244059939,
+      "macro_line_mae": 1.058282753
+    },
+    {
+      "model": "extra_trees_metadata",
+      "n": 2677,
+      "mae": 0.9570795066,
+      "prediction_rmse": 1.3083950059,
+      "r2": 0.7774051291,
+      "spearman": 0.8155519569,
+      "macro_drug_mae": 0.9558156045,
+      "macro_line_mae": 0.9993900358
+    }
+  ],
+  "run": {
+    "config": {
+      "seed": 42,
+      "target": "LN_IC50",
+      "group": "SANGER_MODEL_ID",
+      "qc_rmse_max": 0.3,
+      "qc_sensitivity_thresholds": [
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "test_size": 0.2,
+      "cv_folds": 4,
+      "metadata_features": [
+        "DRUG_ID",
+        "CANCER_TYPE"
+      ],
+      "molecular_drug_ids": [],
+      "molecular_max_drugs": 3,
+      "molecular_min_development_lines": 25,
+      "molecular_min_test_lines": 5,
+      "bootstrap_repetitions": 1000
+    },
+    "versions": {
+      "python": "3.11.15",
+      "pandas": "2.3.3",
+      "numpy": "2.4.6",
+      "scikit_learn": "1.7.2"
+    },
+    "selected_on_development_cv": "drug_mean",
+    "n_dev_lines": 40,
+    "n_test_lines": 11,
+    "unsupported_test_rows": 0,
+    "response_source_sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+    "interval": {
+      "n_test_lines": 11,
+      "line_macro_mae": 0.9810063106356178,
+      "line_macro_mae_ci95": [
+        0.7522533499482393,
+        1.3556810033505862
+      ],
+      "delta_vs_baseline": 0,
+      "delta_ci95": [
+        0,
+        0
+      ],
+      "method": "bootstrap agrupado por SIDM; percentil; condicionado al entrenamiento fijo"
+    },
+    "scope": "Metadatos: fármacos conocidos en líneas reservadas. No caracteriza heterogeneidad molecular.",
+    "training_partition": "development_only; test no usado para ajustar ni seleccionar"
+  },
+  "molecular_status": {
+    "status": "missing_expression",
+    "required_files": [
+      "/home/saro/research/gbm-drug-response/data/external/expression.csv",
+      "/home/saro/research/gbm-drug-response/data/external/expression_metadata.json"
+    ],
+    "message_es": "No se entrenó un modelo molecular: falta expresión real. El notebook 02 sí funciona con los adjuntos."
+  },
+  "scope": "Sólo metadatos entrenados con datos reales. Molecular pendiente de expresión."
+}

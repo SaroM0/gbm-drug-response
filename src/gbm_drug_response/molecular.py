@@ -124,8 +124,10 @@ def train_molecular(root):
     df = read_responses(root / "data/raw" / FILES["glioma_csv"])
     df = df.loc[quality_flags(df, cfg["qc_rmse_max"]).keep].copy()
     genes = [c for c in expr if c.startswith("gene_")]
-    # Reusar exactamente el holdout de metadatos; una unión many-to-one validada.
-    joined = df.merge(expr, on="SANGER_MODEL_ID", how="inner", validate="many_to_one")
+    # Unir sólo IDs ahora: repetir 50.000 genes en 12.000 curvas consume varios GB.
+    # La matriz molecular se alinea una vez por línea dentro de cada fármaco.
+    joined = df.merge(expr[["SANGER_MODEL_ID"]], on="SANGER_MODEL_ID", how="inner", validate="many_to_one")
+    expression_by_line = expr.set_index("SANGER_MODEL_ID")[genes]
     original_lines = set(df.SANGER_MODEL_ID)
     matched_lines = set(joined.SANGER_MODEL_ID)
     pd.DataFrame({"SANGER_MODEL_ID": sorted(original_lines - matched_lines)}).to_csv(folder / "unmatched_lines.csv", index=False)
@@ -141,6 +143,7 @@ def train_molecular(root):
     drugs = requested if requested else eligible[:cfg["molecular_max_drugs"]]
     coverage.to_csv(folder / "development_drug_coverage.csv", index=False)
     all_scores, all_predictions, all_cv, skipped, models, runs = [], [], [], [], {}, []
+    comparisons = []
     for drug in drugs:
         tr = dev.loc[dev.DRUG_ID == drug].reset_index(drop=True)
         te = test.loc[test.DRUG_ID == drug].reset_index(drop=True)
@@ -149,7 +152,9 @@ def train_molecular(root):
             continue
         assert not tr.SANGER_MODEL_ID.duplicated().any() and not te.SANGER_MODEL_ID.duplicated().any()
         folds = grouped_folds(tr, cfg["cv_folds"])
-        fitted, cv, details = fit_candidates(molecular_candidates(cfg), tr[genes], tr.LN_IC50, folds)
+        X_train = expression_by_line.loc[tr.SANGER_MODEL_ID].reset_index(drop=True)
+        X_test = expression_by_line.loc[te.SANGER_MODEL_ID].reset_index(drop=True)
+        fitted, cv, details = fit_candidates(molecular_candidates(cfg), X_train, tr.LN_IC50, folds)
         selected = cv.iloc[0].model
         pred = te[["NLME_CURVE_ID", "SANGER_MODEL_ID", "DRUG_ID", "DRUG_NAME", "LN_IC50"]].copy()
         cv.insert(0, "DRUG_ID", drug)
@@ -161,21 +166,32 @@ def train_molecular(root):
             assignment.loc[valid, "validation_fold"] = i
         assignment.to_csv(folder / f"cv_assignments_{drug}.csv", index=False)
         for name, model in fitted.items():
-            pred[name] = model.predict(te[genes])
+            pred[name] = model.predict(X_test)
             all_scores.append({"DRUG_ID": drug, "DRUG_NAME": te.DRUG_NAME.iloc[0], "model": name,
                                "selected_by_cv": name == selected, **metrics(te.LN_IC50, pred[name])})
         all_predictions.append(pred)
-        models[drug] = {"model": fitted[selected], "gene_columns": genes, "selected": selected}
+        models[drug] = {"model": fitted[selected], "gene_columns": genes, "selected": selected,
+                        "candidates": fitted}
+        for name in fitted:
+            interval = cluster_bootstrap(pred, name, repetitions=cfg["bootstrap_repetitions"], seed=cfg["seed"])
+            comparisons.append({"DRUG_ID": drug, "DRUG_NAME": te.DRUG_NAME.iloc[0],
+                                "model": name, "selected_by_cv": name == selected,
+                                "delta_mae_vs_drug_mean": interval["delta_vs_baseline"],
+                                "delta_ci95_low": interval["delta_ci95"][0],
+                                "delta_ci95_high": interval["delta_ci95"][1]})
         runs.append({"DRUG_ID": drug, "selected": selected, "n_dev": len(tr), "n_test": len(te),
                      "interval": cluster_bootstrap(pred, selected, repetitions=cfg["bootstrap_repetitions"], seed=cfg["seed"])})
     scores = pd.DataFrame(all_scores)
     predictions = pd.concat(all_predictions, ignore_index=True) if all_predictions else pd.DataFrame()
     scores.to_csv(folder / "test_metrics.csv", index=False)
     predictions.to_csv(folder / "test_predictions.csv", index=False)
+    pd.DataFrame(comparisons).to_csv(folder / "paired_comparisons.csv", index=False)
     if all_cv:
         pd.concat(all_cv, ignore_index=True).to_csv(folder / "cv_summary.csv", index=False)
     status = {"status": "trained" if models else "insufficient_coverage", "config": cfg,
               "expression_metadata": meta, "versions": runtime_info(), "n_matched_lines": len(matched_lines),
+              "response_source_sha256": sha256(root / "data/raw" / FILES["glioma_csv"]),
+              "split_sha256": sha256(root / "data/processed/line_split.csv"),
               "n_unmatched_lines": len(original_lines - matched_lines), "n_gene_features": len(genes),
               "selected_drugs_from_development": drugs, "skipped": skipped, "runs": runs,
               "training_partition": "development_only", "scope": "Exploratorio in vitro, por fármaco conocido; no validación clínica ni externa"}

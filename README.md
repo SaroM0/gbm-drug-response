@@ -2,6 +2,20 @@
 
 Primer acercamiento reproducible para auditar GDSC2 y predecir `LN_IC50` en líneas celulares GBM/glioma reservadas. CPU; sin deep learning ni bases de datos adicionales.
 
+## Documentación
+
+Empezar por el [informe completo del proyecto y explicación de resultados](docs/informe_completo.md). Describe los datos, el diccionario, el código, las decisiones, las pruebas, la reproducción y los límites científicos de la primera ejecución.
+
+| Documento | Contenido |
+|---|---|
+| [Informe completo](docs/informe_completo.md) | Trabajo realizado y lectura detallada de MAE, RMSE, R², Spearman, extrapolaciones y variación entre líneas. |
+| [Primer resultado](docs/primer_resultado.md) | Resumen de las métricas y conclusión de la primera ejecución. |
+| [Metodología](docs/metodologia.md) | Protocolo preespecificado, validación, QC y fuentes. |
+| [Entrada de expresión](docs/expresion.md) | Archivos y metadatos necesarios para ejecutar el entrenamiento molecular real. |
+| [Evidencia de la primera ejecución](docs/evidencia_primera_ejecucion.json) | Instantánea versionable de hashes, configuración, partición, QC y métricas. |
+
+Resultado principal: la media por fármaco fue seleccionada en CV y obtuvo MAE 0,9389 en test; los modelos con metadatos no la superaron. El R² agrupado de 0,7846 no acredita predicción individual molecular. El 76,50% de las IC50 ajustadas de GBM/glioma está por encima del máximo ensayado, una limitación relevante del outcome. El modelo molecular sigue pendiente de expresión real.
+
 ## Abrir los notebooks
 
 ```bash
