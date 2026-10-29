@@ -9,6 +9,7 @@ Empezar por el [informe completo del proyecto y explicación de resultados](docs
 | Documento | Contenido |
 |---|---|
 | [Plan de investigación T98G y nanopartículas](docs/plan_investigacion_t98g_nanoparticulas.md) | Definición experimental acordada con el laboratorio (Fe₃O₄@SiO₂-APTES, MTT, 4 brazos), inventario, datos faltantes, inputs/outputs y plan de validación probabilística, ML y deep learning. |
+| [Química y priorización de candidatos](docs/quimica_candidatos.md) | Identidad química desde PubChem, anotación de conjugabilidad a la superficie APTES, factibilidad de dosis en ppm y lista corta de candidatos para el ensayo. |
 | [Informe completo](docs/informe_completo.md) | Trabajo realizado y lectura detallada de MAE, RMSE, R², Spearman, extrapolaciones y variación entre líneas. |
 | [Primer resultado](docs/primer_resultado.md) | Resumen de las métricas y conclusión de la primera ejecución. |
 | [Metodología](docs/metodologia.md) | Protocolo preespecificado, validación, QC y fuentes. |
@@ -44,6 +45,17 @@ Para ejecutar los tres sin interfaz:
 
 El ejecutor guarda outputs dentro de cada notebook, conserva los outputs completados si una celda falla y devuelve error. Se puede indicar uno o varios nombres de notebook como argumentos. Abrir Jupyter desde la raíz o desde `notebooks/` funciona; no se necesitan rutas personales dentro de los notebooks.
 
+## Priorización de candidatos para el ensayo
+
+Dos scripts independientes de los notebooks, para la fase de nanopartículas:
+
+```bash
+.venv/bin/python scripts/build_compounds.py   # identidad química desde PubChem, con caché local
+.venv/bin/python scripts/rank_candidates.py   # potencia libre, factibilidad de dosis y niveles
+```
+
+El primero resuelve los nombres de fármaco contra PubChem y anota grupos funcionales con RDKit; guarda cada respuesta cruda en `data/external/pubchem_cache/`, de modo que repetirlo no vuelve a consultar la red. El segundo cruza esa tabla con la potencia medida en T98G y en el panel de GDSC2, y aplica el embudo de cribado. El método, sus supuestos y la lista corta están en [docs/quimica_candidatos.md](docs/quimica_candidatos.md).
+
 ## Datos y resultados
 
 Los cuatro adjuntos se copiaron sin modificar a `data/raw/`. El GDSC2 completo se usa para auditoría; el primer entrenamiento utiliza las 51 líneas del subconjunto GBM/glioma. No se concatenan la versión CSV/XLSX ni T98G.
@@ -56,6 +68,8 @@ Resultados locales:
 - `data/processed/`: tablas canónicas en Parquet y `line_split.csv`.
 - `reports/metadata_baseline/`: búsqueda CV, predicciones, métricas por línea/fármaco, bootstrap y protocolo de ejecución.
 - `reports/molecular/`: disponibilidad molecular o métricas reales cuando se incorpora expresión.
+- `reports/chemistry/`: resolución de identidad química y filas que requieren revisión manual.
+- `reports/candidates/`: ranking completo por `DRUG_ID`, lista corta por molécula y parámetros del cribado.
 - `models/`: modelos ajustados sólo con desarrollo, más lista de features y configuración.
 
 ## Interpretación
