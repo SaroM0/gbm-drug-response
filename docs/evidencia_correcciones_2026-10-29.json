@@ -1,0 +1,1953 @@
+{
+  "scope": "Software correction and exploratory rerun; laboratory validation remains pending",
+  "runs": {
+    "chemistry": {
+      "run_id": "20261029T220646789117Z-0264ec65",
+      "kind": "chemistry",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:06:46.789184+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "data/raw/Aislados T98G - Hoja 1.csv": {
+          "sha256": "575f6ee3414bdcc81e57e509f9e9fd44b019fcd36c894b450e18ffec5845d377",
+          "bytes": 39175
+        },
+        "data/external/pubchem_cache/123138.json": {
+          "sha256": "7372333d3af85f222c40a923764eb9c00666fc64527c157bd0e3d62d77c29a85",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/123829.json": {
+          "sha256": "b56b651329592f37e37d28857ebb0015ece23e2f4a84ab7726e34f6b86c34ad1",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/150412.json": {
+          "sha256": "f4e5fe8032d97b1edd83c5aa861e07a86669d99aa057b2f0247dfe63677c04a2",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/5-Fluorouracil.json": {
+          "sha256": "c9b3cf08f090401dd4b81d08634029c6acc4442de313dd21f72b6d6e2fe8ba53",
+          "bytes": 502
+        },
+        "data/external/pubchem_cache/5-azacytidine.json": {
+          "sha256": "953646685628c0b46000d1f928e9200c1aac8ba172df793f05401a3ad958c238",
+          "bytes": 543
+        },
+        "data/external/pubchem_cache/50869.json": {
+          "sha256": "7bd10ba292cfc0bf57957144326e78dc9d70252e5f302f3e3d889d984c6b45f9",
+          "bytes": 95
+        },
+        "data/external/pubchem_cache/615590.json": {
+          "sha256": "c1fd163c48e7512ee00044832288cbb4519f9726f26c071138d2d05e7031970c",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/630600.json": {
+          "sha256": "4384b7f2210db4415e4b898c29eccea0a15264f1bb31cb0630f3809ff57b4ce3",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/667880.json": {
+          "sha256": "0c9f03a081d94b904c841645139a9fb271234d18128828e9fb045795d803cb38",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/720427.json": {
+          "sha256": "e4a98ad6fffccc4b2a4c4e20ebcbd59317822eff5756d58f8339a2d04430c77b",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/729189.json": {
+          "sha256": "5737dcdf9b67f53e6b9b9ddeb79d1faa04cf5fb27dd9fa7ac21c7fe7b2bf0f4b",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/741909.json": {
+          "sha256": "a32944d93931186da72545b6a6092513d7912fe3e430a7240a45c49cea29a3a0",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/743380.json": {
+          "sha256": "a9579e7ae626563d9020c420937ac6547a5e69ea4117ca394394bbe2ef368605",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/765771.json": {
+          "sha256": "f7d90ba26365879d53727f21cf99a76bf95b7aee4e6f26c0869aa48af417f0a7",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/776928.json": {
+          "sha256": "f0b328f5b579677776c3326f62da74afe9f7e83c7210219d24143f59d4dc7ab6",
+          "bytes": 96
+        },
+        "data/external/pubchem_cache/A-366.json": {
+          "sha256": "d3105276befb1bc56acf49de0716cec4dac4303ea4702aa64b243e81361a6f6f",
+          "bytes": 610
+        },
+        "data/external/pubchem_cache/ABT737.json": {
+          "sha256": "58533b84c440ef612ef21c96281a28766e0b623a2b2ed20b780f11aa7feb3ed0",
+          "bytes": 840
+        },
+        "data/external/pubchem_cache/AGI-5198.json": {
+          "sha256": "3a9ca4769faa134f372a524a6297f7d3098325595e1632f649cbfa26fc029e16",
+          "bytes": 578
+        },
+        "data/external/pubchem_cache/AGI-6780.json": {
+          "sha256": "69001392621be59fdc79c3465a2703db5c00c98bf68c8c3c3a5e6d4a6fa4ddfa",
+          "bytes": 590
+        },
+        "data/external/pubchem_cache/AGK2.json": {
+          "sha256": "3797f6f4d5332868a90fa4cddf9b703c2f19b24e7c3cb2760f9a30bcd39f0459",
+          "bytes": 585
+        },
+        "data/external/pubchem_cache/AMG-319.json": {
+          "sha256": "90e834038515d79b657e8d3d8b0622eaacc9da6c5a7832fb9e6d3f8bf77356d9",
+          "bytes": 647
+        },
+        "data/external/pubchem_cache/AT13148.json": {
+          "sha256": "b58662d93178e50aee8b1ab2dabe8587124917744a6aa3bc0be14567659141b8",
+          "bytes": 547
+        },
+        "data/external/pubchem_cache/AZ6102.json": {
+          "sha256": "3bb9c5bd16caa24abfde7dc59d691837c1ecf2e3c32339671f615ddeb18cda79",
+          "bytes": 710
+        },
+        "data/external/pubchem_cache/AZ960.json": {
+          "sha256": "470acf899706d4a7e797fd7d87f2ccc61169733ced33c173846aefcc5a4cbe02",
+          "bytes": 559
+        },
+        "data/external/pubchem_cache/AZD1208.json": {
+          "sha256": "4088ca3e14acd514519f93777e9980c56764da846f728d6bfad91ea7e85c7063",
+          "bytes": 568
+        },
+        "data/external/pubchem_cache/AZD1332.json": {
+          "sha256": "82096582eefc6aec9850d6a2ebb2c5060182f7a60d2c9d2798d486a553440fc2",
+          "bytes": 648
+        },
+        "data/external/pubchem_cache/AZD2014.json": {
+          "sha256": "50dfc5a6cad6ba4d12781795f1eda8b841ec82cee2414fd59546d1910a67d6de",
+          "bytes": 586
+        },
+        "data/external/pubchem_cache/AZD3759.json": {
+          "sha256": "d2ac0631687d5f54031a5d236308187188915b8a2dea53f2824d4145b56eabd7",
+          "bytes": 592
+        },
+        "data/external/pubchem_cache/AZD4547.json": {
+          "sha256": "9dac2146f65c201e1a9a5f6a5edb636fd195d84919677f2b17ac1a0c53f02173",
+          "bytes": 592
+        },
+        "data/external/pubchem_cache/AZD5153.json": {
+          "sha256": "748806eaf6e863a1327c793f29d89a5a311fe6ddb865cebe9dc4aa2d4b5dc103",
+          "bytes": 584
+        },
+        "data/external/pubchem_cache/AZD5363.json": {
+          "sha256": "73870bd9a972977bca4c517e8df56abd0684775dd0f08a9c97228f27494826e2",
+          "bytes": 576
+        },
+        "data/external/pubchem_cache/AZD5438.json": {
+          "sha256": "7cd9a0da746819fb5949b02f2da70258036bf1156554175fdd414d43aed05275",
+          "bytes": 646
+        },
+        "data/external/pubchem_cache/AZD5582.json": {
+          "sha256": "2725b3cfc9be35a3c232f3e1bd524a6b24ce4245cfcf79b87ccdd64e207fb4e5",
+          "bytes": 751
+        },
+        "data/external/pubchem_cache/AZD5991.json": {
+          "sha256": "225483651042150dd8ac5ceb5ba2f190abb01ba323c448cadcced275b60655e0",
+          "bytes": 848
+        },
+        "data/external/pubchem_cache/AZD6482.json": {
+          "sha256": "e955e3578937599d9ff595242a09e1421770a7117a20d3c3c8f19a31082ff2ef",
+          "bytes": 569
+        },
+        "data/external/pubchem_cache/AZD6738.json": {
+          "sha256": "f70f68fbd52f0e291439729af64e5417e07285b9825e34a206551581c59c2092",
+          "bytes": 581
+        },
+        "data/external/pubchem_cache/AZD7762.json": {
+          "sha256": "d81d751fdf4daeed5077f30582bc5ed018abfc7c841dc57d56b1b8f6fe8a2311",
+          "bytes": 557
+        },
+        "data/external/pubchem_cache/AZD8055.json": {
+          "sha256": "da463cee46a0939472a1e37dce684ff26056d59c684b9773c69b84db6b5e18fb",
+          "bytes": 580
+        },
+        "data/external/pubchem_cache/AZD8186.json": {
+          "sha256": "e9b469acc5734ac6eb353adb38ae3f1478068f6c0d22e0cf7de9cbee119d06fe",
+          "bytes": 584
+        },
+        "data/external/pubchem_cache/Acetalax.json": {
+          "sha256": "a1669d8ae1aa1eb0bca3cf9a9653b4a1cefbc73e81e0d7d97cfbfe992c0967b0",
+          "bytes": 581
+        },
+        "data/external/pubchem_cache/Afatinib.json": {
+          "sha256": "3e61d50d78745bd9cec4ff812f5efaebf545bed3af77cab23047090f30367b10",
+          "bytes": 596
+        },
+        "data/external/pubchem_cache/Afuresertib.json": {
+          "sha256": "9339d205aa53781dd3a1ea8abbeb03bd0a4be0722b785a9527918748956fff01",
+          "bytes": 579
+        },
+        "data/external/pubchem_cache/Alisertib.json": {
+          "sha256": "2e582487ccaa964de2a7efd878fb75b556edf9f3fc7b93fa4e0b9fbad57acde5",
+          "bytes": 607
+        },
+        "data/external/pubchem_cache/Alpelisib.json": {
+          "sha256": "10242ab68c6be3c827d29a2f03750bae74391ea2a6774ed5f409f9e2e69fbb53",
+          "bytes": 583
+        },
+        "data/external/pubchem_cache/Avagacestat.json": {
+          "sha256": "cba4865767cf305e44da4b6bd2248de0970152694ab3e2af6ced85735de566cc",
+          "bytes": 610
+        },
+        "data/external/pubchem_cache/Axitinib.json": {
+          "sha256": "f43f6c487c17cfef99354f98c4687ea3989845d13bca5c21b960fd63e27f43bf",
+          "bytes": 560
+        },
+        "data/external/pubchem_cache/BDF00022089a.json": {
+          "sha256": "53ee28a5a499ce0f1f8cd74d498db4c14b15f848d01a260da39161c94fc921d1",
+          "bytes": 102
+        },
+        "data/external/pubchem_cache/BDILV000379a.json": {
+          "sha256": "fc67912447534325f15d741c211c254aac945a69d10f22a24491437faafe32eb",
+          "bytes": 102
+        },
+        "data/external/pubchem_cache/BDOCA000347a.json": {
+          "sha256": "c35854030ca6a5fb8c7bc7df515276907457f2cd380fc629c5e8028f2fbb8c1c",
+          "bytes": 102
+        },
+        "data/external/pubchem_cache/BDP-00009066.json": {
+          "sha256": "4df302bd3556c94dd038045d7e3c76fe12960d17c1010586377385c5e9d8d6ee",
+          "bytes": 102
+        },
+        "data/external/pubchem_cache/BEN.json": {
+          "sha256": "beaf3eb2143f69b8663f96d24bbf6065c11710e508bd4e63e30666bb411fb0b1",
+          "bytes": 482
+        },
+        "data/external/pubchem_cache/BI-2536.json": {
+          "sha256": "97f38d15fa4b6c79bf9ec5ba115e3fd79f3902380e2ef1ccca594892f0d91a4e",
+          "bytes": 595
+        },
+        "data/external/pubchem_cache/BIBR-1532.json": {
+          "sha256": "aecf5b536f02a9f3042cf732b53fca7d7a1bf87b0bfdd477998d0eb28e32ad46",
+          "bytes": 553
+        },
+        "data/external/pubchem_cache/BMS-345541.json": {
+          "sha256": "2a0d1645e1cc1cdb63c3cb54aa7696bf24ad6d434efe351bd78bea931278510e",
+          "bytes": 519
+        },
+        "data/external/pubchem_cache/BMS-536924.json": {
+          "sha256": "e27fa735e19336af64fcca236061751e94ddb2fbac08d06b42b4f154fff60e1e",
+          "bytes": 593
+        },
+        "data/external/pubchem_cache/BMS-754807.json": {
+          "sha256": "f1a383c70f320700f4e76afa3b4aa97d3de78fe630758b23d0179f51e92f389b",
+          "bytes": 591
+        },
+        "data/external/pubchem_cache/BPD-00008900.json": {
+          "sha256": "551116834e84bbe2aa2ef89e8a0ff2ca29e5fe16abc6b7eceecffd614ed55feb",
+          "bytes": 102
+        },
+        "data/external/pubchem_cache/BX795.json": {
+          "sha256": "930cc862b7228e0099fe72e9e66cc4ab76ce33e32e6fc2f37957d27dcd1465e1",
+          "bytes": 683
+        },
+        "data/external/pubchem_cache/Bicalutamide.json": {
+          "sha256": "ef50e8c2cb9a3fccd3736d27bfc5018a49d6ec9e250310d0eec17e94c094314b",
+          "bytes": 585
+        },
+        "data/external/pubchem_cache/Bleomycin.json": {
+          "sha256": "0a44b45d3f662ce862b62a40ecba3973113adb9d6d79568ce71c6c640c8238b1",
+          "bytes": 878
+        },
+        "data/external/pubchem_cache/Bleomycin__50_uM_.json": {
+          "sha256": "a83ec38d2bdad87a931776a5677891e07fb8f930129d9baf59ea4d69fd53e7d5",
+          "bytes": 915
+        },
+        "data/external/pubchem_cache/Bortezomib.json": {
+          "sha256": "1d74f2a711a8cfc6f9a4630cb5148950df0ebcd41dfc9487eaa69929a6f5fea4",
+          "bytes": 553
+        },
+        "data/external/pubchem_cache/Bosutinib.json": {
+          "sha256": "da5ab4cec67996a7580d6a4a01cbfea609f45bc3ef1dd30766f701c7d9369009",
+          "bytes": 591
+        },
+        "data/external/pubchem_cache/Bromosporine.json": {
+          "sha256": "1c7658ac08a04f2c32f5af1440958e4d21c27306e5c8e043d5626b858f592eb0",
+          "bytes": 573
+        },
+        "data/external/pubchem_cache/Buparlisib.json": {
+          "sha256": "fb8368aa618380750b5fbb5fb19a1cc529e23a7ea9f57cf62208af7f66e6405f",
+          "bytes": 566
+        },
+        "data/external/pubchem_cache/CCT-018159.json": {
+          "sha256": "4e80a695454558a90bc5c63f3a3c1beb797e2066ea6a4b828518c63bcb9d9ae4",
+          "bytes": 555
+        },
+        "data/external/pubchem_cache/CCT007093.json": {
+          "sha256": "950b95e23e5f65e4a461546d4214d41a76f0b15bbaed47b5ee7bef6c9b4d67f1",
+          "bytes": 530
+        },
+        "data/external/pubchem_cache/CDK9_5038.json": {
+          "sha256": "bff23c992538babeb0e185b9554f1bb7ac8c014eeb27f91021c86630c80b98fd",
+          "bytes": 99
+        },
+        "data/external/pubchem_cache/CDK9_5576.json": {
+          "sha256": "62925015a73b098ab602828977e1e1eaa56f6df79085d518eb11fddad8382345",
+          "bytes": 99
+        },
+        "data/external/pubchem_cache/CHIR-99021.json": {
+          "sha256": "9319346492e74c85a1c46a4bb5d7dba6781a5c26e09ed6e2e9d7a959a7bdf10f",
+          "bytes": 586
+        },
+        "data/external/pubchem_cache/CPI-637.json": {
+          "sha256": "6641bd07c80a66aa028009ab059d5443fe97f4948ca827984256905d56b21233",
+          "bytes": 684
+        },
+        "data/external/pubchem_cache/CT7033-2.json": {
+          "sha256": "d13015b37b92248f6ed7b5de58a9337980295f51a0a15cf5de7bad66af506cf0",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/CZC24832.json": {
+          "sha256": "952d00369e7fb6b2431e6326b2263b52c5b0636cf7cf509d3ac4b737af73d6e5",
+          "bytes": 565
+        },
+        "data/external/pubchem_cache/Camptothecin.json": {
+          "sha256": "f4e2e1fce173557c4140e95bbfa3ccb460950c084c39fb402e94dace739b7714",
+          "bytes": 562
+        },
+        "data/external/pubchem_cache/Cediranib.json": {
+          "sha256": "deb766480a70b6319dea6831d3cb0511c7c6354f7aa90d274ddd0532b40755e4",
+          "bytes": 575
+        },
+        "data/external/pubchem_cache/Cisplatin.json": {
+          "sha256": "47c992ecdc4c0384e63f1d3b633260e82aa43e447e4531b573022244c8cbe7e4",
+          "bytes": 470
+        },
+        "data/external/pubchem_cache/Crizotinib.json": {
+          "sha256": "ad40d929b1efa07b1992522da714b87d9380952d62643bab5ba671cb9555b14b",
+          "bytes": 582
+        },
+        "data/external/pubchem_cache/Cyclophosphamide.json": {
+          "sha256": "4c886f91d948da8fefaffec807c1f21b3999ea3941a8e2d22a125dac91635a8e",
+          "bytes": 519
+        },
+        "data/external/pubchem_cache/Cytarabine.json": {
+          "sha256": "bf2f7b05e97cc6c2633ae0a3cbe5854702e6ef3b177ee8456f8b3ac510c4f206",
+          "bytes": 538
+        },
+        "data/external/pubchem_cache/Dabrafenib.json": {
+          "sha256": "6818e5e8e4be257cdb36cf2d6d8227ef2e744d6a670c71ee18b791f769a44beb",
+          "bytes": 613
+        },
+        "data/external/pubchem_cache/Dacarbazine.json": {
+          "sha256": "a0a87350ad89d6f7edcd13c97ee6ea80de249876494d66b6b01150cc66ac39da",
+          "bytes": 512
+        },
+        "data/external/pubchem_cache/Dactinomycin.json": {
+          "sha256": "fc5d52e0a153a6fc01451eddc3832c35fa1008fd5ea269c805e638b253915148",
+          "bytes": 877
+        },
+        "data/external/pubchem_cache/Dactolisib.json": {
+          "sha256": "c6e119b51f2278a20de1062d5e98d4b7b5d2d732386b900379bd51a8a01a56c8",
+          "bytes": 602
+        },
+        "data/external/pubchem_cache/Daporinad.json": {
+          "sha256": "da9a127c31264ba909ee9d8e59ce186e7f12bafdc8cd4776899c36bacdfba519",
+          "bytes": 556
+        },
+        "data/external/pubchem_cache/Dasatinib.json": {
+          "sha256": "c556f0dbc6818040caf3875b6ff74c422d46de44c283b99355f666c0376fe1e3",
+          "bytes": 586
+        },
+        "data/external/pubchem_cache/Dihydrorotenone.json": {
+          "sha256": "0dcffa4b357bf8306b981d9de2620beb5e6e7ee6b8008195904070c77de8c07a",
+          "bytes": 585
+        },
+        "data/external/pubchem_cache/Dinaciclib.json": {
+          "sha256": "73fc1ba0d1d833d5fa82a2c8a2372ae52cdc652111e0064f764f4f5ed9f50c17",
+          "bytes": 573
+        },
+        "data/external/pubchem_cache/Docetaxel.json": {
+          "sha256": "c74aad52978d921179f28b802c93dc42614f61dc94a945fffdcc2f3be91fb109",
+          "bytes": 736
+        },
+        "data/external/pubchem_cache/Doramapimod.json": {
+          "sha256": "c63c3eea317ad5bba8fafea262a8fa56cca362a972fb93a84c72d8b4ab964689",
+          "bytes": 605
+        },
+        "data/external/pubchem_cache/EHT-1864.json": {
+          "sha256": "59c7d81cdfe6da99c99c47bff7154f98a28c666227a209dac9a113189ea71969",
+          "bytes": 575
+        },
+        "data/external/pubchem_cache/EPZ004777.json": {
+          "sha256": "42c2122525afb90f3c409ba8915c5b0a15e23d232e5aaaf421bbdb4770ac5e99",
+          "bytes": 622
+        },
+        "data/external/pubchem_cache/EPZ5676.json": {
+          "sha256": "7447f5a4d5a1342198597643744aad900e7669c3d67420a26146bcc2beec1191",
+          "bytes": 639
+        },
+        "data/external/pubchem_cache/ERK_2440.json": {
+          "sha256": "05c723702784781b4b7e423cebf0243629ff2a5322ba8c5211dad1eaaad212ed",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/ERK_6604.json": {
+          "sha256": "44c9e02730053ae00dd468fa869bdbaaff2bc22c2b3acb427ebf29651821246a",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/Eg5_9814.json": {
+          "sha256": "86917c5a3f60f950fb58f143fdab0ee1a2da2e189f61d4ffc86e053c9fd0e647",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/Elephantin.json": {
+          "sha256": "f179f75165e6bb3e17e985fe0144111aa85cd041f727a4111ecc5085a2a82807",
+          "bytes": 588
+        },
+        "data/external/pubchem_cache/Elesclomol.json": {
+          "sha256": "af94a9d1d989cf0319e1f834e04016cbb20e8ae5e5fec41007ddaf199e59af47",
+          "bytes": 562
+        },
+        "data/external/pubchem_cache/Entinostat.json": {
+          "sha256": "e196e48bee0f173eef39ef0ec2cbaaa3b43c6b7210fa1c98b8f7061b3bd18318",
+          "bytes": 560
+        },
+        "data/external/pubchem_cache/Entospletinib.json": {
+          "sha256": "95a5b40073cfb60277ae4290fdba1eb066f7db7c7ea53956e6b82768238e6d7f",
+          "bytes": 582
+        },
+        "data/external/pubchem_cache/Epirubicin.json": {
+          "sha256": "1cdf87b313ea3fb6c8544b45a9ad12cc60834707f141559c70ec187e17d1f88f",
+          "bytes": 640
+        },
+        "data/external/pubchem_cache/Erlotinib.json": {
+          "sha256": "5cf28c81d5f4add758797ebd2684b45563f05e6aec7f8fd5ba95331cde9337f0",
+          "bytes": 557
+        },
+        "data/external/pubchem_cache/Fludarabine.json": {
+          "sha256": "fefb9b3c764107605e9d2486b7dded26d77ec1a9756699ed4ba1f34f511c5df9",
+          "bytes": 556
+        },
+        "data/external/pubchem_cache/Foretinib.json": {
+          "sha256": "c8bc9af0fc30da650298f9084418898bfd6c0dee3946e282ae4a8ccc6caf490c",
+          "bytes": 627
+        },
+        "data/external/pubchem_cache/Fulvestrant.json": {
+          "sha256": "b3d1bfd2c3ed53dacf35c300332a4ea2ec83af27c2844719a1f070218fdcb8fd",
+          "bytes": 622
+        },
+        "data/external/pubchem_cache/GDC0810.json": {
+          "sha256": "ddf92f758de9f9385ec6fc36860a538fc8cc150ab30af2afd10b0d6f09d51209",
+          "bytes": 601
+        },
+        "data/external/pubchem_cache/GNE-317.json": {
+          "sha256": "96f42e9056a85b6d4c63a23f024441ec492309e6f44c1e95b52d76a1a2c1138c",
+          "bytes": 638
+        },
+        "data/external/pubchem_cache/GSK-LSD1-2HCl_.json": {
+          "sha256": "2c6e56d2e2af5593d73e9ac4363a361ecbf264fce700fc626a5bf7f8b5e71a99",
+          "bytes": 542
+        },
+        "data/external/pubchem_cache/GSK-LSD1.json": {
+          "sha256": "8b458274b84dca96db8d9c0fea9b4beddfff5108683ae06ae6194c33dd2c067b",
+          "bytes": 511
+        },
+        "data/external/pubchem_cache/GSK1904529A.json": {
+          "sha256": "9d0cdd2bd7dbb4657238671cb6089192c9b53684df2dfa2fff0c7230c9a78048",
+          "bytes": 865
+        },
+        "data/external/pubchem_cache/GSK2110183B.json": {
+          "sha256": "61683ef4bf8fcf19e56ea78a397efe8b635030a45fa2e53ab60377fa039c412d",
+          "bytes": 583
+        },
+        "data/external/pubchem_cache/GSK2256098C.json": {
+          "sha256": "7d07c5b4d564d146e07b4d5a19f010411477498415c8b41b1b077324fc73f01b",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/GSK2276186C.json": {
+          "sha256": "f742f0be6acab50d466fd9ebb06087b913cec35529fc837809711273b77a4eaf",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/GSK2578215A.json": {
+          "sha256": "fb857dba192e49f406e192c813f0342ea80008a5c95a8bd499f4bb0518259969",
+          "bytes": 635
+        },
+        "data/external/pubchem_cache/GSK2606414.json": {
+          "sha256": "c1be97b65dbf701a9b2cb9143eb766b37e6c2f4b1b605cf462f3ad68df71b7a5",
+          "bytes": 597
+        },
+        "data/external/pubchem_cache/GSK269962A.json": {
+          "sha256": "d14313c86339cb00d6527719a264c92e12f585f72799d609ff6befc1beb35a90",
+          "bytes": 608
+        },
+        "data/external/pubchem_cache/GSK2801.json": {
+          "sha256": "ff356da38dcdb657577ccfebbd30c09c547b8abe1badb5d260fc4001ccca43a6",
+          "bytes": 555
+        },
+        "data/external/pubchem_cache/GSK2830371.json": {
+          "sha256": "a7408f429180087434519d6ab58d83d4bf270e0db670b39fea62294ee1d569e0",
+          "bytes": 582
+        },
+        "data/external/pubchem_cache/GSK2830371A.json": {
+          "sha256": "e00414642e5ad9ad087cd5cce09252a5d4ced25ef43658992062553ab956d35d",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/GSK3337463A.json": {
+          "sha256": "79e39cf169c52485c8a3454508f303fd0b8fa3bf6250759971ba14c087752cf6",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/GSK343.json": {
+          "sha256": "ed444839e1676664ed34c53645e40c9a5a4aa1b8d9e389ca5f6ac0385742ec10",
+          "bytes": 606
+        },
+        "data/external/pubchem_cache/GSK591.json": {
+          "sha256": "f7a5258f9a8acddf71148918e04bacbe176809a7e24ddfbbf9ae1aa3fb101d20",
+          "bytes": 557
+        },
+        "data/external/pubchem_cache/GSK626616AC.json": {
+          "sha256": "019a0f7816c469c3283ade9764531ab976bd7705f3db14d136b8469f7c60714e",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/GW441756.json": {
+          "sha256": "b5f4c61d36f25ab0e8021284c2be7234ff25e968029767f0a905e977165b5608",
+          "bytes": 531
+        },
+        "data/external/pubchem_cache/Gallibiscoquinazole.json": {
+          "sha256": "14a4c511d2fa68c8aeb684806d1cdccc16d7b08d9b77217344c5a0fbe85ca2d9",
+          "bytes": 579
+        },
+        "data/external/pubchem_cache/Gefitinib.json": {
+          "sha256": "e7b34a723afb046ef4031287eb5a2652d8afc59525c9c295bcbd97a353567eb6",
+          "bytes": 568
+        },
+        "data/external/pubchem_cache/Gemcitabine.json": {
+          "sha256": "f2ff2a35b9e7670b6ee29008124adfec4d7c51ca1503c2b34de5c8b858d4908f",
+          "bytes": 545
+        },
+        "data/external/pubchem_cache/HKMTI-1-005.json": {
+          "sha256": "069280ecda35cc9dba290d7bb4675e076cdf6c700f5807e10939597a91e96ff5",
+          "bytes": 583
+        },
+        "data/external/pubchem_cache/I-BET-762.json": {
+          "sha256": "f8e759e26995190aba764440916b937ab7ab2ac49c17ca7f5530a9319bae17ce",
+          "bytes": 681
+        },
+        "data/external/pubchem_cache/I-BRD9.json": {
+          "sha256": "af4ac033a5b4b24dafa68b4e3f04fafe73b766c61b5177d4ae6ccce10cef6634",
+          "bytes": 590
+        },
+        "data/external/pubchem_cache/IAP_5620.json": {
+          "sha256": "6238c27ae366cae62b36a256df9764e3d43795629da43c3b6a059c5ebd81d9f1",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/ICL-SIRT078.json": {
+          "sha256": "9dc0dec7e0866a5d73995f3c37ea18ae6551dc7e2ff502c5e7293b8cb0d59cad",
+          "bytes": 710
+        },
+        "data/external/pubchem_cache/IGF1R_3801.json": {
+          "sha256": "efa9b67787c8543fbb5edbbde4a9febe38aba11ad20ad0737770d7a88d03df9b",
+          "bytes": 100
+        },
+        "data/external/pubchem_cache/IOX2.json": {
+          "sha256": "3edefbc8cfd1d3d382731af096c8573df2a7a9c4e306e25104d31667c54deb62",
+          "bytes": 611
+        },
+        "data/external/pubchem_cache/IRAK4_4710.json": {
+          "sha256": "3c078b56217e4b8d4c80e8a9ed5bc2e82b1075768df2778ddd599da706463a7e",
+          "bytes": 100
+        },
+        "data/external/pubchem_cache/IWP-2.json": {
+          "sha256": "cd6eb9419487d5145aca39663cc966caf98c640bc9bd75a63f61d99df9b129b5",
+          "bytes": 571
+        },
+        "data/external/pubchem_cache/Ibrutinib.json": {
+          "sha256": "9b5fdcdb282178f89797709671d32bb389a0cb91cb7dfc36b63bce2f0fc65d46",
+          "bytes": 589
+        },
+        "data/external/pubchem_cache/Ipatasertib.json": {
+          "sha256": "76c136f9fb4503c5be1e1466316f4c82cc94ec1ce84b01a7f3f0b7623229b16d",
+          "bytes": 598
+        },
+        "data/external/pubchem_cache/Irinotecan.json": {
+          "sha256": "6c710223c94d1db6794a1bd918956f5391569814216da5cbcf7519a3cddc80b1",
+          "bytes": 617
+        },
+        "data/external/pubchem_cache/JAK1_8709.json": {
+          "sha256": "8965dd2ccc917c20dc484fc5638c95a23190bcd4ac155d172d5536649012363f",
+          "bytes": 99
+        },
+        "data/external/pubchem_cache/JAK_8517.json": {
+          "sha256": "b85212a196e09d11518f99e3330507b93c9821818e96412de945bb5fa0e3be3c",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/JNK_Inhibitor_VIII.json": {
+          "sha256": "75f7d6a4da8f461fe60885177ebc5070626582ef05f660ffe2e675dce1810823",
+          "bytes": 572
+        },
+        "data/external/pubchem_cache/JQ1.json": {
+          "sha256": "6fd559132513cc6ce17b58811570d014ef354151092d97660ebc678fcbcaa960",
+          "bytes": 589
+        },
+        "data/external/pubchem_cache/KRAS__G12C__Inhibitor-12.json": {
+          "sha256": "7ac1be39779c7cb9d62962fc4acced03c2f81be00e98a90cc276dc2ef9dddb75",
+          "bytes": 643
+        },
+        "data/external/pubchem_cache/KU-55933.json": {
+          "sha256": "0ca01a332b46a70381006e12729cbdee950afc9e033f520ab629fde297eee796",
+          "bytes": 557
+        },
+        "data/external/pubchem_cache/L-Oxonoreleagnine.json": {
+          "sha256": "ac366bcbb8eb4fc1e43c6477d84408330b2771e4e88a767ce22505d696936f75",
+          "bytes": 551
+        },
+        "data/external/pubchem_cache/LCL161.json": {
+          "sha256": "b2f5fb68919d7f3782006af47e813e6b0cd2fa9b9aed73e8b4699f4936529e90",
+          "bytes": 595
+        },
+        "data/external/pubchem_cache/LGK974.json": {
+          "sha256": "331859bfe8c66174be6060fe5cb125e40e5fe3ffdf6240b25e1575ddffe623e2",
+          "bytes": 567
+        },
+        "data/external/pubchem_cache/LJI308.json": {
+          "sha256": "e02fc511ded2bf901231548b6b8eae71ce40ff60ebe35c2203a798e37ac82315",
+          "bytes": 611
+        },
+        "data/external/pubchem_cache/LMB_AB1.json": {
+          "sha256": "e03d437984338176d1543ede92d2f1c79e8c18d50d1c5fe0a87ae887e40df2d2",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/LMB_AB2.json": {
+          "sha256": "12e21a5ef87944f1c81ff2e24f8f2ebd3435bfa404a55c1341693fea1bdfca0e",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/LMB_AB3.json": {
+          "sha256": "63cc6f7c640dd455bca853892f2d05a8ebf0ef4643d296887e4af99543412bc0",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/LMP744.json": {
+          "sha256": "679a92488eb5b116285bfc9c44f4e93b7d9ddb503a654694df2785d82e394d70",
+          "bytes": 676
+        },
+        "data/external/pubchem_cache/LY2109761.json": {
+          "sha256": "5b6fbefda27743c5429497a4818a1a538c66d1bdc5c72f633e68764e8fb216b5",
+          "bytes": 577
+        },
+        "data/external/pubchem_cache/Lapatinib.json": {
+          "sha256": "8b3bfdd154e5fb72eb2be9b3fb6c25f1da2bb647ef99e9fe0bb44a61cc3a505c",
+          "bytes": 616
+        },
+        "data/external/pubchem_cache/Leflunomide.json": {
+          "sha256": "63153fe8e975bd0fe2bc5727b7fb6821dad525afd3f331d2609704ccba34849c",
+          "bytes": 535
+        },
+        "data/external/pubchem_cache/Lenalidomide.json": {
+          "sha256": "32e70e474845fcfec38d28f4a115176cc75467acd7cbe55fe28dd5d0c9b1561e",
+          "bytes": 535
+        },
+        "data/external/pubchem_cache/Lestaurtinib.json": {
+          "sha256": "c1ab915deb4feb7f956c850c5b582fb56666ec0ea6441036b09fd45b46444950",
+          "bytes": 605
+        },
+        "data/external/pubchem_cache/Linsitinib.json": {
+          "sha256": "dc158dff3451a94133701bd6d0755f84e0853be63465ae49174e199ce8e22cdd",
+          "bytes": 585
+        },
+        "data/external/pubchem_cache/Luminespib.json": {
+          "sha256": "7aa2d1dc3aa8201b60de99a0aa3f4f41400df0aa16c3f2322668b6e4d561455d",
+          "bytes": 583
+        },
+        "data/external/pubchem_cache/MG-132.json": {
+          "sha256": "f94c5f482719a3cc62b1cc9013f3878173bf48d778ae1dec829b1bab7f4bf065",
+          "bytes": 581
+        },
+        "data/external/pubchem_cache/MIM1.json": {
+          "sha256": "27cdf7e4daa40dc54068bfd442ad44bcef19f80f875f87e8bb207e26efb2e8f9",
+          "bytes": 622
+        },
+        "data/external/pubchem_cache/MIRA-1.json": {
+          "sha256": "c0c71b36fe550fad0d650fe0fcc8a913438a664fbe9d37e3a2f8be4ce88027b9",
+          "bytes": 541
+        },
+        "data/external/pubchem_cache/MK-1775.json": {
+          "sha256": "e6388074cca7a73998cd1cf6e86d58a409b4cb742b26216bf263125ec367d9ef",
+          "bytes": 594
+        },
+        "data/external/pubchem_cache/MK-2206.json": {
+          "sha256": "82038db00dbc778e080942a0fd69c105f8866803c000c0c026deaf2b342e1399",
+          "bytes": 578
+        },
+        "data/external/pubchem_cache/MK-8776.json": {
+          "sha256": "47e7543a6e42606e4dab2e926854ed798eba34cf45e55974889c867547e15511",
+          "bytes": 552
+        },
+        "data/external/pubchem_cache/ML323.json": {
+          "sha256": "1bed7e2764f85163d4eebb28ec23051b84ded5f6a8a0cee4161e3e4bec065b23",
+          "bytes": 553
+        },
+        "data/external/pubchem_cache/MN-64.json": {
+          "sha256": "5cfee2e1da48ebdf7f83936b1412343fe5ac08ec8ddebea199d0be11134b4e5d",
+          "bytes": 538
+        },
+        "data/external/pubchem_cache/Methotrexate.json": {
+          "sha256": "c1d90af2b778cacfdf5f375e5dcf3f6c8ee8421ce43252b68f1575f6e92e86d6",
+          "bytes": 601
+        },
+        "data/external/pubchem_cache/Mirin.json": {
+          "sha256": "409223ba42f10edc59715b7d13165bcfe2c2627b2b5f8562af9259dfdc314abe",
+          "bytes": 512
+        },
+        "data/external/pubchem_cache/Mitoxantrone.json": {
+          "sha256": "88026103edf2a2891049afccb097a1b906d2acadae4d8d76f396dfd2e757761f",
+          "bytes": 567
+        },
+        "data/external/pubchem_cache/Motesanib.json": {
+          "sha256": "392d980f0d8b12f13bc8ff0ea4cb1396286b6d8dfddd9e6faf5b6293f88c22f8",
+          "bytes": 562
+        },
+        "data/external/pubchem_cache/Mycophenolic_acid.json": {
+          "sha256": "e33ddcb45861dea4e090cd1512a2dca26b03026cad6e369dbb1c6094e3c8b161",
+          "bytes": 557
+        },
+        "data/external/pubchem_cache/N-acetyl_cysteine.json": {
+          "sha256": "a78e8ef474a9e99ae0b4c924a7e69fb52e564a7c5f48b151c4c86339681f4bd0",
+          "bytes": 510
+        },
+        "data/external/pubchem_cache/N25720-51-A1.json": {
+          "sha256": "220bd35d5c05ca26e8232ea616541d3ad084188a577616730af4021de173e07f",
+          "bytes": 102
+        },
+        "data/external/pubchem_cache/N27922-53-1.json": {
+          "sha256": "1f9785ccb8b0205397bac577a3eb71e1abe02c03e972ad9f10628cb297d89375",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/N29087-69-1.json": {
+          "sha256": "4e467bbbb87a10dd6d95420c70e4daee81f48979eeddbd5af4885b9597512a76",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/N30652-18-1.json": {
+          "sha256": "f4c8a320a443e5f2c082fe1f88e4040f24ac7a7227961a6790fbdba157b0aacf",
+          "bytes": 101
+        },
+        "data/external/pubchem_cache/NU7441.json": {
+          "sha256": "b530db9dcd78ffdf016a5694b83f4513cf9e3a676234081bf1041702ef368dfa",
+          "bytes": 566
+        },
+        "data/external/pubchem_cache/NVP-ADW742.json": {
+          "sha256": "eadf880b80afce8b7edc5407ef4d67130793d7ef9d52a593fbc99fe321e92d4f",
+          "bytes": 587
+        },
+        "data/external/pubchem_cache/Navitoclax.json": {
+          "sha256": "fb3390d605e4eeaa456098e6ea42bdcc18f8e536a347fe1722ed8ce8116bf76c",
+          "bytes": 724
+        },
+        "data/external/pubchem_cache/Nelarabine.json": {
+          "sha256": "21be7ba49cc2372960c61e6245de5b2d73743d9d9ab5ba3d57076f3664660018",
+          "bytes": 552
+        },
+        "data/external/pubchem_cache/Nilotinib.json": {
+          "sha256": "02058e4c80f4107d3be287502b1004070ba570ff7d707fdb93bd3b6eb5289852",
+          "bytes": 618
+        },
+        "data/external/pubchem_cache/Niraparib.json": {
+          "sha256": "ce84fbcb7db2d77afc9fe418b9d56a178828c5900e5e485e41a83b51605315dd",
+          "bytes": 554
+        },
+        "data/external/pubchem_cache/Nutlin-3a__-_.json": {
+          "sha256": "c80725e53ae0768571e106f7520e9a99d8d2f1c0b7cb6aeacad62e3c9c9ffecf",
+          "bytes": 662
+        },
+        "data/external/pubchem_cache/OF-1.json": {
+          "sha256": "dcfb7770ff291819c6b38a2ad7b06987f6c239ff97335820951e9ae7bcad5182",
+          "bytes": 657
+        },
+        "data/external/pubchem_cache/OSI-027.json": {
+          "sha256": "0c15a45a348cd973a92e4bdf1e5858420162d35e095f8f92265124a5595fd27e",
+          "bytes": 568
+        },
+        "data/external/pubchem_cache/OTX015.json": {
+          "sha256": "846b2f364b3302462d7407a81d04042591c0729d9e8e0e3e4d1476ab3d3a9676",
+          "bytes": 714
+        },
+        "data/external/pubchem_cache/Obatoclax_Mesylate.json": {
+          "sha256": "9e45fd582ca346375e9b69ceed2fe3828b8f23895f4eef47a9b44aa80db4afc4",
+          "bytes": 586
+        },
+        "data/external/pubchem_cache/Olaparib.json": {
+          "sha256": "c2391729882a26eef7c7e587828253a6d2eb6d198fb23fb48d3b5cc2b032d29d",
+          "bytes": 582
+        },
+        "data/external/pubchem_cache/Osimertinib.json": {
+          "sha256": "6ec39758a6b25ef5d8ebd3f7317bc59b78a14dcaf4801f87910ff2059f224097",
+          "bytes": 605
+        },
+        "data/external/pubchem_cache/Oxaliplatin.json": {
+          "sha256": "73e1868558ced31093930ef9787314827627b3c29440f215c6d6ca329ab10376",
+          "bytes": 582
+        },
+        "data/external/pubchem_cache/P22077.json": {
+          "sha256": "6b253f686d0ed7944b2a4bcc27f81b7bfa41934009880130dd28d0721cd1976b",
+          "bytes": 548
+        },
+        "data/external/pubchem_cache/PAK_5339.json": {
+          "sha256": "c98d305784a24d484e53dbbcaebe4d0f382e890de0ffe588d4df7b04bb09e87c",
+          "bytes": 98
+        },
+        "data/external/pubchem_cache/PBD-288.json": {
+          "sha256": "a9ab879177e4a3fe4b835cad650c6684f4621e976b67aa3da2d11eb8fc306d82",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/PCI-34051.json": {
+          "sha256": "b4d1dd718c57fd969cc471a966f16c00e881b95d4bc406111d3feefc8300f630",
+          "bytes": 540
+        },
+        "data/external/pubchem_cache/PD0325901.json": {
+          "sha256": "c9dc8c1471cef835598279ce1c0e4872e050c01160e8f4139a199b212ca969c8",
+          "bytes": 634
+        },
+        "data/external/pubchem_cache/PD173074.json": {
+          "sha256": "ebe6d2ead203b46d206761d30ccda06f7a472de4468b52033a6273d53ed3d4a4",
+          "bytes": 692
+        },
+        "data/external/pubchem_cache/PF-4708671.json": {
+          "sha256": "ca75b92e6c7aa7b4ad4de8853260319f9b9e48c7a91e600ed7d261f3ba6756a7",
+          "bytes": 563
+        },
+        "data/external/pubchem_cache/PFI-1.json": {
+          "sha256": "0dd0c1faa2e488ab72c8b96209fcd1f3bbb4c0fa74a48095d066e7c49c864a2e",
+          "bytes": 542
+        },
+        "data/external/pubchem_cache/PFI3.json": {
+          "sha256": "db244585aa681363c5af90fc020ccec62bce8db6f3589fa2a8155badf5411fb4",
+          "bytes": 545
+        },
+        "data/external/pubchem_cache/PLX-4720.json": {
+          "sha256": "9711d4fc991b1e0925ff60e7b13d1b7d791904deb4d84029373194a5a59ca229",
+          "bytes": 573
+        },
+        "data/external/pubchem_cache/POMHEX.json": {
+          "sha256": "f9d97fb4a339520265cb1e343104299969555a4f42c0ad9ad9fc8cc17c6f158d",
+          "bytes": 553
+        },
+        "data/external/pubchem_cache/PRIMA-1MET.json": {
+          "sha256": "cac14a29059e2cd9b1898d507916a8650d78c297f249f97518a749ba9bb089e6",
+          "bytes": 560
+        },
+        "data/external/pubchem_cache/PRT062607.json": {
+          "sha256": "3f3b4b94b9c9343543295ae16cfa158d06a065c7735eee5208e4cba7ed1c89a0",
+          "bytes": 575
+        },
+        "data/external/pubchem_cache/Paclitaxel.json": {
+          "sha256": "2f133502809112964cf440e5d5ac89fda964267acb1579e9a6f040dc39a0848b",
+          "bytes": 753
+        },
+        "data/external/pubchem_cache/Palbociclib.json": {
+          "sha256": "481fd58e95aed22a2ad41d97d306a6bca3e79b3e080adac3f78e221da2850ca6",
+          "bytes": 585
+        },
+        "data/external/pubchem_cache/Pevonedistat.json": {
+          "sha256": "69d16f82e487d6a12295e6eee30e3a08ddc566b46c6397c212de4a7792d297b5",
+          "bytes": 598
+        },
+        "data/external/pubchem_cache/Picolinici-acid.json": {
+          "sha256": "bb66aa3fc57e63ddc658d5f20ecdf8a151fa181ff8a61e111d7574e08674f548",
+          "bytes": 105
+        },
+        "data/external/pubchem_cache/Pictilisib.json": {
+          "sha256": "8c56e3d0336d47d36ec13ea58b7eaf37e43756ef0360d0ebc2d5985531cfe9aa",
+          "bytes": 597
+        },
+        "data/external/pubchem_cache/Piperlongumine.json": {
+          "sha256": "4dcb867200b98df419aa431f42bb5a92c3807a3055198d71f771e8e432c43064",
+          "bytes": 545
+        },
+        "data/external/pubchem_cache/Podophyllotoxin_bromide.json": {
+          "sha256": "e404f31c34b4c46fcdaa7867aebebf545f44b6906f64238c95c37a5e01789a15",
+          "bytes": 610
+        },
+        "data/external/pubchem_cache/Pyridostatin.json": {
+          "sha256": "55ec6c40ed48e471ccd7dcb9910ca842e66f52ad27ae55ab149a38cae713e0da",
+          "bytes": 631
+        },
+        "data/external/pubchem_cache/RO-3306.json": {
+          "sha256": "dcb2b4a70e16064cc9e2a07832d6e70fc6effa7649e729b53d6ae3dc4ee84bdf",
+          "bytes": 549
+        },
+        "data/external/pubchem_cache/RVX-208.json": {
+          "sha256": "3cad713e30f0bc7fd3b8a5685a9b3212307f8d2a61143b9c1518cf082d8b06e9",
+          "bytes": 562
+        },
+        "data/external/pubchem_cache/Rapamycin.json": {
+          "sha256": "261c4d6d278d0957599c8ceec0f56446676860438430a31efd7be40def1929ba",
+          "bytes": 763
+        },
+        "data/external/pubchem_cache/Refametinib.json": {
+          "sha256": "b467146e3dedd32acee7908afc293f9cbeb18ac0765ddc14f444ebb07dd245d2",
+          "bytes": 594
+        },
+        "data/external/pubchem_cache/Remodelin.json": {
+          "sha256": "3586aba917a55200cb8f1feb91dd495f131b3e82f852921a1b324c91011003e3",
+          "bytes": 581
+        },
+        "data/external/pubchem_cache/Ribociclib.json": {
+          "sha256": "695db6fc15807353a6bedf833815a071d828c3bebf654c091a25d4d7c6027a02",
+          "bytes": 572
+        },
+        "data/external/pubchem_cache/Romidepsin.json": {
+          "sha256": "3cf82e75734566ed975666db49cc66d9c4c1f5434db4294877e952b6d9623ff6",
+          "bytes": 615
+        },
+        "data/external/pubchem_cache/Rucaparib.json": {
+          "sha256": "ff2723dc84b007203e4518b85b511fffcd7bb8104051a8343b91faf618f515ae",
+          "bytes": 550
+        },
+        "data/external/pubchem_cache/Ruxolitinib.json": {
+          "sha256": "8440f52204e1361a2ea2dd7b63407ff64856bff4ba574b7c30324257074e585a",
+          "bytes": 550
+        },
+        "data/external/pubchem_cache/SB216763.json": {
+          "sha256": "fbfc4960a2a5c52cc93672d6bf434130e38bf7fe729f768640e0dc49f9cc05b2",
+          "bytes": 565
+        },
+        "data/external/pubchem_cache/SB505124.json": {
+          "sha256": "2917fd64df68c5b15ad6ffaebbd9db6e32221ca2c2ecf17fe6c7da1eee3e760e",
+          "bytes": 557
+        },
+        "data/external/pubchem_cache/SB590885.json": {
+          "sha256": "0b916290479069672b872b37795fe22a4e767d62fd86fc8c5245e465c8598a61",
+          "bytes": 589
+        },
+        "data/external/pubchem_cache/SCH772984.json": {
+          "sha256": "3f1ba1bd10d5720363c4f6009300f926b61bb5c1a3d9b7f93f6a290ccf0f57fd",
+          "bytes": 629
+        },
+        "data/external/pubchem_cache/SGC-CBP30.json": {
+          "sha256": "a07642e56d593f7607c79149882aefed2a658e7da11427ec56c35c2593db53d5",
+          "bytes": 605
+        },
+        "data/external/pubchem_cache/SGC0946.json": {
+          "sha256": "4c1b969a57fb338920538fa3b703c0d8c02248da6b1b25c29feb00e2c6edf75e",
+          "bytes": 626
+        },
+        "data/external/pubchem_cache/SL0101.json": {
+          "sha256": "cc370c005a50de49adccb6cd99fb48026722466ee08f6f44967b0e13def66f55",
+          "bytes": 655
+        },
+        "data/external/pubchem_cache/SN-38.json": {
+          "sha256": "74f08531f0dfc0ae398e4f83ddbba636bd3d9de4b67e39d3d66396ae887387ba",
+          "bytes": 589
+        },
+        "data/external/pubchem_cache/Sabutoclax.json": {
+          "sha256": "c008082cd0f36671c1b0f19bbcaa33f1f08dfb0e6c614b42bea0dc08e8fe6e98",
+          "bytes": 676
+        },
+        "data/external/pubchem_cache/Sapitinib.json": {
+          "sha256": "3f5a7babf26b105d4be64a4370128f532dde769de8d4a4f5177cc55947c03804",
+          "bytes": 586
+        },
+        "data/external/pubchem_cache/Savolitinib.json": {
+          "sha256": "cea11d4883061ff20d0555ed2fd73bcfccd92796ef346a66d58bc24e52ee1371",
+          "bytes": 566
+        },
+        "data/external/pubchem_cache/Schweinfurthin_A.json": {
+          "sha256": "7cbbce9209ae56a1ebf70e6dbee5446f12e088e0bfa36096847660cef9f1749b",
+          "bytes": 643
+        },
+        "data/external/pubchem_cache/Selumetinib.json": {
+          "sha256": "269d99ec09a52f00dd362f2956b99dbbaf0326dfc566a11be5406980164c569c",
+          "bytes": 570
+        },
+        "data/external/pubchem_cache/Sepantronium_bromide.json": {
+          "sha256": "fdf56ff1e3f8fb4871cffb1a3241e2a2414cbd6b64a4e381073c298c32b5d680",
+          "bytes": 579
+        },
+        "data/external/pubchem_cache/Serdemetan.json": {
+          "sha256": "8ff6299973c1a66feefbd1804f35033b3183e92b51b53c6f80701d3129c5424f",
+          "bytes": 553
+        },
+        "data/external/pubchem_cache/Sinularin.json": {
+          "sha256": "1492d2dd28bf4c9c1af3426f6a7ded6246340432eb01ed21ddda1e98b07a3ad3",
+          "bytes": 570
+        },
+        "data/external/pubchem_cache/Sorafenib.json": {
+          "sha256": "7932397804e81f1f5698f2bd8e931771178e85961334b4771c3e9a99fb1e2b14",
+          "bytes": 589
+        },
+        "data/external/pubchem_cache/Staurosporine.json": {
+          "sha256": "90396807843172890a0ad0639acd68301474a891491cddb1a795b8a35b580df6",
+          "bytes": 617
+        },
+        "data/external/pubchem_cache/TAF1_5496.json": {
+          "sha256": "706b4af72a8baeae22b55a43d1e8247f5afabf0a65d8f2f61931449bb6ca786e",
+          "bytes": 99
+        },
+        "data/external/pubchem_cache/THR-101.json": {
+          "sha256": "87ea4d9e5a80e3df7b86e6a81869a1b3a8b4ab61ade83f7b44532047e720dc83",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/THR-102.json": {
+          "sha256": "a3dd262ec4ca780717bc6dd2d9c1b9e695dd042e862bff4935fff541ec9eb9d8",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/THR-103.json": {
+          "sha256": "a1a904d5223f345efccec98f39359cc88368450305c072acc77425244a4a2beb",
+          "bytes": 97
+        },
+        "data/external/pubchem_cache/TW_37.json": {
+          "sha256": "4b1c0ce5027c9b261dde0b2d41ceffb3451317aae612c506db6a87cb2e80302b",
+          "bytes": 614
+        },
+        "data/external/pubchem_cache/Talazoparib.json": {
+          "sha256": "52aae47fc3681d44568164fff87e52721daf5fe66aa9465e167b486a876adc4a",
+          "bytes": 582
+        },
+        "data/external/pubchem_cache/Tamoxifen.json": {
+          "sha256": "f54a25b80f838b8c912c24812723cb51fcc5250bc53efebd1508899362eba927",
+          "bytes": 561
+        },
+        "data/external/pubchem_cache/Tanespimycin.json": {
+          "sha256": "aa2b6f0799906593bde97caf029ef3f12ff9354f1a3ed3c667a59abc655ea754",
+          "bytes": 656
+        },
+        "data/external/pubchem_cache/Taselisib.json": {
+          "sha256": "47b9b7af67850e742f0de219ac479779494d2337c1800c20c3a544f62207b15b",
+          "bytes": 598
+        },
+        "data/external/pubchem_cache/Telomerase_Inhibitor_IX.json": {
+          "sha256": "aee802126e2e03c1960e13eb4a20f0a12f166f409df5eda2220c1577f8b33098",
+          "bytes": 604
+        },
+        "data/external/pubchem_cache/Temozolomide.json": {
+          "sha256": "3a7fe0687b1272d33de594af36c3aad59467c0e4b7ce0946daaaf9dd278e7d0a",
+          "bytes": 514
+        },
+        "data/external/pubchem_cache/Temsirolimus.json": {
+          "sha256": "d09d23f8d8cb24b8fcececf139892b853a42d8c2cf17d0bfb6a9fe6ad0b1ae22",
+          "bytes": 802
+        },
+        "data/external/pubchem_cache/Teniposide.json": {
+          "sha256": "f2d6e18ab6f00439c4ff631e3b5c9c329970813a50e13b480c9a0e3be75fcf20",
+          "bytes": 676
+        },
+        "data/external/pubchem_cache/Topotecan.json": {
+          "sha256": "304b7b684065195d0f9757b589db0d60889bc2b20a071de92470dbda36747a39",
+          "bytes": 579
+        },
+        "data/external/pubchem_cache/Tozasertib.json": {
+          "sha256": "2fbf9460d2235886678a3d34204a9845750fbc7e25dff05cda21630f97fa2586",
+          "bytes": 583
+        },
+        "data/external/pubchem_cache/Trametinib.json": {
+          "sha256": "52ece666e8c7e3603767bbb206d05d9fca33c4e789258af5b9df1784c258e76b",
+          "bytes": 616
+        },
+        "data/external/pubchem_cache/Tretinoin.json": {
+          "sha256": "69737bfbca666bd559f394a442bda4f44c30291b0d3200a9d2440b2d76da4c02",
+          "bytes": 546
+        },
+        "data/external/pubchem_cache/ULK1_4989.json": {
+          "sha256": "15868c5a5beb5d3ca5e5a5435cb4d85872174ccbef2ae9a9b5730627944c2f3c",
+          "bytes": 99
+        },
+        "data/external/pubchem_cache/UMI-77.json": {
+          "sha256": "640edf482d2ed5b65e218b40706bf4b391cedf02a508d90c06b9e8e028d59cac",
+          "bytes": 567
+        },
+        "data/external/pubchem_cache/UNC0379.json": {
+          "sha256": "af02addb8b2dea11a503a49a59aef796453ac33fa261bdd700a9551e244f5fda",
+          "bytes": 553
+        },
+        "data/external/pubchem_cache/UNC0638.json": {
+          "sha256": "2fe8b15a391db7b4cca3c5862a15706ef2987461380728930626bc19283806c2",
+          "bytes": 674
+        },
+        "data/external/pubchem_cache/Ulixertinib.json": {
+          "sha256": "4c532f56a742495a048af043280471f99cb514ef7eea3fd8f49422fe9e8ba51c",
+          "bytes": 584
+        },
+        "data/external/pubchem_cache/Uprosertib.json": {
+          "sha256": "933cbd62ca5935109102237009a388d0ef6531266b6187fe685c8a149f7eca52",
+          "bytes": 587
+        },
+        "data/external/pubchem_cache/VE-822.json": {
+          "sha256": "2577444cb40fa48f5e9b312cdb273e31a028fce25dfcd7ccd695df7304f55328",
+          "bytes": 594
+        },
+        "data/external/pubchem_cache/VE821.json": {
+          "sha256": "42aebd7f0ed68c7d28c21c2af476d01f8217f6ab885be52de9fda6abb4762b0b",
+          "bytes": 560
+        },
+        "data/external/pubchem_cache/VSP34_8731.json": {
+          "sha256": "c376653fcd052d819046c6ebb190506e50b22f6d77cd915092206512c07e4d8e",
+          "bytes": 100
+        },
+        "data/external/pubchem_cache/VTP-A.json": {
+          "sha256": "eddb7949b58eb20792c74563f5d0e40492934ab0fd1f1bce4c16dd1089ee6d9c",
+          "bytes": 95
+        },
+        "data/external/pubchem_cache/VTP-B.json": {
+          "sha256": "74c8b48f8e85ee5395015d3543107a0ead549e3dabcf1869718d23653902df6e",
+          "bytes": 95
+        },
+        "data/external/pubchem_cache/VX-11e.json": {
+          "sha256": "1bb6e5ce18a39c1139beaca4b1af836f7e85d7e3e09a9dd622c7a6100092237d",
+          "bytes": 719
+        },
+        "data/external/pubchem_cache/Veliparib.json": {
+          "sha256": "41c846c60fe641c0cfdb8fa4981baa399a145cfd9f85f56efc95e15b865fa66b",
+          "bytes": 529
+        },
+        "data/external/pubchem_cache/Venetoclax.json": {
+          "sha256": "a5e4bc03cfe0cf512c7f67cff16df54ab972e7b2f676620ddd2ae48029da3f94",
+          "bytes": 720
+        },
+        "data/external/pubchem_cache/Vinblastine.json": {
+          "sha256": "91dc8d3bb2f483c163c005ca087cc8b1796b79f7b393fa69b067612a05e83944",
+          "bytes": 728
+        },
+        "data/external/pubchem_cache/Vinorelbine.json": {
+          "sha256": "4391e5d61ad434286317851d0b1032f37c88132b5ee3b82a831ff9f0cdfa7d1a",
+          "bytes": 720
+        },
+        "data/external/pubchem_cache/Vismodegib.json": {
+          "sha256": "8d036bb26eef62add94d182a2c718226568b754a49d74bc1680c35fcb512ca96",
+          "bytes": 583
+        },
+        "data/external/pubchem_cache/Vorinostat.json": {
+          "sha256": "d81310b75ca20d95c65ce1c3a8fc25a974df7d6707e4b990aa2c300721f6ac35",
+          "bytes": 518
+        },
+        "data/external/pubchem_cache/WEHI-539.json": {
+          "sha256": "c426e98cb2942da6e4b6cf1a67117dc950f5550fc0ef8280f7df4befd3f58be6",
+          "bytes": 620
+        },
+        "data/external/pubchem_cache/WIKI4.json": {
+          "sha256": "953dbb995274fad83338ec934db7a75536dfa95eaa7ca5cefe36528175cc7434",
+          "bytes": 695
+        },
+        "data/external/pubchem_cache/WZ4003.json": {
+          "sha256": "d68e408653ee772589c575e7f49f43f735174a1ebfdce1abbee01630a36399fe",
+          "bytes": 683
+        },
+        "data/external/pubchem_cache/Wee1_Inhibitor.json": {
+          "sha256": "3986d3c6ec0cc95ebe308568dc4fb4a53091ca320957ea66a73bc50595f83d39",
+          "bytes": 587
+        },
+        "data/external/pubchem_cache/Wnt-C59.json": {
+          "sha256": "01c3d25893d20b9718d12eee38d5455337c61b6193f6e1bef3a0134e9c95c64d",
+          "bytes": 629
+        },
+        "data/external/pubchem_cache/XAV939.json": {
+          "sha256": "8afce5fff04d83870f30077ed9dbee6d2721c0d360f2f4395cc4f1d4dc4f0833",
+          "bytes": 536
+        },
+        "data/external/pubchem_cache/YK-4-279.json": {
+          "sha256": "f3ebbbc0d5a2e7e9afc40b3dbef5f3cdb8e7137b10386c1fa982d30928b3f1d7",
+          "bytes": 631
+        },
+        "data/external/pubchem_cache/ZM447439.json": {
+          "sha256": "07fe04c9b728f78f21cb7b82e7cac8ea383d3c15279099ba24640ca0bd0ac8ef",
+          "bytes": 662
+        },
+        "data/external/pubchem_cache/Zoledronate.json": {
+          "sha256": "3b2289434c36f9f69ed3fe4f894a3bdcd6c6c7403e7e15a6dc8e070588c2e276",
+          "bytes": 534
+        },
+        "data/external/pubchem_cache/alpha-lipoic_acid.json": {
+          "sha256": "ad60a05b35784366f96dfe92d51e6613591c2de10bf67f356392dd9aad645533",
+          "bytes": 499
+        },
+        "data/external/pubchem_cache/ascorbate__vitamin_C_.json": {
+          "sha256": "e0b812126864b5805f842e5fddafcae7e789393ffebfd9285c75ce2e8fe06ea1",
+          "bytes": 561
+        },
+        "data/external/pubchem_cache/glutathione.json": {
+          "sha256": "384714a7e68e8edbad38ec2377bdd65fb6366e8bff6c5d4ae0211a5da97590c5",
+          "bytes": 545
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "f9ec18a515614e4ca5a8d59b182b7d04515c499ed4557640d54ad702733d4778",
+        "notebooks/02_baseline_metadatos.ipynb": "476769e08ec7ebb9675c2894e17911d225576741681a7d5bc2d7f7d6310a4fe7",
+        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "b87e5a88d53ece9e8970244c565829c55ff786ac26c3121edcd339c2d41a4511",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:06:48.544409+00:00",
+      "outputs": {
+        "compounds.csv": "9318374a4059baacf57a7ed7c9cbb369a08e116e778da682cd66b1c2b7787ea4",
+        "compounds_run.json": "26c796779eabe3123722f0d2cefc92eb888e9f0260892fa1eac58726ade09453",
+        "pubchem_cache.tar.gz": "d412a91c61a2ea9b9f987e31626aa46630bf72711907312cb5d976df583f655e",
+        "resolution_review.csv": "4f0508089b77f1137f0216749c5c1e29df45567eab642a088022563c21c119fa",
+        "source.tar.gz": "eb9a5fc291541ea701a5b105300b91b21872c3b6736074d1e8a806ccb6a8f04f"
+      }
+    },
+    "candidates": {
+      "run_id": "20261029T220755953647Z-8bdb6f15",
+      "kind": "candidates",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:07:55.953752+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/raw/Aislados T98G - Hoja 1.csv": {
+          "sha256": "575f6ee3414bdcc81e57e509f9e9fd44b019fcd36c894b450e18ffec5845d377",
+          "bytes": 39175
+        },
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "data/raw/GDSC2_fitted_dose_response_27Oct23.xlsx": {
+          "sha256": "0e99120a14a003dcbd3c27c020f1cfd35e38ee091067a2406f66c0d4dbc1c899",
+          "bytes": 22112537
+        },
+        "data/processed/compounds.csv": {
+          "sha256": "9318374a4059baacf57a7ed7c9cbb369a08e116e778da682cd66b1c2b7787ea4",
+          "bytes": 183686
+        },
+        "screening.json": {
+          "sha256": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+          "bytes": 623
+        },
+        "pilot_protocol.json": {
+          "sha256": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+          "bytes": 1144
+        },
+        "data/candidate_reviews.csv": {
+          "sha256": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+          "bytes": 110
+        },
+        "data/formulation_measurements.csv": {
+          "sha256": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+          "bytes": 385
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "f9ec18a515614e4ca5a8d59b182b7d04515c499ed4557640d54ad702733d4778",
+        "notebooks/02_baseline_metadatos.ipynb": "476769e08ec7ebb9675c2894e17911d225576741681a7d5bc2d7f7d6310a4fe7",
+        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "b87e5a88d53ece9e8970244c565829c55ff786ac26c3121edcd339c2d41a4511",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:08:39.259344+00:00",
+      "outputs": {
+        "assays.csv": "dd5c81610c01a33fc5aae95a385e1fb75e6d47b35e22e43e4086a796965b8d98",
+        "dose_scenarios.csv": "7d3732489047a3b4a650958e9ce92d1ae3346acc008a33e348c15c35d6d2f6e6",
+        "formulation_readiness.csv": "81d254328bd06f43d10f37cb5d3b8044388f11a44f9f443c26bd9d4a3a045798",
+        "funnel.csv": "90bdb48f673dc1fc88214110a15b10a054c1678a47b08ee628f095bcf21e03ac",
+        "ranking.csv": "3fe69567e922bb9de6a1f384d23582c8abcaaf2c9cfc8ca339c7d7d07bf7435d",
+        "run.json": "17933f19619d437e964245a09daddcd6efa145be13afd8c4c8c204fd885e70a9",
+        "scenario_summary.csv": "01c0561cd6b74a62f184352fe9347ab537dd07a13f329d2c9a54597ee1b8c5d4",
+        "shortlist.csv": "f7c459c2c09f2164ec0f23e9494f6935fffadcc16f5117e9817122fb8a638d24",
+        "source.tar.gz": "ced050d06212f2ede963036ebab28b75ee46da699600ead5af279ab806dd68e6"
+      }
+    },
+    "metadata_baseline": {
+      "run_id": "20261029T221151543898Z-00c7f9eb",
+      "kind": "metadata_baseline",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:11:51.543955+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "data/processed/line_split.csv": {
+          "sha256": "106ddfc9242743e5cacbc9feebf5f3ed4af2ddf75e26a070a0d63eec1c098ec0",
+          "bytes": 1071
+        },
+        "data/external/model_list_20260921.csv": {
+          "sha256": "419f65d1d6534454194f1a744550fab632cd1d7411f6b13411a885735aa37006",
+          "bytes": 957555
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "476769e08ec7ebb9675c2894e17911d225576741681a7d5bc2d7f7d6310a4fe7",
+        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "b87e5a88d53ece9e8970244c565829c55ff786ac26c3121edcd339c2d41a4511",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:12:20.261086+00:00",
+      "outputs": {
+        "biological_groups.csv": "940e976aa49c22d552c67ca92e4f745a724cf6fb6c8aff3766a6cedc21390e23",
+        "cv_assignments.csv": "6ffd059bd42834c31c99d5525d914f68797e73fb79344a1c84c7f1d819b4c8c8",
+        "cv_search.csv": "70800822eb07c41cc1ce95bfdbb1d5e3fee1b5c8c17fd0d3da243e0ce9697a6f",
+        "cv_summary.csv": "fe462996384006dd3a53c78e3b8ddb816e791ed71dfd4110c19e9cb517173de2",
+        "model.joblib": "95fdb9be0caf406086bfb7500f4065ff13fb6da151f97342f0d97b1dff8cb255",
+        "outcome_diagnostics.csv": "dcb6a78fa13b8483b615332982382c942397d2d994aea53216338bfc8eb8cde7",
+        "run.json": "10958faea7a69883475b8a2964b414627594d5c96984d2894d54b09ba2e0e507",
+        "source.tar.gz": "ce817be7406f4115ff1531e337e6cbc16b967d51e47748abe507825e65fe4599",
+        "test_by_drug.csv": "8d8d3cfd9bffd3f13fcd6b7b3d43042fbeaf24d6fcd5716739f803f478a8e78e",
+        "test_by_line.csv": "744109ad8144b3608ae4ef510422f848630fef72a998e4f8479b540ca1b286fe",
+        "test_metrics.csv": "2d6d43edb567aff772049e8edf3557c604f90a3ae0e4a476f8d508299fabfdea",
+        "test_predictions.csv": "4e53ea01c74957f075ae9876cd8a2cdd08f8aa8e0c06834c614f90fd520ee10b"
+      }
+    },
+    "molecular": {
+      "run_id": "20261029T221250672376Z-0b91f133",
+      "kind": "molecular",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:12:50.672502+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "data/external/expression.csv": {
+          "sha256": "b335b0a8d8bf3db1e75a290fe92c383228a1b242350f8c06e992066544ebafbf",
+          "bytes": 24359716
+        },
+        "data/external/expression_metadata.json": {
+          "sha256": "b8f0a0356ebcd333b62ea542426a04a5973806fcd8b0338100349d16b31be3d7",
+          "bytes": 1198
+        },
+        "data/external/model_list_20260921.csv": {
+          "sha256": "419f65d1d6534454194f1a744550fab632cd1d7411f6b13411a885735aa37006",
+          "bytes": 957555
+        },
+        "data/processed/line_split.csv": {
+          "sha256": "106ddfc9242743e5cacbc9feebf5f3ed4af2ddf75e26a070a0d63eec1c098ec0",
+          "bytes": 1071
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "3956fa1eba4a442c50a46950b19fe7ebddbe9e20568e94ea8c1566bb6e67ba2a",
+        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "5fad2585fe7599cba6ca7c524d92126449d427452f84a2cf9051ab2846bd8bed",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "eaf8ac37c9c40dc0a9f3f6295f7a17f8fda761fbc26dd10399752d6262ba7767",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:14:26.283854+00:00",
+      "outputs": {
+        "biological_groups.csv": "940e976aa49c22d552c67ca92e4f745a724cf6fb6c8aff3766a6cedc21390e23",
+        "cv_assignments_1003.csv": "914c622c0c0e8ff9135421b406eaad4d055647ae92063859abca6c4508af53a5",
+        "cv_assignments_1007.csv": "ac9f53f09a3ee9428a7b6000effcfa5266563e3232e00369b0b86ea33391df2d",
+        "cv_assignments_1011.csv": "fd9d32c2a7b0f804e86377634e4eff55afb2e7100e6891d83cee6ca79fcc5585",
+        "cv_search_1003.csv": "0a4377776dafb9e91001c2230cbffb264fc307afd665865bb7ae72f41f60436f",
+        "cv_search_1007.csv": "bf179b70a80f36d388905d0be903c870f03c954853dc85c5d4563ee77a1a07e2",
+        "cv_search_1011.csv": "1632c114938d33f9d6298d1524bd436518478f4b50bfa1571b5ad74694d5da73",
+        "cv_summary.csv": "61d5193df4d85f30d0d2061157055668f6da5f652f3a2b2985fb0eb83f2e4ba4",
+        "development_drug_coverage.csv": "75b9a501c5be60b6025efd9f95ed83f8244b4be3e713a2d04ea8dcda2a62ff3a",
+        "model.joblib": "40d685297f98131a5d7e0d5517232d26a878e890d27b479d77b41fc01886f9b6",
+        "outcome_diagnostics.csv": "6e1bba7d41e12b1d6f8a112f75c4f7e2d0fd5acc4e8eb6f23108587020c65a51",
+        "paired_comparisons.csv": "69e77fbfa1ec52b03785eefc45722a58f7a8e539f1b934f023a8e1b2a133cf73",
+        "source.tar.gz": "90dd4fa8ab7f84df6200bdff9aacd3c22b548a50bc3e6d956c3f6a317762fde3",
+        "status.json": "1874c2b7c4121f3f38f43fc07676af2fb622c48ff33bcb6597df7c3a19c8a0ec",
+        "test_metrics.csv": "5316e32cfe968f65edb1dd57db7633d30cc1e4e6b93b9021ec3843e46d5b2c5c",
+        "test_predictions.csv": "7a41d5abd9100ee28548d8fb0812386bcccfe92d3d4c2415b3e3fb410291eb8d",
+        "unmatched_lines.csv": "17b68d2c24b1eaf53873e2287ed930098dae9f5c71a22a64abf8d80a82bc2474"
+      }
+    },
+    "expression_preparation": {
+      "run_id": "20261029T220647968006Z-d34a9c67",
+      "kind": "expression_preparation",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:06:47.968125+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/external/rnaseq_all_20220624.zip": {
+          "sha256": "2af6fd33a16c5c3d48a8d78976f54b4a09fcf0bac4102317b621f24d7bdca39a",
+          "bytes": 940707972
+        },
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "f9ec18a515614e4ca5a8d59b182b7d04515c499ed4557640d54ad702733d4778",
+        "notebooks/02_baseline_metadatos.ipynb": "476769e08ec7ebb9675c2894e17911d225576741681a7d5bc2d7f7d6310a4fe7",
+        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "b87e5a88d53ece9e8970244c565829c55ff786ac26c3121edcd339c2d41a4511",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:06:59.175999+00:00",
+      "outputs": {
+        "expression.csv": "b335b0a8d8bf3db1e75a290fe92c383228a1b242350f8c06e992066544ebafbf",
+        "expression_metadata.json": "b8f0a0356ebcd333b62ea542426a04a5973806fcd8b0338100349d16b31be3d7",
+        "gene_annotation.csv": "a02cf5296ca65c5fa9f4c33c865bfeea44ed8fdf61964b26ec148887318984d3",
+        "profiles.csv": "e507149a802ecefac8c725f4421c6f50c2dd7c779dd9a09e4d637eb5153d455a",
+        "source.tar.gz": "2aca6d3b8156d962a6c76c77ce71c3528eab99ffc55251191bfa03d2d5e8ff62",
+        "unmatched_lines.csv": "17b68d2c24b1eaf53873e2287ed930098dae9f5c71a22a64abf8d80a82bc2474"
+      }
+    },
+    "audit": {
+      "run_id": "20261029T221101927170Z-bc52ddfa",
+      "kind": "audit",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:11:01.927281+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/raw/GDSC2_fitted_dose_response_27Oct23.xlsx": {
+          "sha256": "0e99120a14a003dcbd3c27c020f1cfd35e38ee091067a2406f66c0d4dbc1c899",
+          "bytes": 22112537
+        },
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "data/raw/GBMGliomafiltrado.xlsx": {
+          "sha256": "6c8fb03a46cf8878255154611fa19f5879f4cfd6f11fa70e848c216ae3d8cf4e",
+          "bytes": 1069474
+        },
+        "data/raw/Aislados T98G - Hoja 1.csv": {
+          "sha256": "575f6ee3414bdcc81e57e509f9e9fd44b019fcd36c894b450e18ffec5845d377",
+          "bytes": 39175
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "f9ec18a515614e4ca5a8d59b182b7d04515c499ed4557640d54ad702733d4778",
+        "notebooks/02_baseline_metadatos.ipynb": "476769e08ec7ebb9675c2894e17911d225576741681a7d5bc2d7f7d6310a4fe7",
+        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "b87e5a88d53ece9e8970244c565829c55ff786ac26c3121edcd339c2d41a4511",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:11:44.667699+00:00",
+      "outputs": {
+        "cell_lines.csv": "71b211741d0f7897d448383a099c93d0569e9869a7c499b0dabf17255943a926",
+        "dictionary_gdsc2.csv": "6ddde37006002679722851fc105044672d0ae1bf431d6381373e4745e72e1cb0",
+        "dictionary_glioma_csv.csv": "a8e7bbdd13f12303bc4605b64bbcf3fc5580412628b1642c73d903e7a9dffc67",
+        "dictionary_glioma_xlsx.csv": "a8e7bbdd13f12303bc4605b64bbcf3fc5580412628b1642c73d903e7a9dffc67",
+        "dictionary_t98g.csv": "c0745690c64dbf920f16dbabddea6ea1a87851cfdc0ae94a3fafed8821611d99",
+        "drug_coverage.csv": "211ed8d41fe903b2a52a7e5e82f0d4c6ce96a8254fda218ee5cc037252846a29",
+        "glioma_flagged.parquet": "ffa7ba2d72092548a05a2fb05fa6f15d323964885be4021fe6c3bdb52b0bd142",
+        "glioma_qc.parquet": "c6a10541f99a24239dce1bc1e5bd578031ce8725277eed7986a04cde91a83473",
+        "inventory.csv": "3c9b07c94c3ad189cb1e9234bfb198ff33b63f4f9305c6eba69001140ed6ba40",
+        "manifest.json": "5d108db42fa13725bea67d5209648a48b06c11d6e63aa0a1a8eb80a7d61bbdc5",
+        "multiple_drug_ids.csv": "3f15ee5b1a84c3e44d1868e0e951b6781a4b3640f14cab821b12892500a4b086",
+        "quality_counts.csv": "2515c4bd326f9662e697f8de9b880e8f66b4be4f57d2143e1014db774ba67440",
+        "relationships.json": "96c6f12fdf657ec0775c87795fa3acfe2710fd4056dbfc4ce0db4f680bdd2ca6",
+        "rmse_sensitivity.csv": "70d4c996a1c72eea5b6bc0a0302c1099f42383af8921cd5893275eac371e430e",
+        "source.tar.gz": "b515509ca7c4b7550371b9b4a67f8ad9cde3d6f7ab0b326ef85a04647adf58b3"
+      }
+    }
+  },
+  "candidates": {
+    "run_id": "20261029T220755953647Z-8bdb6f15",
+    "protocol": {
+      "protocol_version": "screening-v2-exploratory",
+      "np_doses_ug_ml": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "loading_scenarios_pct": [
+        1,
+        3,
+        5,
+        10
+      ],
+      "released_fraction_scenarios": [
+        0.1,
+        0.5,
+        1.0
+      ],
+      "reference_loading_pct": 5,
+      "reference_released_fraction": 1.0,
+      "screening_loading_limit_pct": 10,
+      "potency_summary": "maximum_ln_ic50_across_all_assays",
+      "range_policy": "all_assays_within_range",
+      "mass_basis": "active_parent_drug_mass_per_carrier_mass",
+      "interpretation": "Scenarios chosen for exploration; neither measured capacity nor universal feasibility limits. Same free-drug potency is assumed, not established."
+    },
+    "purpose": "Exploratory prioritization, not formulation efficacy prediction",
+    "qc_assay_rows": 280,
+    "t98g_above_range": 214,
+    "t98g_below_range": 0,
+    "t98g_within_range": 66,
+    "ranked_entities_including_unresolved": 269,
+    "shortlist_molecules": 23,
+    "chemistry_reviews_approved": 0,
+    "pilot_protocol": {
+      "ready": false,
+      "missing_decisions": [
+        "primary_time_h",
+        "minimum_relevant_improvement",
+        "independent_experiments",
+        "sample_size_rationale",
+        "normalization_and_curve_model",
+        "multiple_comparisons_plan",
+        "randomization_and_plate_layout",
+        "orthogonal_assay",
+        "physical_mixture_control_decision",
+        "endothelial_acceptance_criterion",
+        "transwell_analyte",
+        "barrier_integrity_criterion",
+        "transport_mass_balance_criterion",
+        "approved_by",
+        "approved_at"
+      ],
+      "errors": [
+        "protocol_not_approved"
+      ],
+      "meaning": "Decisions only; not evidence that controls or measurements were performed."
+    },
+    "comparative_assay_ready": false,
+    "unmeasured_requirements": [
+      "loading per formulation batch",
+      "release over time in assay conditions",
+      "retained activity",
+      "MTT interference and orthogonal validation",
+      "dose equivalence",
+      "endothelial safety and intact-barrier transport"
+    ],
+    "funnel": [
+      {
+        "stage": "t98g_qc_assays",
+        "drug_id_rows": 280,
+        "distinct_nonmissing_compound_ids": 217
+      },
+      {
+        "stage": "structure_accepted",
+        "drug_id_rows": 223,
+        "distinct_nonmissing_compound_ids": 213
+      },
+      {
+        "stage": "all_assays_in_range",
+        "drug_id_rows": 50,
+        "distinct_nonmissing_compound_ids": 49
+      },
+      {
+        "stage": "within_chosen_loading_scenario",
+        "drug_id_rows": 42,
+        "distinct_nonmissing_compound_ids": 41
+      },
+      {
+        "stage": "structural_route_tier_1_to_4",
+        "drug_id_rows": 24,
+        "distinct_nonmissing_compound_ids": 23
+      }
+    ]
+  },
+  "chemistry": {
+    "source": "PubChem PUG REST, consulta por nombre",
+    "input_file": "GBMGliomafiltrado.csv",
+    "input_sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+    "drug_ids": 295,
+    "drug_names": 286,
+    "resolved_drug_id_rows": 243,
+    "resolved_names": 234,
+    "unique_compound_ids": 232,
+    "rows_needing_review": 152,
+    "route_counts": {
+      "asa_aromatica_poco_reactiva": 71,
+      "covalente_requiere_derivatizacion": 57,
+      "sin_asa_reactiva": 57,
+      "unresolved": 52,
+      "covalente_amina_requiere_activacion": 36,
+      "covalente_cooh_edc_nhs": 15,
+      "adsorcion_electrostatica": 4,
+      "coordinacion_metal": 3
+    },
+    "note_es": "La correspondencia nombre->CID es ambigua; las filas del informe de revisión no deben usarse sin verificación manual de la identidad."
+  },
+  "expression": {
+    "source_url": "https://cog.sanger.ac.uk/cmp/download/rnaseq_all_20220624.zip",
+    "source_authenticity": "local_file_official_byte_identity_not_verified",
+    "release": "20220624",
+    "scale": "log2_tpm_plus1",
+    "gene_id_type": "Sanger SIDG gene identifiers; symbols retained separately",
+    "preprocessing": "Merged wide TPM member; unique SIDM profiles as supplied; select response SIDMs; validate nonnegative TPM, no infinities and observed profile sums within 2% of 1e6; log2(TPM+1) once; transpose. Preserve partial missing values; no outcome-based filtering, cross-sample scaling or imputation.",
+    "input_scale": "raw_tpm",
+    "input_scale_evidence": "Historical TPM member with unlogged abundances and profile sums approximately 1e6; current documentation concerns newer releases.",
+    "sha256": "b335b0a8d8bf3db1e75a290fe92c383228a1b242350f8c06e992066544ebafbf",
+    "zip_sha256": "2af6fd33a16c5c3d48a8d78976f54b4a09fcf0bac4102317b621f24d7bdca39a",
+    "member": "rnaseq_tpm_20220624.csv",
+    "run_id": "20261029T220647968006Z-d34a9c67",
+    "n_matched_lines": 50,
+    "n_genes": 37602,
+    "unmatched_lines": [
+      "SIDM01021"
+    ],
+    "profile_data_sources": {
+      "Broad": 28,
+      "Sanger": 22
+    }
+  },
+  "molecular_status": {
+    "status": "trained",
+    "run_id": "20261029T221250672376Z-0b91f133",
+    "outcome_policy": {
+      "target_interpretation": "fitted_point_estimate_not_measured_censoring_bound",
+      "evaluation_status": "exploratory_previously_observed_holdout",
+      "selection_uses_test_subgroups": false,
+      "n_within_range": 15,
+      "n_above_range": 18,
+      "n_below_range": 0,
+      "validated_formulation_or_clinical_prediction": false
+    },
+    "relationships": {
+      "status": "local_metadata_checked",
+      "matched_lines": 51,
+      "distinct_patient_ids": 51,
+      "donor_independence_verified": true,
+      "independent_groups": 51,
+      "official_download_authenticity_verified": false
+    },
+    "config": {
+      "seed": 42,
+      "target": "LN_IC50",
+      "group": "SANGER_MODEL_ID",
+      "qc_rmse_max": 0.3,
+      "qc_sensitivity_thresholds": [
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "test_size": 0.2,
+      "cv_folds": 4,
+      "metadata_features": [
+        "DRUG_ID",
+        "CANCER_TYPE"
+      ],
+      "molecular_drug_ids": [],
+      "molecular_max_drugs": 3,
+      "molecular_min_development_lines": 25,
+      "molecular_min_test_lines": 5,
+      "bootstrap_repetitions": 1000
+    },
+    "expression_metadata": {
+      "source_url": "https://cog.sanger.ac.uk/cmp/download/rnaseq_all_20220624.zip",
+      "source_authenticity": "local_file_official_byte_identity_not_verified",
+      "release": "20220624",
+      "scale": "log2_tpm_plus1",
+      "gene_id_type": "Sanger SIDG gene identifiers; symbols retained separately",
+      "preprocessing": "Merged wide TPM member; unique SIDM profiles as supplied; select response SIDMs; validate nonnegative TPM, no infinities and observed profile sums within 2% of 1e6; log2(TPM+1) once; transpose. Preserve partial missing values; no outcome-based filtering, cross-sample scaling or imputation.",
+      "input_scale": "raw_tpm",
+      "input_scale_evidence": "Historical TPM member with unlogged abundances and profile sums approximately 1e6; current documentation concerns newer releases.",
+      "sha256": "b335b0a8d8bf3db1e75a290fe92c383228a1b242350f8c06e992066544ebafbf",
+      "zip_sha256": "2af6fd33a16c5c3d48a8d78976f54b4a09fcf0bac4102317b621f24d7bdca39a",
+      "member": "rnaseq_tpm_20220624.csv",
+      "run_id": "20261029T220647968006Z-d34a9c67",
+      "n_matched_lines": 50,
+      "n_genes": 37602,
+      "unmatched_lines": [
+        "SIDM01021"
+      ],
+      "profile_data_sources": {
+        "Broad": 28,
+        "Sanger": 22
+      }
+    },
+    "versions": {
+      "python": "3.11.15",
+      "pandas": "2.3.3",
+      "numpy": "2.4.6",
+      "scikit_learn": "1.7.2"
+    },
+    "n_matched_lines": 50,
+    "response_source_sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+    "split_sha256": "106ddfc9242743e5cacbc9feebf5f3ed4af2ddf75e26a070a0d63eec1c098ec0",
+    "n_unmatched_lines": 1,
+    "n_gene_features": 37602,
+    "selected_drugs_from_development": [
+      "1003",
+      "1007",
+      "1011"
+    ],
+    "skipped": [],
+    "runs": [
+      {
+        "DRUG_ID": "1003",
+        "selected": "pca_elastic_net",
+        "n_dev": 39,
+        "n_test": 11,
+        "interval": {
+          "n_test_lines": 11,
+          "line_macro_mae": 1.1140422207169005,
+          "line_macro_mae_ci95": [
+            0.7452938267932743,
+            1.5204804225701234
+          ],
+          "delta_vs_baseline": -0.07979258347890368,
+          "delta_ci95": [
+            -0.2808797383441734,
+            0.18403867936036325
+          ],
+          "method": "bootstrap agrupado por SIDM; percentil; condicionado al entrenamiento fijo"
+        }
+      },
+      {
+        "DRUG_ID": "1007",
+        "selected": "pca_elastic_net",
+        "n_dev": 39,
+        "n_test": 11,
+        "interval": {
+          "n_test_lines": 11,
+          "line_macro_mae": 1.1796562122821133,
+          "line_macro_mae_ci95": [
+            0.7137902493299972,
+            1.6230893576726233
+          ],
+          "delta_vs_baseline": -0.25315386464096296,
+          "delta_ci95": [
+            -0.5794337431178758,
+            -0.009575141264948388
+          ],
+          "method": "bootstrap agrupado por SIDM; percentil; condicionado al entrenamiento fijo"
+        }
+      },
+      {
+        "DRUG_ID": "1011",
+        "selected": "pca_extra_trees",
+        "n_dev": 39,
+        "n_test": 11,
+        "interval": {
+          "n_test_lines": 11,
+          "line_macro_mae": 0.9201114599287211,
+          "line_macro_mae_ci95": [
+            0.46170515849301613,
+            1.5084291369528589
+          ],
+          "delta_vs_baseline": -0.031079132145871657,
+          "delta_ci95": [
+            -0.14502940686703406,
+            0.07841110595123266
+          ],
+          "method": "bootstrap agrupado por SIDM; percentil; condicionado al entrenamiento fijo"
+        }
+      }
+    ],
+    "training_partition": "development_only",
+    "scope": "Exploratorio in vitro, por fármaco conocido; no validación clínica ni externa"
+  },
+  "verification": {
+    "tests": {
+      "passed": 48,
+      "failed": 0
+    },
+    "notebooks": [
+      {
+        "file": "notebooks/01_auditoria_diccionario.ipynb",
+        "executed_code_cells": 6,
+        "errors": 0
+      },
+      {
+        "file": "notebooks/02_baseline_metadatos.ipynb",
+        "executed_code_cells": 5,
+        "errors": 0
+      },
+      {
+        "file": "notebooks/03_expresion_pca_modelos.ipynb",
+        "executed_code_cells": 5,
+        "errors": 0
+      }
+    ],
+    "all_six_run_manifests_and_outputs_verified": true,
+    "originals_and_split_unchanged": true,
+    "local_document_links_valid": true,
+    "shortlist_molecules": 23,
+    "all_t98g_assays_preserved": 280
+  }
+}

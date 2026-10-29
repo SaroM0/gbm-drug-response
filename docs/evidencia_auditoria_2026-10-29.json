@@ -1,0 +1,336 @@
+{
+  "temporary_workspace": "/tmp/gbm-research-audit-7wtwji3o",
+  "comparisons": {
+    "cv_summary": "matches",
+    "test_metrics": "matches",
+    "test_predictions": "matches",
+    "test_by_drug": "matches",
+    "test_by_line": "matches",
+    "data/processed/compounds.csv": "matches",
+    "reports/candidates/ranking.csv": "matches",
+    "reports/candidates/shortlist.csv": "matches"
+  },
+  "selected_model": "drug_mean",
+  "metrics": [
+    {
+      "model": "global_mean",
+      "n": 2677,
+      "mae": 2.080340728486398,
+      "prediction_rmse": 2.7732330315852787,
+      "r2": -2.3316650395566185e-05,
+      "spearman": null,
+      "macro_drug_mae": 2.063203053173161,
+      "macro_line_mae": 2.1026890148553825
+    },
+    {
+      "model": "drug_mean",
+      "n": 2677,
+      "mae": 0.938909801404105,
+      "prediction_rmse": 1.28694516420859,
+      "r2": 0.784643749087506,
+      "spearman": 0.8210895263269176,
+      "macro_drug_mae": 0.9393558700084703,
+      "macro_line_mae": 0.9810063106356176
+    },
+    {
+      "model": "elastic_net_metadata",
+      "n": 2677,
+      "mae": 1.0205798870415381,
+      "prediction_rmse": 1.3540405342441943,
+      "r2": 0.7616030315817874,
+      "spearman": 0.8224552991733699,
+      "macro_drug_mae": 1.02440599385134,
+      "macro_line_mae": 1.0582827530373689
+    },
+    {
+      "model": "extra_trees_metadata",
+      "n": 2677,
+      "mae": 0.9570795065616613,
+      "prediction_rmse": 1.3083950059392906,
+      "r2": 0.7774051290913662,
+      "spearman": 0.8155519569144303,
+      "macro_drug_mae": 0.9558156044743381,
+      "macro_line_mae": 0.9993900358288428
+    }
+  ],
+  "input_hashes": {
+    "GDSC2_fitted_dose_response_27Oct23.xlsx": "0e99120a14a003dcbd3c27c020f1cfd35e38ee091067a2406f66c0d4dbc1c899",
+    "GBMGliomafiltrado.csv": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+    "GBMGliomafiltrado.xlsx": "6c8fb03a46cf8878255154611fa19f5879f4cfd6f11fa70e848c216ae3d8cf4e",
+    "Aislados T98G - Hoja 1.csv": "575f6ee3414bdcc81e57e509f9e9fd44b019fcd36c894b450e18ffec5845d377"
+  },
+  "audit_date": "2026-10-29",
+  "captured_at_utc": "2026-10-29T21:50:11.199510+00:00",
+  "audited_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+  "scope": "Auditoría de reproducibilidad y validez de respuesta libre y priorización para formulaciones; no validación experimental o clínica",
+  "existing_tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 23,
+    "failed": 0,
+    "duration_seconds": 6.47
+  },
+  "rdkit_version": "2026.09.1",
+  "quality_counts": {
+    "t98g": {
+      "rows": 280,
+      "lines": 1,
+      "above_range": 214,
+      "below_range": 0,
+      "within_range": 66,
+      "qc_retained": 280
+    },
+    "glioma_csv": {
+      "rows": 12001,
+      "lines": 51,
+      "above_range": 9181,
+      "below_range": 36,
+      "within_range": 2784,
+      "qc_retained": 12001
+    }
+  },
+  "sequential_funnel": [
+    {
+      "stage": "t98g",
+      "drug_id_rows": 280,
+      "distinct_nonmissing_compound_ids": 218
+    },
+    {
+      "stage": "structure_ok",
+      "drug_id_rows": 226,
+      "distinct_nonmissing_compound_ids": 216
+    },
+    {
+      "stage": "and_within_range",
+      "drug_id_rows": 52,
+      "distinct_nonmissing_compound_ids": 51
+    },
+    {
+      "stage": "and_loading_le_10pct",
+      "drug_id_rows": 43,
+      "distinct_nonmissing_compound_ids": 42
+    },
+    {
+      "stage": "and_route_tier_le_4",
+      "drug_id_rows": 25,
+      "distinct_nonmissing_compound_ids": 24
+    }
+  ],
+  "dose_scenarios": {
+    "assumptions": [
+      "5% drug mass per nanoparticle mass",
+      "100% release",
+      "Same potency as free GDSC2 drug",
+      "No nanoparticle-specific activity or uptake change",
+      "Calculations are illustrative, not experimental predictions or prescribed doses"
+    ],
+    "candidates": [
+      {
+        "drug_name": "Docetaxel",
+        "gdsc_drug_id": 1007,
+        "free_ic50_um": 0.0051481337943886,
+        "mw": 807.9,
+        "drug_um_at_5ppm_np": 0.3094442381482857,
+        "drug_um_at_25ppm_np": 1.5472211907414284,
+        "loading_pct_to_place_free_ic50_within_np_5_to_25ppm": [
+          0.016636709169946202,
+          0.08318354584973102
+        ]
+      },
+      {
+        "drug_name": "Gemcitabine",
+        "gdsc_drug_id": 1190,
+        "free_ic50_um": 0.3487792773428269,
+        "mw": 263.2,
+        "drug_um_at_5ppm_np": 0.9498480243161095,
+        "drug_um_at_25ppm_np": 4.749240121580548,
+        "loading_pct_to_place_free_ic50_within_np_5_to_25ppm": [
+          0.36719482318652813,
+          1.8359741159326406
+        ]
+      },
+      {
+        "drug_name": "OSI-027",
+        "gdsc_drug_id": 1594,
+        "free_ic50_um": 3.5688378122361644,
+        "mw": 406.4,
+        "drug_um_at_5ppm_np": 0.6151574803149606,
+        "drug_um_at_25ppm_np": 3.0757874015748032,
+        "loading_pct_to_place_free_ic50_within_np_5_to_25ppm": [
+          5.801502747571108,
+          29.00751373785554
+        ]
+      }
+    ]
+  },
+  "pevonedistat": {
+    "smiles": "C1CC2=CC=CC=C2[C@H]1NC3=C4C=CN(C4=NC=N3)[C@@H]5C[C@H]([C@H](C5)O)COS(=O)(=O)N",
+    "assigned_route": "covalente_amina_requiere_activacion",
+    "primary_aliphatic_amine_count": 1,
+    "nh2_match_neighbors": [
+      [
+        "S"
+      ]
+    ],
+    "interpretation": "The matched N is attached to S in a sulfamate; this is not an aliphatic amine."
+  },
+  "representation_counterexamples": [
+    {
+      "smiles": "CC(=O)O",
+      "inchikey": "QTBSBXVTEAMEQO-UHFFFAOYSA-N",
+      "current_route": "covalente_cooh_edc_nhs",
+      "current_net_charge_ph74_heuristic": -1
+    },
+    {
+      "smiles": "CC(=O)[O-].[Na+]",
+      "inchikey": "VMHLLURERBWHNL-UHFFFAOYSA-M",
+      "current_route": "sin_asa_reactiva",
+      "current_net_charge_ph74_heuristic": 0
+    },
+    {
+      "smiles": "CCCCN",
+      "inchikey": "HQABUPZFAYXKJW-UHFFFAOYSA-N",
+      "current_route": "covalente_amina_requiere_activacion",
+      "current_net_charge_ph74_heuristic": 1
+    },
+    {
+      "smiles": "CCCC[NH3+].[Cl-]",
+      "inchikey": "ICXXXLGATNSZAV-UHFFFAOYSA-N",
+      "current_route": "sin_asa_reactiva",
+      "current_net_charge_ph74_heuristic": 0
+    }
+  ],
+  "lower_bound_counterexample": {
+    "fixture_only": true,
+    "ln_ic50": -10,
+    "min_conc": 0.001,
+    "max_conc": 10,
+    "data_quality_flag_below_range": true,
+    "ranking_t98g_in_range": true,
+    "assigned_tier_with_structure_and_dose_conditions": 1,
+    "impact_on_current_t98g_shortlist": "No T98G below-range rows in current inputs; affects logic and panel fractions."
+  },
+  "docetaxel_assays": [
+    {
+      "gdsc_drug_id": 1007,
+      "t98g_ic50_um": 0.0051481337943886,
+      "required_loading_pct": 0.0166367091699462,
+      "tier": 4
+    },
+    {
+      "gdsc_drug_id": 1819,
+      "t98g_ic50_um": 0.0082307346779224,
+      "required_loading_pct": 0.0265984421851742,
+      "tier": 4
+    }
+  ],
+  "model_relationships": {
+    "model_list_file": "data/external/model_list_20260921.csv",
+    "model_list_sha256": "419f65d1d6534454194f1a744550fab632cd1d7411f6b13411a885735aa37006",
+    "matched_lines": 51,
+    "nonmissing_patient_ids": 51,
+    "distinct_patient_ids": 51,
+    "models_with_parent": [
+      {
+        "SANGER_MODEL_ID": "SIDM01210",
+        "parent_id": "SIDM00605",
+        "partition": "development"
+      },
+      {
+        "SANGER_MODEL_ID": "SIDM01220",
+        "parent_id": "SIDM00682",
+        "partition": "development"
+      }
+    ],
+    "parent_models_in_current_cohort": [],
+    "official_download_authenticity_verified": false
+  },
+  "expression_inventory": {
+    "zip_file": "data/external/rnaseq_all_20220624.zip",
+    "zip_bytes": 940707972,
+    "members": [
+      {
+        "name": "rnaseq_all_data_20220624.csv",
+        "uncompressed_bytes": 5324670520
+      },
+      {
+        "name": "rnaseq_fpkm_20220624.csv",
+        "uncompressed_bytes": 250037610
+      },
+      {
+        "name": "rnaseq_tpm_20220624.csv",
+        "uncompressed_bytes": 257466286
+      },
+      {
+        "name": "rnaseq_read_count_20220624.csv",
+        "uncompressed_bytes": 165041993
+      }
+    ],
+    "header_matched_lines": 50,
+    "header_unmatched_lines": [
+      "SIDM01021"
+    ],
+    "inspection": "ZIP directory and CSV header only; no full CRC, measurement completeness or scale certification",
+    "canonical_expression_csv_exists": false,
+    "canonical_metadata_exists": false
+  },
+  "notebook_saved_state": [
+    {
+      "file": "notebooks/01_auditoria_diccionario.ipynb",
+      "code_cells": 6,
+      "executed_cells": 6,
+      "error_outputs": 0,
+      "rerun_in_this_audit": false
+    },
+    {
+      "file": "notebooks/02_baseline_metadatos.ipynb",
+      "code_cells": 5,
+      "executed_cells": 5,
+      "error_outputs": 0,
+      "rerun_in_this_audit": false
+    },
+    {
+      "file": "notebooks/03_expresion_pca_modelos.ipynb",
+      "code_cells": 5,
+      "executed_cells": 5,
+      "error_outputs": 0,
+      "rerun_in_this_audit": false
+    }
+  ],
+  "additional_exploratory_baseline": {
+    "drug_mean_cv_mae": 0.9188439672230758,
+    "drug_median_cv_mae": 0.9299271028853409,
+    "drug_mean_test_mae": 0.938909801404105,
+    "drug_median_test_mae": 0.9446463757937991,
+    "status": "Audit diagnostic; not a new confirmatory model-selection experiment"
+  },
+  "artifact_sha256": {
+    "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+    "data/processed/compounds.csv": "48b7076427c44a654290d36b014b1b98d261f712cc2694802aa4cda21590d71f",
+    "data/processed/line_split.csv": "106ddfc9242743e5cacbc9feebf5f3ed4af2ddf75e26a070a0d63eec1c098ec0",
+    "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+    "reports/candidates/ranking.csv": "4f75cbd33d65ac8221017a01a6e4e1dfe8d9e66badd22ba219493f9518c5329d",
+    "reports/candidates/shortlist.csv": "dec4af0c9baee4ed23cecfab4b0b502a1820b9aabf9027c9b5126378d679e9b9",
+    "scripts/build_compounds.py": "8e5b05460082874a3bc3e5592c241367d5e5c9df4749b502fad0ae1a91745098",
+    "scripts/rank_candidates.py": "f51a09f44b5db6949fc6796d41b817653faf79b93fc17c37319543e636ee7aeb",
+    "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+    "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+    "src/gbm_drug_response/chemistry.py": "6379c140582feb1e8e86f786041adff8296c661ff808ee4af59d20ac157950dd",
+    "src/gbm_drug_response/data.py": "f3eac32c336bff3c458ac1296b93dc80a7c12ea436646102bcc275fee32aa89c",
+    "src/gbm_drug_response/modeling.py": "22e896c1ced84e960b4969920e0e202bc97a8e65ba9ed9b89af3a2f63f5f36ac",
+    "src/gbm_drug_response/molecular.py": "8d4edae56c619ce05911601251da4e9af87c11156896a9ff2a78df538178b6b5",
+    "tests/test_chemistry.py": "21c01035cccacd0270df3cec0ba0b82ffccacf3bce7558438e64bbf592055718",
+    "tests/test_protocol.py": "ccebaca6c638c620f5e45329e688644dbbf10d316076a5744ddd12e086e86b1f",
+    "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+  },
+  "primary_sources": [
+    "https://depmap.sanger.ac.uk/documentation/datasets/drug-sensitivity/",
+    "https://pubs.acs.org/doi/10.1021/bk-2016-1240.ch001",
+    "https://pubmed.ncbi.nlm.nih.gov/20129059/",
+    "https://pubs.rsc.org/en/content/articlehtml/2026/ra/d6ra00215c",
+    "https://researchnow.flinders.edu.au/en/publications/modified-green-synthesis-of-fesub3subosub4subsiosub2sub-nanoparti/",
+    "https://www.inchi-trust.org/technical-faq/",
+    "https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10845919/",
+    "https://pubmed.ncbi.nlm.nih.gov/19013850/"
+  ]
+}

@@ -47,11 +47,13 @@ def test_ester_is_not_a_free_carboxylic_acid():
     assert record["hydrolysis_liability"]
 
 
-def test_charge_and_repulsion_against_protonated_surface():
+def test_group_balance_does_not_claim_physiological_charge():
     anionic = annotate("OC(=O)CCCC(=O)O")       # ácido adípico
     cationic = annotate("CCCCN")                 # butilamina
-    assert anionic["net_charge_ph74"] < 0 and not anionic["cationic_repulsion_risk"]
-    assert cationic["net_charge_ph74"] > 0 and cationic["cationic_repulsion_risk"]
+    assert anionic['ionizable_group_balance'] < 0
+    assert cationic['ionizable_group_balance'] > 0
+    assert cationic['charge_ph74_status'].startswith('unknown')
+    assert 'net_charge_ph74' not in cationic
 
 
 def test_largest_fragment_drives_annotation_of_a_salt():
@@ -85,8 +87,8 @@ def test_build_table_groups_aliases_by_inchikey(tmp_path, monkeypatch):
     responses = {
         "DrugA": {"CID": 1, "Title": "DrugA", "SMILES": "CCCCN",
                   "InChIKey": "HQABUPZFAYXKJW-UHFFFAOYSA-N"},
-        "DrugA hydrochloride": {"CID": 2, "Title": "DrugA hydrochloride", "SMILES": "CCCCN.Cl",
-                                "InChIKey": "HQABUPZFAYXKJW-UHFFFAOYSA-M"},
+        "DrugA hydrochloride": {"CID": 2, "Title": "DrugA hydrochloride", "SMILES": "CCCC[NH3+].[Cl-]",
+                                "InChIKey": "ICXXXLGATNSZAV-UHFFFAOYSA-N"},
     }
     monkeypatch.setattr("gbm_drug_response.chemistry.fetch_compound",
                         lambda name, cache: {"status": "resolved", "n_cids": 1,
@@ -95,6 +97,42 @@ def test_build_table_groups_aliases_by_inchikey(tmp_path, monkeypatch):
     table = build_table(list(responses), tmp_path)
     assert table["compound_id"].nunique() == 1
     assert set(table["chemical_form"]) == {"single_component", "salt_or_mixture"}
+
+
+def test_pevonedistat_sulfamate_is_not_an_aliphatic_amine():
+    smiles = 'C1CC2=CC=CC=C2[C@H]1NC3=C4C=CN(C4=NC=N3)[C@@H]5C[C@H]([C@H](C5)O)COS(=O)(=O)N'
+    record = annotate(smiles)
+    assert record['sulfamate'] == 1
+    assert record['primary_aliphatic_amine'] == 0
+    assert record['secondary_aliphatic_amine'] == 0
+    assert record['conjugation_route'] == 'covalente_requiere_derivatizacion'
+
+
+@pytest.mark.parametrize('smiles', ['CS(=O)(=O)N', 'NS(=O)(=O)OC', 'NC(=O)C', 'NP(=O)(O)O'])
+def test_non_amine_nitrogens_are_not_coupling_handles(smiles):
+    record = annotate(smiles)
+    assert record['primary_aliphatic_amine'] == 0
+
+
+@pytest.mark.parametrize('free,salt', [('CC(=O)O', 'CC(=O)[O-].[Na+]'), ('CCCCN', 'CCCC[NH3+].[Cl-]')])
+def test_salt_normalization_preserves_identity_and_functional_groups(free, salt):
+    a, b = annotate(free), annotate(salt)
+    assert a['compound_id'] == b['compound_id']
+    assert a['form_inchikey'] != b['form_inchikey']
+    assert a['conjugation_route'] == b['conjugation_route']
+    assert a['active_molecular_weight'] == pytest.approx(b['active_molecular_weight'])
+
+
+def test_stereoisomers_are_not_merged_as_the_same_compound():
+    a, b = annotate('C[C@H](O)C(=O)O'), annotate('C[C@@H](O)C(=O)O')
+    assert a['compound_id'] != b['compound_id']
+    assert a['connectivity_family_id'] == b['connectivity_family_id']
+
+
+def test_boronic_pharmacophore_is_not_a_generic_derivatizable_handle():
+    record = annotate('OB(O)c1ccccc1')
+    assert record['boronic_acid'] > 0
+    assert not record['derivatizable_handle']
 
 
 def test_required_loading_scales_with_potency_and_mass():

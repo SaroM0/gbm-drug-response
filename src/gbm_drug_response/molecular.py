@@ -20,6 +20,8 @@ from sklearn.preprocessing import StandardScaler
 from .data import load_config, sha256, quality_flags, read_responses, FILES
 from .modeling import (attach_split, get_split, grouped_folds, fit_candidates,
                        metrics, runtime_info, cluster_bootstrap)
+from .runs import tracked, write_json
+from .validation import annotate_validation_groups, outcome_diagnostics
 
 
 class TopVarianceGenes(TransformerMixin, BaseEstimator):
@@ -111,18 +113,25 @@ def molecular_candidates(cfg):
     }
 
 
-def train_molecular(root):
+@tracked('molecular')
+def train_molecular(root, *, _run):
     root = Path(root)
     cfg = load_config(root)
+    _run.model_link('molecular.joblib')
     expr, meta = load_expression(root)
-    folder = root / "reports/molecular"
-    folder.mkdir(parents=True, exist_ok=True)
+    folder = _run.path
     if expr is None:
-        status = {**meta, "message_es": "No se entrenó un modelo molecular: falta expresión real. El notebook 02 sí funciona con los adjuntos."}
+        status = {**meta, 'run_id': _run.id, "message_es": "No se entrenó en esta ejecución; consultar el inventario y preparar la matriz canónica."}
         (folder / "status.json").write_text(json.dumps(status, indent=2, ensure_ascii=False) + "\n")
         return status, pd.DataFrame(), pd.DataFrame()
     df = read_responses(root / "data/raw" / FILES["glioma_csv"])
     df = df.loc[quality_flags(df, cfg["qc_rmse_max"]).keep].copy()
+    df, relationships = annotate_validation_groups(root, df, folder)
+    _run.inputs([root / 'data/raw' / FILES['glioma_csv'], root / 'data/external/expression.csv',
+                 root / 'data/external/expression_metadata.json'])
+    model_meta = root / 'data/external/model_list_20260921.csv'
+    if model_meta.exists():
+        _run.inputs([model_meta])
     genes = [c for c in expr if c.startswith("gene_")]
     # Unir sólo IDs ahora: repetir 50.000 genes en 12.000 curvas consume varios GB.
     # La matriz molecular se alinea una vez por línea dentro de cada fármaco.
@@ -156,7 +165,7 @@ def train_molecular(root):
         X_test = expression_by_line.loc[te.SANGER_MODEL_ID].reset_index(drop=True)
         fitted, cv, details = fit_candidates(molecular_candidates(cfg), X_train, tr.LN_IC50, folds)
         selected = cv.iloc[0].model
-        pred = te[["NLME_CURVE_ID", "SANGER_MODEL_ID", "DRUG_ID", "DRUG_NAME", "LN_IC50"]].copy()
+        pred = te[["NLME_CURVE_ID", "SANGER_MODEL_ID", "DRUG_ID", "DRUG_NAME", "LN_IC50", 'MIN_CONC', 'MAX_CONC']].copy()
         cv.insert(0, "DRUG_ID", drug)
         all_cv.append(cv)
         details.to_csv(folder / f"cv_search_{drug}.csv", index=False)
@@ -188,14 +197,17 @@ def train_molecular(root):
     pd.DataFrame(comparisons).to_csv(folder / "paired_comparisons.csv", index=False)
     if all_cv:
         pd.concat(all_cv, ignore_index=True).to_csv(folder / "cv_summary.csv", index=False)
-    status = {"status": "trained" if models else "insufficient_coverage", "config": cfg,
+    interpretation = outcome_diagnostics(predictions, list(molecular_candidates(cfg)), metrics, folder) if len(predictions) else None
+    _run.inputs([root / 'data/processed/line_split.csv'])
+    status = {"status": "trained" if models else "insufficient_coverage", 'run_id': _run.id,
+              'outcome_policy': interpretation, 'relationships': relationships, "config": cfg,
               "expression_metadata": meta, "versions": runtime_info(), "n_matched_lines": len(matched_lines),
               "response_source_sha256": sha256(root / "data/raw" / FILES["glioma_csv"]),
               "split_sha256": sha256(root / "data/processed/line_split.csv"),
               "n_unmatched_lines": len(original_lines - matched_lines), "n_gene_features": len(genes),
               "selected_drugs_from_development": drugs, "skipped": skipped, "runs": runs,
               "training_partition": "development_only", "scope": "Exploratorio in vitro, por fármaco conocido; no validación clínica ni externa"}
-    (folder / "status.json").write_text(json.dumps(status, indent=2, ensure_ascii=False, default=int) + "\n")
+    write_json(folder / 'status.json', status)
     if models:
-        joblib.dump({"models": models, "run": status}, root / "models/molecular.joblib")
+        joblib.dump({"models": models, "run": status}, folder / 'model.joblib')
     return status, scores, predictions

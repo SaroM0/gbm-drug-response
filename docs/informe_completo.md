@@ -1,5 +1,7 @@
 # Documentación del proyecto y explicación de resultados
 
+> Registro histórico de la primera ejecución. El estado vigente está en [resultados_actuales.md](resultados_actuales.md) y [correcciones de auditoría](correcciones_auditoria_2026-10-29.md); las menciones a expresión ausente o salidas sobrescritas describen aquella versión.
+
 ## 1. Qué se construyó y qué se obtuvo
 
 El repositorio `gbm-drug-response` contiene un flujo reproducible para auditar cuatro archivos de respuesta a fármacos, construir su diccionario de datos, aplicar control de calidad y evaluar regresores de `LN_IC50` reservando líneas celulares completas.

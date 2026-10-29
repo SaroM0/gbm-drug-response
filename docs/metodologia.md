@@ -49,3 +49,14 @@ Consultadas durante la preparación del repositorio. El sitio histórico cancerr
 ## Siguiente ampliación
 
 Incorporar expresión con correspondencia SIDM verificada; registrar donante, versión, plataforma y lote. Ampliar el entrenamiento a líneas pan-cáncer, manteniendo GBM/glioma de evaluación completamente fuera de selección/preprocesamiento. Para transferencia a pacientes hacen falta datos y validación externos; el comportamiento en cultivo no demuestra eficacia clínica.
+
+
+## Enmienda exploratoria del 29 de octubre de 2026
+
+Esta enmienda se realiza después de observar el holdout; no se presenta como preregistro previo ni restaura independencia confirmatoria. Se conserva la partición y la búsqueda existentes. Los desgloses `outcome_diagnostics.csv` evalúan los mismos modelos en todos los ajustes y por estado de rango (ambos extremos), sin seleccionar por esos resultados. Los valores extrapolados siguen siendo ajustes puntuales, no cotas de censura medidas. No se inventa una distribución de incertidumbre a partir del RMSE de curva. La resolución del outcome requiere curvas crudas o un protocolo de censura respaldado por mediciones; estos datos no están disponibles.
+
+La matriz local TPM de 2022 se prepara con `scripts/prepare_expression.py`, preservando perfiles y ausentes. No se aplica la descripción de escala de la versión web actual sin verificar los valores del archivo histórico. Los 50 perfiles emparejados se transforman una vez a log2(TPM+1). El entrenamiento molecular usa los tres fármacos que selecciona la cobertura de desarrollo del protocolo existente; no se eligen por éxito en test.
+
+`validation.py` comprueba la tabla local de modelos/donantes y componentes relacionados. En esta cohorte hay 51 patient_id distintos y ningún padre anotado compartido dentro de la cohorte. Si aparecen relaciones, viajan juntas en CV; si una familia cruza el holdout persistido, la ejecución falla y exige un protocolo de evaluación independiente, sin cambiar la semilla en busca de métricas favorables.
+
+Las ejecuciones conservan entradas, código, configuración, versiones y hashes en directorios separados; las rutas cortas apuntan a la ejecución actual. Un estado `missing_expression`, cobertura insuficiente o fallo no mantiene métricas/modelos antiguos como actuales. Los resúmenes científicos se generan sólo a partir de corridas completas con salidas verificadas. Ver [resultados actuales](resultados_actuales.md) y [correcciones](correcciones_auditoria_2026-10-29.md).

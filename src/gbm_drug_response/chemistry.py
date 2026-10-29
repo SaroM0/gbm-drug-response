@@ -15,8 +15,9 @@ from urllib.parse import quote
 
 import pandas as pd
 import requests
-from rdkit import Chem, RDLogger
+from rdkit import Chem, rdBase
 from rdkit.Chem import Descriptors
+from rdkit.Chem.MolStandardize import rdMolStandardize
 
 PUBCHEM = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound"
 PROPERTIES = ("Title,MolecularFormula,MolecularWeight,SMILES,ConnectivitySMILES,"
@@ -32,8 +33,10 @@ SMARTS = {
     # Ruta covalente principal: carboxilo libre + amina del APTES con EDC/NHS.
     "carboxylic_acid": "[CX3](=O)[OX2H1]",
     # Rutas covalentes alternativas: requieren activar la superficie (p. ej. glutaraldehído).
-    "primary_aliphatic_amine": "[NX3;H2;!$(NC=[O,N,S]);!$(N[a])]",
-    "secondary_aliphatic_amine": "[NX3;H1;!$(NC=[O,N,S]);!$(N[a])]",
+    "primary_aliphatic_amine": "[NX3;H2;$(N[CX4]);!$(NC=[O,N,S]);!$(NS(=O));!$(NP(=O));!$(N[a])]",
+    "secondary_aliphatic_amine": "[NX3;H1;$(N[CX4]);!$(NC=[O,N,S]);!$(NS(=O));!$(NP(=O));!$(N[a])]",
+    "sulfamate": "[OX2][SX4](=O)(=O)[NX3]",
+    "sulfonamide": "[#6][SX4](=O)(=O)[NX3]",
     # Las aminas unidas a anillo aromático, y sobre todo a heterociclos tipo aminopirimidina,
     # son poco nucleófilas: no se acoplan en condiciones EDC/NHS habituales.
     "aromatic_amine": "[NX3;H2,H1][a]",
@@ -50,7 +53,7 @@ SMARTS = {
     # Grupos básicos: a pH fisiológico quedan catiónicos, como la propia superficie.
     "amidine": "[NX3][CX3]=[NX2]",
     "guanidine": "[NX3][CX3](=[NX2])[NX3]",
-    "basic_tertiary_amine": "[NX3;H0;!$(NC=[O,N,S]);!$(N[a]);!$(N=*)]",
+    "basic_tertiary_amine": "[NX3;H0;$(N[CX4]);!$(NC=[O,N,S]);!$(NS(=O));!$(NP(=O));!$(N[a]);!$(N=*)]",
     # Pasivos de estabilidad acuosa: hidrólisis durante carga, almacenamiento o liberación.
     "ester": "[CX3](=O)[OX2H0][#6;!$([CX3]=[OX1])]",
     "lactone": "[CX3;R](=O)[OX2;R][#6;R]",
@@ -70,7 +73,7 @@ ANIONIC_FLAGS = ("carboxylic_acid", "sulfonic_acid", "phosphate_acid", "tetrazol
 CATIONIC_FLAGS = ("primary_aliphatic_amine", "secondary_aliphatic_amine", "amidine",
                   "guanidine", "basic_tertiary_amine")
 AMINE_FLAGS = ("primary_aliphatic_amine", "secondary_aliphatic_amine")
-DERIVATIZABLE_FLAGS = ("aliphatic_hydroxyl", "phenol", "thiol", "boronic_acid")
+DERIVATIZABLE_FLAGS = ("aliphatic_hydroxyl", "phenol", "thiol")
 # Metales con química de coordinación propia: el precedente de oxaliplatino pertenece aquí.
 COORDINATION_METALS = {"Pt", "Ru", "Pd", "Au", "Gd", "As"}
 HIGH_LOGP = 5.0
@@ -141,8 +144,8 @@ def fetch_compound(name, cache_dir):
 
 def largest_fragment(smiles):
     """Componente mayor de una sal o mezcla; es donde se evalúan los grupos funcionales."""
-    RDLogger.DisableLog("rdApp.*")
-    molecule = Chem.MolFromSmiles(smiles)
+    with rdBase.BlockLogs():
+        molecule = Chem.MolFromSmiles(smiles)
     if molecule is None:
         return None, None
     fragments = Chem.GetMolFrags(molecule, asMols=True, sanitizeFrags=False)
@@ -156,6 +159,37 @@ def largest_fragment(smiles):
     except (Chem.AtomValenceException, Chem.KekulizeException, ValueError):
         Chem.FastFindRings(largest)
     return molecule, largest
+
+
+def standardize(smiles):
+    """Entidad activa con estereoquímica; la forma original se conserva por separado.
+
+    No desalar/desconectar complejos metálicos ni elegir un componente de mezclas
+    con varios fragmentos orgánicos sustanciales sin revisión humana.
+    """
+    whole, largest = largest_fragment(smiles)
+    if whole is None:
+        return None, None, {'parse_status': 'unparsed'}
+    metal = any(a.GetSymbol() in COORDINATION_METALS for a in whole.GetAtoms())
+    fragments = Chem.GetMolFrags(whole, asMols=True)
+    substantial = sum(any(a.GetSymbol() == 'C' for a in f.GetAtoms()) and f.GetNumHeavyAtoms() >= 6
+                      for f in fragments)
+    ambiguous_mixture = substantial > 1
+    if metal or ambiguous_mixture:
+        parent = whole
+    else:
+        parent = rdMolStandardize.Uncharger().uncharge(rdMolStandardize.FragmentParent(whole))
+    parent.UpdatePropertyCache(strict=False)
+    Chem.GetSymmSSSR(parent)
+    key = Chem.MolToInchiKey(parent)
+    return whole, parent, {
+        'parse_status': 'ok', 'form_inchikey': Chem.MolToInchiKey(whole),
+        'active_smiles': Chem.MolToSmiles(parent, isomericSmiles=True),
+        'compound_id': key, 'connectivity_family_id': key[:14],
+        'normalization_status': ('metal_preserved_requires_review' if metal else
+                                 'mixture_requires_review' if ambiguous_mixture else 'standardized'),
+        'active_molecular_weight': Descriptors.MolWt(parent),
+    }
 
 
 def functional_groups(molecule):
@@ -176,15 +210,14 @@ def functional_groups(molecule):
 
 
 def annotate(smiles):
-    """Anota una estructura: grupos, carga aproximada a pH 7,4, pasivos y ruta propuesta.
+    """Detecta grupos sobre entidad normalizada; no estima carga a pH fisiológico."""
+    whole, parent, identity = standardize(smiles)
+    if whole is None:
+        return identity
+    # Los ligandos de un metal desconectado no son asas libres del complejo.
+    _, fragment = largest_fragment(smiles) if identity['normalization_status'].startswith('metal') else (whole, parent)
 
-    La carga es una aproximación por grupos ionizables, no un cálculo de pKa.
-    """
-    whole, fragment = largest_fragment(smiles)
-    if whole is None or fragment is None:
-        return {"parse_status": "unparsed"}
-
-    record = {"parse_status": "ok",
+    record = {**identity,
               "n_fragments": len(Chem.GetMolFrags(whole)),
               "heavy_atoms": fragment.GetNumHeavyAtoms()}
     record["chemical_form"] = "salt_or_mixture" if record["n_fragments"] > 1 else "single_component"
@@ -199,22 +232,16 @@ def annotate(smiles):
     record.update(functional_groups(fragment))
     record["anionic_groups"] = sum(record[k] for k in ANIONIC_FLAGS)
     record["cationic_groups"] = sum(record[k] for k in CATIONIC_FLAGS)
-    record["net_charge_ph74"] = record["cationic_groups"] - record["anionic_groups"]
+    record["ionizable_group_balance"] = record["cationic_groups"] - record["anionic_groups"]
+    record["charge_ph74_status"] = 'unknown_requires_pka_and_medium'
     record["hydrolysis_liability"] = sum(record[k] for k in HYDROLYSIS_FLAGS) > 0
     record["hydrolysis_groups"] = ",".join(k for k in HYDROLYSIS_FLAGS if record[k])
     record["alternative_amine_handle"] = sum(record[k] for k in AMINE_FLAGS) > 0
     record["derivatizable_handle"] = sum(record[k] for k in DERIVATIZABLE_FLAGS) > 0
-    # La superficie APTES está protonada a pH fisiológico: un fármaco catiónico sin
-    # grupos aniónicos se repele en lugar de adsorberse.
-    record["cationic_repulsion_risk"] = (record["net_charge_ph74"] > 0
-                                         and record["anionic_groups"] == 0)
+    record["electrostatic_review"] = record['cationic_groups'] > 0
 
     record["conjugation_route"] = route(record)
-    # Conjugar el único grupo ionizable altera la forma en que el fármaco interactúa con
-    # su diana. No es un veredicto de pérdida de actividad: requiere revisión química.
-    record["single_handle_review"] = (record["free_carboxylic_acid"] == 1
-                                      and record["anionic_groups"] == 1
-                                      and record["cationic_groups"] == 0)
+    record["single_carboxyl_review"] = record['free_carboxylic_acid'] == 1
     return record
 
 
@@ -223,10 +250,10 @@ def route(record):
 
     El orden refleja cuánto trabajo químico adicional exige cada opción, no eficacia.
     """
-    if record["free_carboxylic_acid"] > 0:
-        return "covalente_cooh_edc_nhs"
     if record["metal_complex"]:
         return "coordinacion_metal"
+    if record["free_carboxylic_acid"] > 0:
+        return "covalente_cooh_edc_nhs"
     if record["anionic_groups"] > 0:
         return "adsorcion_electrostatica"
     if record["alternative_amine_handle"]:
@@ -271,7 +298,7 @@ def build_table(names, cache_dir):
             row["parse_status"] = "no_structure"
         rows.append(row)
     table = pd.DataFrame(rows)
-    # Identidad química compartida: el bloque de conectividad del InChIKey agrupa
-    # sales y alias del mismo esqueleto molecular.
-    table["compound_id"] = table["inchikey"].str.slice(0, 14)
+    # El ID se calcula desde la entidad normalizada, nunca del CID o de un key truncado.
+    if 'compound_id' not in table:
+        table['compound_id'] = None
     return table

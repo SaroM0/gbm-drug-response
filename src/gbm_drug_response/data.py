@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from .runs import tracked, publish_link
 
 SOURCE = "https://depmap.sanger.ac.uk/documentation/datasets/drug-sensitivity/"
 FILES = {
@@ -107,6 +108,17 @@ def quality_flags(df, rmse_max=0.3):
     return f
 
 
+def range_state(df):
+    """Estado del ajuste respecto a ambos extremos; no censura medida."""
+    state = pd.Series('within_range', index=df.index, dtype='string')
+    minimum, maximum, target = df.MIN_CONC, df.MAX_CONC, df.LN_IC50
+    state.loc[target < np.log(minimum.where(minimum > 0))] = 'below_range'
+    state.loc[target > np.log(maximum.where(maximum > 0))] = 'above_range'
+    valid = np.isfinite(target) & np.isfinite(minimum) & np.isfinite(maximum) & (minimum > 0) & (maximum > minimum)
+    state.loc[~valid] = 'invalid'
+    return state
+
+
 def assert_subset(child, parent):
     if child["NLME_CURVE_ID"].duplicated().any() or parent["NLME_CURVE_ID"].duplicated().any():
         raise ValueError("NLME_CURVE_ID repetido: investigar antes de unir.")
@@ -115,11 +127,16 @@ def assert_subset(child, parent):
     pd.testing.assert_frame_equal(a, b, check_dtype=False, check_exact=False, rtol=0, atol=1e-12)
 
 
-def audit(root):
+@tracked('audit')
+def audit(root, *, _run):
     root = Path(root)
     cfg = load_config(root)
-    report = root / "reports" / "audit"
-    report.mkdir(parents=True, exist_ok=True)
+    report = _run.path
+    (root / 'data/processed').mkdir(parents=True, exist_ok=True)
+    for name in ['glioma_flagged.parquet', 'glioma_qc.parquet']:
+        publish_link(root / 'data/processed' / name, root / 'reports/audit' / name,
+                     root / 'reports/runs/legacy_processed')
+    _run.inputs([root / 'data/raw' / name for name in FILES.values()])
     frames, inventory, manifests = {}, [], []
     for label, name in FILES.items():
         path = root / "data/raw" / name
@@ -145,8 +162,8 @@ def audit(root):
             raise ValueError("Un SIDM tiene varios nombres: revisar mapeo.")
     df = frames["glioma_csv"]
     flags = quality_flags(df, cfg["qc_rmse_max"])
-    pd.concat([df, flags], axis=1).to_parquet(root / "data/processed/glioma_flagged.parquet", index=False)
-    df.loc[flags.keep].to_parquet(root / "data/processed/glioma_qc.parquet", index=False)
+    pd.concat([df, flags], axis=1).to_parquet(report / 'glioma_flagged.parquet', index=False)
+    df.loc[flags.keep].to_parquet(report / 'glioma_qc.parquet', index=False)
     flags.sum().rename("rows").to_csv(report / "quality_counts.csv")
     sensitivity = []
     for threshold in cfg["qc_sensitivity_thresholds"]:

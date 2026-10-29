@@ -23,6 +23,8 @@ from sklearn.preprocessing import OneHotEncoder
 from threadpoolctl import threadpool_limits
 
 from .data import load_config, read_responses, FILES, sha256, quality_flags
+from .runs import tracked, write_json
+from .validation import annotate_validation_groups, outcome_diagnostics
 
 BLOCKED_FEATURES = {"LN_IC50", "AUC", "RMSE", "Z_SCORE", "NLME_CURVE_ID",
                     "NLME_RESULT_ID", "SANGER_MODEL_ID", "CELL_LINE_NAME",
@@ -47,6 +49,7 @@ def get_split(root, cfg):
     ids = sorted(original.SANGER_MODEL_ID.dropna().unique())
     signature = hashlib.sha256(json.dumps({"ids": ids, "seed": cfg["seed"], "test_size": cfg["test_size"]}, sort_keys=True).encode()).hexdigest()
     folder = root / "data/processed"
+    folder.mkdir(parents=True, exist_ok=True)
     csv_path, sig_path = folder / "line_split.csv", folder / "line_split_signature.txt"
     if csv_path.exists() or sig_path.exists():
         if not csv_path.exists() or not sig_path.exists() or sig_path.read_text().strip() != signature:
@@ -76,13 +79,16 @@ def attach_split(df, split):
     dev = out.loc[out.partition == "development"].reset_index(drop=True)
     test = out.loc[out.partition == "test"].reset_index(drop=True)
     assert set(dev.SANGER_MODEL_ID).isdisjoint(test.SANGER_MODEL_ID)
+    if 'VALIDATION_GROUP' in out and not set(dev.VALIDATION_GROUP).isdisjoint(test.VALIDATION_GROUP):
+        raise ValueError('Modelos del mismo donante/familia cruzan desarrollo y test. Se requiere nuevo protocolo independiente.')
     return dev, test
 
 
 def grouped_folds(df, n_splits):
-    if df.SANGER_MODEL_ID.nunique() < n_splits:
+    groups = df['VALIDATION_GROUP'] if 'VALIDATION_GROUP' in df else df.SANGER_MODEL_ID
+    if groups.nunique() < n_splits:
         raise ValueError("Número de líneas insuficiente para CV.")
-    splits = list(GroupKFold(n_splits=n_splits).split(df, groups=df.SANGER_MODEL_ID))
+    splits = list(GroupKFold(n_splits=n_splits).split(df, groups=groups))
     for train, valid in splits:
         assert set(df.iloc[train].SANGER_MODEL_ID).isdisjoint(df.iloc[valid].SANGER_MODEL_ID)
     return splits
@@ -149,18 +155,22 @@ def runtime_info():
     return {"python": platform.python_version(), "pandas": pd.__version__, "numpy": np.__version__, "scikit_learn": sklearn.__version__}
 
 
-def train_metadata(root):
+@tracked('metadata_baseline')
+def train_metadata(root, *, _run):
     root = Path(root)
     cfg = load_config(root)
+    _run.model_link('metadata_baseline.joblib')
+    _run.inputs([root / 'data/raw' / FILES['glioma_csv']])
     raw = read_responses(root / "data/raw" / FILES["glioma_csv"])
     df = raw.loc[quality_flags(raw, cfg["qc_rmse_max"]).keep].copy()
+    df, relationships = annotate_validation_groups(root, df, _run.path)
     dev, test = attach_split(df, get_split(root, cfg))
     folds = grouped_folds(dev, cfg["cv_folds"])
     features = cfg["metadata_features"]
     X = dev[features].astype(str)
     fitted, cv, details = fit_candidates(metadata_candidates(cfg), X, dev.LN_IC50, folds)
     selected = cv.iloc[0].model  # Congelado antes de consultar resultados test.
-    pred = test[["NLME_CURVE_ID", "SANGER_MODEL_ID", "DRUG_ID", "DRUG_NAME", "LN_IC50"]].copy()
+    pred = test[["NLME_CURVE_ID", "SANGER_MODEL_ID", "DRUG_ID", "DRUG_NAME", "LN_IC50", 'MIN_CONC', 'MAX_CONC']].copy()
     pred["drug_seen_in_training"] = test.DRUG_ID.isin(dev.DRUG_ID)
     for name, model in fitted.items():
         pred[name] = model.predict(test[features].astype(str))
@@ -177,8 +187,12 @@ def train_metadata(root):
     scores, perdrug, perline = pd.DataFrame(scores), pd.DataFrame(perdrug), pd.DataFrame(perline)
     scores["macro_drug_mae"] = scores.model.map(perdrug.groupby("model").mae.mean())
     scores["macro_line_mae"] = scores.model.map(perline.groupby("model").mae.mean())
-    folder = root / "reports/metadata_baseline"
-    folder.mkdir(parents=True, exist_ok=True)
+    folder = _run.path
+    interpretation = outcome_diagnostics(supported, list(fitted), metrics, folder)
+    _run.inputs([root / 'data/processed/line_split.csv'])
+    model_meta = root / 'data/external/model_list_20260921.csv'
+    if model_meta.exists():
+        _run.inputs([model_meta])
     for name, table in [("cv_summary", cv), ("cv_search", details), ("test_metrics", scores),
                         ("test_predictions", pred), ("test_by_drug", perdrug), ("test_by_line", perline)]:
         table.to_csv(folder / f"{name}.csv", index=False)
@@ -188,13 +202,14 @@ def train_metadata(root):
         fold_manifest.loc[valid, "validation_fold"] = i
     assert fold_manifest.validation_fold.ge(0).all()
     fold_manifest.to_csv(folder / "cv_assignments.csv", index=False)
-    run = {"config": cfg, "versions": runtime_info(), "selected_on_development_cv": selected,
+    run = {"run_id": _run.id, 'outcome_policy': interpretation, 'relationships': relationships,
+           "config": cfg, "versions": runtime_info(), "selected_on_development_cv": selected,
            "n_dev_lines": dev.SANGER_MODEL_ID.nunique(), "n_test_lines": test.SANGER_MODEL_ID.nunique(),
            "unsupported_test_rows": int((~pred.drug_seen_in_training).sum()),
            "response_source_sha256": sha256(root / "data/raw" / FILES["glioma_csv"]),
            "interval": cluster_bootstrap(supported, selected, repetitions=cfg["bootstrap_repetitions"], seed=cfg["seed"]),
            "scope": "Metadatos: fármacos conocidos en líneas reservadas. No caracteriza heterogeneidad molecular.",
            "training_partition": "development_only; test no usado para ajustar ni seleccionar"}
-    (folder / "run.json").write_text(json.dumps(run, indent=2, ensure_ascii=False, default=int) + "\n")
-    joblib.dump({"model": fitted[selected], "features": features, "run": run}, root / "models/metadata_baseline.joblib")
+    write_json(folder / 'run.json', run)
+    joblib.dump({"model": fitted[selected], "features": features, "run": run}, folder / 'model.joblib')
     return cv, scores, pred, run

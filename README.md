@@ -1,10 +1,10 @@
 # gbm-drug-response
 
-Primer acercamiento reproducible para auditar GDSC2 y predecir `LN_IC50` en líneas celulares GBM/glioma reservadas. CPU; sin deep learning ni bases de datos adicionales.
+Auditoría reproducible de GDSC2, predicción exploratoria de `LN_IC50` con expresión basal y priorización de fármacos para estudiar formulaciones en T98G. CPU; sin deep learning. Las fuentes externas y sus límites se registran por ejecución.
 
 ## Documentación
 
-Empezar por el [informe completo del proyecto y explicación de resultados](docs/informe_completo.md). Describe los datos, el diccionario, el código, las decisiones, las pruebas, la reproducción y los límites científicos de la primera ejecución.
+Empezar por los [resultados actuales generados](docs/resultados_actuales.md) y el [seguimiento de las correcciones de auditoría](docs/correcciones_auditoria_2026-10-29.md). El [informe de la primera ejecución](docs/informe_completo.md) queda como registro histórico.
 
 | Documento | Contenido |
 |---|---|
@@ -16,7 +16,7 @@ Empezar por el [informe completo del proyecto y explicación de resultados](docs
 | [Entrada de expresión](docs/expresion.md) | Archivos y metadatos necesarios para ejecutar el entrenamiento molecular real. |
 | [Evidencia de la primera ejecución](docs/evidencia_primera_ejecucion.json) | Instantánea versionable de hashes, configuración, partición, QC y métricas. |
 
-Resultado principal: la media por fármaco fue seleccionada en CV y obtuvo MAE 0,9389 en test; los modelos con metadatos no la superaron. El R² agrupado de 0,7846 no acredita predicción individual molecular. El 76,50% de las IC50 ajustadas de GBM/glioma está por encima del máximo ensayado, una limitación relevante del outcome. El modelo molecular sigue pendiente de expresión real.
+Resultado principal: la media por fármaco fue seleccionada en CV y obtuvo MAE 0,9389 en test; los modelos con metadatos no la superaron. El R² agrupado de 0,7846 no acredita predicción individual molecular. El 76,50% de las IC50 ajustadas de GBM/glioma está por encima del máximo ensayado, una limitación relevante del outcome. La expresión real ya se prepara desde el ZIP local y se ejecuta el protocolo molecular; consultar sus resultados exploratorios actuales en la documentación generada.
 
 ## Abrir los notebooks
 
@@ -50,8 +50,8 @@ El ejecutor guarda outputs dentro de cada notebook, conserva los outputs complet
 Dos scripts independientes de los notebooks, para la fase de nanopartículas:
 
 ```bash
-.venv/bin/python scripts/build_compounds.py   # identidad química desde PubChem, con caché local
-.venv/bin/python scripts/rank_candidates.py   # potencia libre, factibilidad de dosis y niveles
+.venv/bin/python scripts/build_compounds.py   # entidad activa normalizada y caché archivada
+.venv/bin/python scripts/rank_candidates.py   # todos los ensayos y escenarios de carga/liberación
 ```
 
 El primero resuelve los nombres de fármaco contra PubChem y anota grupos funcionales con RDKit; guarda cada respuesta cruda en `data/external/pubchem_cache/`, de modo que repetirlo no vuelve a consultar la red. El segundo cruza esa tabla con la potencia medida en T98G y en el panel de GDSC2, y aplica el embudo de cribado. El método, sus supuestos y la lista corta están en [docs/quimica_candidatos.md](docs/quimica_candidatos.md).
@@ -76,6 +76,22 @@ Resultados locales:
 
 La referencia de metadatos cuantifica cuánto puede predecirse sin medir biología molecular. Un R² global alto puede provenir de diferencias entre fármacos; revisar errores por fármaco y la mejora frente a su media. La diana `PUTATIVE_TARGET` no es la etiqueta `y`, y `PATHWAY_NAME` no es una medición celular de vías.
 
-El notebook molecular implementa PCA, no puntuación de vías. Toda selección de genes, imputación, escala y PCA se aprende en entrenamiento dentro de CV. Los mínimos de cobertura son requisitos de ejecución, no un cálculo de tamaño muestral. Las líneas se agrupan por SIDM; aún no se ha demostrado independencia por donante.
+El notebook molecular implementa PCA, no puntuación de vías. Toda selección de genes, imputación, escala y PCA se aprende en entrenamiento dentro de CV. Los mínimos de cobertura son requisitos de ejecución, no un cálculo de tamaño muestral. Se verifican relaciones de modelos/donantes con la tabla local y se impiden cruces entre familias conocidas. La autenticidad de descarga de esos metadatos no está verificada.
 
 Protocolo, fuentes, limitaciones y decisiones: `docs/metodologia.md`. Formato molecular y adquisición: `docs/expresion.md`. Primera ejecución y sus métricas: `docs/primer_resultado.md`. Los resultados son exploratorios in vitro; no validan predicciones clínicas para pacientes.
+
+
+## Flujo corregido y conservación de ejecuciones
+
+```bash
+.venv/bin/python scripts/prepare_expression.py
+.venv/bin/python scripts/run_notebooks.py
+.venv/bin/python scripts/build_compounds.py
+.venv/bin/python scripts/rank_candidates.py
+.venv/bin/python scripts/update_results_docs.py
+.venv/bin/python -m pytest -q
+```
+
+Los escenarios están en `screening.json`; las decisiones pendientes del laboratorio en `pilot_protocol.json`. Identidad/ruta revisadas y mediciones reales se registran en `data/candidate_reviews.csv` y `data/formulation_measurements.csv`. Las listas son provisionales; un campo vacío no se convierte en un supuesto favorable.
+
+Cada etapa guarda un directorio distinto `reports/runs/<etapa>/<run_id>/` con snapshots y manifiesto. Las rutas cortas y modelos son enlaces a la corrida actual. Se preservan salidas anteriores; un fallo no vuelve a exponer automáticamente resultados viejos. Para reproducir en otro equipo hay que conservar también originales, ZIP y corridas, excluidos de Git.

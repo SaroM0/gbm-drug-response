@@ -2,6 +2,7 @@
 from pathlib import Path
 import sys
 import tempfile
+import socket
 
 import nbformat
 from nbclient import NotebookClient
@@ -12,7 +13,18 @@ from ipykernel.kernelspec import write_kernel_spec
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def check_kernel_transport():
+    """Falla antes de lanzar kernels si el aislamiento prohíbe sockets locales."""
+    try:
+        stream = socket.socket()
+        stream.close()
+    except PermissionError as exc:
+        raise RuntimeError('Jupyter requiere sockets locales. Este aislamiento los bloquea; '
+                           'ejecute este script en un entorno autorizado para kernels locales.') from exc
+
+
 def main():
+    check_kernel_transport()
     names = sys.argv[1:] or [p.name for p in sorted((ROOT / "notebooks").glob("*.ipynb"))]
     # Kernel privado y temporal: no instala ni altera kernels del usuario.
     with tempfile.TemporaryDirectory(prefix="gbm-kernel-") as kernel_dir:

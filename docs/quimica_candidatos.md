@@ -1,163 +1,70 @@
-# Identidad química y priorización de candidatos
+# Identidad química y priorización de candidatos — protocolo corregido
 
-Este documento describe cómo se construye `data/processed/compounds.csv` y cómo se ordenan los candidatos a conjugar en Fe₃O₄@SiO₂-APTES para ensayarlos en T98G. Corresponde a las etapas 1 y 2 del [plan de investigación](plan_investigacion_t98g_nanoparticulas.md), bajo la definición experimental que fijó el laboratorio (sección 0 de ese plan).
+El resultado es una priorización exploratoria de fármacos libres para estudiar formulaciones Fe₃O₄@SiO₂-APTES. Las cifras vigentes se generan en [resultados_actuales.md](resultados_actuales.md); el [informe de auditoría](auditoria_2026-10-29.md) conserva el estado anterior a las correcciones.
 
-**Qué es y qué no es.** Es un embudo de cribado que combina potencia del fármaco libre ya medida en GDSC2, factibilidad de dosis en el rango de nanopartícula que usa el laboratorio y asas químicas presentes en la estructura. No predice la citotoxicidad de la formulación cargada: con aproximadamente tres candidatos no existe conjunto de entrenamiento de formulaciones. Las preguntas C y D del plan se responden en el laboratorio.
+## Identidad y grupos funcionales
 
-## 1. Identidad química
+`scripts/build_compounds.py` conserva la respuesta de PubChem, la estructura original y su identidad de forma (`form_inchikey`). Para compuestos orgánicos se prepara una entidad parental mediante `FragmentParent` y `Uncharger` de RDKit. `compound_id` es el InChIKey completo calculado sobre esa entidad: preserva información estereoquímica. El primer bloque se conserva únicamente como `connectivity_family_id`, no como identidad única de molécula. La masa molecular empleada en el escenario corresponde a la entidad activa; la forma comercial y su conversión de masa deben verificarse por separado.
 
-`scripts/build_compounds.py` toma los nombres de fármaco de los adjuntos de respuesta y los resuelve contra PubChem mediante su API REST PUG. Cada respuesta cruda se guarda en `data/external/pubchem_cache/`, de modo que la tabla es reproducible sin volver a consultar la red y queda registro de qué devolvió el servicio y cuándo.
+Los complejos metálicos se conservan completos. Las mezclas con varios fragmentos orgánicos sustanciales se marcan para revisión y no pasan automáticamente como una entidad activa normalizada. Es una regla conservadora para revisión, no una identificación inequívoca de sal/mezcla. No se alteran estructuras metálicas para inventar un grupo conjugable en un ligando desconectado.
 
-El `compound_id` es el primer bloque del InChIKey, que codifica la conectividad molecular. Así, sales y alias del mismo esqueleto comparten identidad, que es lo que pide el plan antes de contar moléculas.
+Los SMARTS de aminas excluyen amidas, sulfonamidas, sulfamatos y entornos fosforilados. Pevonedistat tiene un sulfamato, que ya no cuenta como amina alifática: la anotación propone revisar sus hidroxilos, sin demostrar una ruta experimental. El ácido borónico no cuenta como asa genérica de derivatización. Los grupos son observaciones estructurales; accesibilidad, reactividad, conservación del farmacóforo y actividad tras conjugación siguen requiriendo revisión.
 
-### Límites de esta resolución
+El balance de grupos ionizables es una heurística (`ionizable_group_balance`), **no una carga a pH 7,4**. No se infiere repulsión inevitable ni imposibilidad de adsorción. Se registran necesidades de pKa, potencial zeta y medio experimental. La existencia de un único carboxilo no demuestra que sea el único grupo ionizable o que medie la unión a la diana.
 
-La correspondencia nombre → CID es ambigua por construcción y **no sustituye la verificación de un químico**. El informe `reports/chemistry/resolution_review.csv` recoge las filas que requieren revisión manual:
+`reports/chemistry/resolution_review.csv` incluye nombres ambiguos, títulos diferentes, búsquedas modificadas, ausencia de estructura y normalización pendiente. Un título diferente puede ser un sinónimo legítimo; no se aprueba automáticamente. Una consulta sin resultado sólo significa que la consulta no resolvió el nombre: no demuestra inexistencia pública o falta de disponibilidad comercial.
 
-- nombres que devuelven más de un CID;
-- nombres cuyo título en PubChem no coincide con el consultado;
-- estructuras que RDKit no puede interpretar o que no tienen estructura asociada.
+## Potencia: todos los ensayos de la misma entidad
 
-Los códigos de desarrollo del tipo `AZD7762` o `GSK343` suelen resolverse, pero un nombre comercial o un alias interno puede apuntar a una sal, a un isómero o a otra molécula. Antes de comprar un compuesto hay que confirmar la identidad contra el catálogo del proveedor.
+El script conserva cada curva, QC, rango, DRUG_ID, AUC y comparación descriptiva con el panel en `reports/candidates/assays.csv`. No convierte esa comparación con otras líneas tumorales en seguridad endotelial.
 
-## 2. Anotación de conjugabilidad
+El ranking contiene una fila por entidad y usa, como resumen conservador explícito, el **máximo LN_IC50 entre todos sus ensayos**. Guarda todos los DRUG_ID, mínimo/máximo de IC50 y discrepancia relativa. La molécula sólo satisface el criterio de rango cuando todos sus ensayos satisfacen `log(MIN_CONC) ≤ LN_IC50 ≤ log(MAX_CONC)`. Los casos mixtos y las extrapolaciones en cualquier dirección se conservan con su estado y se separan de la lista provisional. No se escoge el ensayo más favorable ni se ocultan los rechazados.
 
-`src/gbm_drug_response/chemistry.py` anota cada estructura con patrones SMARTS. La anotación describe **grupos funcionales presentes en la estructura**, no accesibilidad estérica, reactividad real ni eficiencia de carga. Esas tres cosas se determinan experimentalmente.
+Este resumen es una decisión de cribado, no un estimador de consenso biológico ni una garantía de independencia entre ensayos. Los ajustes extrapolados no se convierten automáticamente en cotas medidas de resistencia.
 
-Cuando la estructura tiene varios fragmentos, como una sal, los grupos se evalúan sobre el fragmento mayor y la fila se marca como `salt_or_mixture`.
+## Dosis, carga y liberación como escenarios
 
-### Rutas de unión
-
-La superficie APTES aporta aminas primarias que a pH fisiológico están protonadas, es decir, con carga positiva. De ahí salen dos mecanismos distintos, que el laboratorio ya describió: conjugación covalente y adsorción electrostática. Las rutas se asignan en este orden, que refleja **cuánto trabajo químico adicional exige cada opción, no su eficacia**:
-
-| Ruta | Criterio estructural | Lectura |
-|---|---|---|
-| `covalente_cooh_edc_nhs` | Carboxilo libre, no esterificado | Caso directo de EDC/NHS con las aminas del APTES |
-| `coordinacion_metal` | Contiene Pt, Ru, Pd, Au, Gd o As | Química de coordinación propia; aquí cae el precedente de oxaliplatino |
-| `adsorcion_electrostatica` | Otro grupo aniónico: sulfonato, fosfato, tetrazol, acilsulfonamida | Adsorción sobre superficie protonada |
-| `covalente_amina_requiere_activacion` | Amina alifática primaria o secundaria | Exige activar la superficie, por ejemplo con glutaraldehído |
-| `covalente_requiere_derivatizacion` | Hidroxilo alifático, fenol, tiol o ácido borónico | Requiere un paso previo, como succinilación, que genere el carboxilo |
-| `asa_aromatica_poco_reactiva` | Sólo amina unida a anillo aromático | Las aminopirimidinas y similares son poco nucleófilas; no se acoplan en condiciones EDC/NHS habituales |
-| `sin_asa_reactiva` | Ninguno de los anteriores | Candidato difícil según el criterio del laboratorio |
-
-### Banderas de revisión
-
-Se registran por separado porque no descalifican un candidato, pero exigen criterio químico:
-
-- `hidrolisis`: éster, lactona, anhídrido, β-lactama, epóxido, haluro de acilo o hidrazona. Son pasivos de estabilidad acuosa durante carga, almacenamiento o liberación.
-- `unico_grupo_ionizable`: el carboxilo que se conjugaría es el único grupo ionizable de la molécula. Conjugarlo altera cómo interactúa con su diana. **No es un veredicto de pérdida de actividad**; es exactamente el caso desfavorable que describió el laboratorio y necesita revisión.
-- `cationico_repele_superficie`: la molécula queda catiónica a pH fisiológico y no tiene grupos aniónicos. La superficie APTES también está protonada, de modo que se repelen en lugar de adsorberse.
-- `logp_alto`, `sal_o_mezcla`, `nombre_no_coincide_con_pubchem`.
-
-La carga se aproxima contando grupos ionizables, **no calculando pKa**. Un grupo límite puede quedar mal clasificado.
-
-## 3. Factibilidad de dosis
-
-Es el criterio que más candidatos descarta y el que usa directamente las condiciones del laboratorio. El laboratorio trabaja entre 5 y 25 ppm de **masa de nanopartícula**. Para que un fármaco alcance su IC50 libre a la dosis más alta de esa serie hace falta una carga en peso de:
+Las reglas y escenarios están en [screening.json](../screening.json). Su versión, valores y hashes se guardan en cada corrida. Para NP en µg/mL, concentración libre de referencia en µM y PM de entidad activa en g/mol:
 
 ```text
-carga requerida (% p/p) = IC50(µM) × PM / 250
+carga requerida (% masa fármaco / masa portador)
+  = IC50_referencia × PM / (10 × dosis_NP × fracción_liberada)
+
+fármaco equivalente (µM)
+  = dosis_NP × carga_porcentual / 100 × fracción_liberada × 1000 / PM
 ```
 
-donde 250 sale de 25 µg/mL de nanopartícula convertidos a porcentaje. La fórmula está en `required_loading_pct()` y verificada en las pruebas.
+Son escenarios de masa que suponen la misma potencia que el fármaco libre, sin cambios de captación ni actividad del portador. No predicen la potencia de la nanoformulación. Se evalúan cargas de 1, 3, 5 y 10%, y liberaciones de 0,1, 0,5 y 1; el escenario de referencia es 5%/1. El corte de cribado de 10% es una elección exploratoria, **no una frontera física ni el máximo publicado**. Cambiarlo requiere identificar una nueva corrida, sin borrar las anteriores.
 
-Como referencia, la literatura reporta para esta superficie capacidades de 30 a 52 µg de fármaco por mg de nanopartícula, es decir **3 a 5,2 % p/p**. El cribado usa 5 % como carga alcanzada en la práctica y 10 % como techo optimista, el doble de lo mejor publicado.
+Las fuentes citadas anteriormente son ejemplos específicos: doxorrubicina sobre ferrita dopada con Gd/sílice/APTES y doxorrubicina sobre sílice carboxilada. No establecen capacidad universal para todos los fármacos, nanopartículas o mecanismos de unión. [Estudio APTES/Gd](https://pubs.rsc.org/en/content/articlehtml/2026/ra/d6ra00215c), [estudio carboxilado](https://researchnow.flinders.edu.au/en/publications/modified-green-synthesis-of-fesub3subosub4subsiosub2sub-nanoparti/).
 
-**Supuestos, que son fuertes.** Asume liberación completa y que el fármaco cargado actúa con la misma potencia que el libre. Ignora el efecto citotóxico propio de la nanopartícula y cualquier cambio de captación celular. Es una prueba de orden de magnitud para descartar imposibles, no una predicción de respuesta.
+`dose_scenarios.csv` distingue alcanzar la referencia a la dosis máxima de rodearla con el rango completo. Devuelve `brackets_reference`, `all_doses_above_reference` o `all_doses_below_reference`; ninguna categoría certifica que MTT produzca esa IC50. `scenario_summary.csv` publica la sensibilidad sin escoger a posteriori el escenario más favorable.
 
-## 4. Niveles de prioridad
+## Niveles, conteos y decisiones
 
-El ranking es **lexicográfico por niveles**, no una suma ponderada. Una puntuación única mezclaría potencia y conjugabilidad, que no son intercambiables, y sugeriría una precisión que estos datos no sostienen.
+Los niveles 1–4 describen rutas estructurales con distinto trabajo químico: COOH, coordinación/adsorción, activación de amina y derivatización. El nivel 5 indica ausencia de asa práctica detectada; 7 supera el escenario elegido; 8 indica rango/base de masa no evaluable; 9 indica estructura pendiente. El orden no expresa probabilidad de éxito, eficacia ni una decisión de compra.
 
-Cada nivel exige cumplir los requisitos de los anteriores:
+`funnel.csv` aplica filtros acumulativos e informa en columnas distintas filas DRUG_ID y entidades normalizadas. Los conteos marginales de rango se informan aparte. La lista `shortlist.csv` sigue siendo provisional, incluso cuando un compuesto tiene buena potencia y ruta estructural.
 
-| Nivel | Significado |
-|---|---|
-| 1 | IC50 medida dentro del rango ensayado, dosis alcanzable y carboxilo libre para EDC/NHS |
-| 2 | Igual, con coordinación metálica o adsorción electrostática |
-| 3 | Igual, con amina alifática; exige activar la superficie |
-| 4 | Igual, con asa que requiere derivatización previa |
-| 5 | Dosis alcanzable pero sin asa reactiva práctica |
-| 7 | La carga requerida supera el 10 % p/p: no alcanza su IC50 a 25 ppm |
-| 8 | IC50 extrapolada por encima del máximo ensayado, o sin peso molecular |
-| 9 | Estructura no resuelta o ambigua |
+Antes de usar un candidato para una comparación formal:
 
-La lista corta son los niveles 1 a 4. Dentro de cada nivel se ordena por carga requerida y luego por potencia.
+1. Registrar identidad, forma comercial, ruta, revisión del farmacóforo y responsable en [candidate_reviews.csv](../data/candidate_reviews.csv).
+2. Completar y aprobar [pilot_protocol.json](../pilot_protocol.json): tiempo y contraste principal, efecto relevante, experimentos independientes y justificación, controles, análisis, seguridad endotelial y definición de transporte.
+3. Registrar mediciones y fuente verificable en [formulation_measurements.csv](../data/formulation_measurements.csv): lote, carga sobre entidad activa, liberación, equivalencia de dosis y validación del ensayo/rango. El software verifica el hash del archivo de evidencia, no la veracidad biológica de la medición.
 
-El primer filtro, y el más importante, es que la IC50 esté **dentro del rango ensayado**. El 76,5 % de las curvas de GBM/glioma tienen la IC50 extrapolada por encima de la concentración máxima: son cotas, no mediciones, y no sirven para elegir un candidato que se va a comprar.
+`formulation_readiness.csv` distingue preparación para comparación T98G y soporte para afirmaciones de transporte. Se exigen criterios de barrera íntegra, seguridad endotelial y balance de masa para lo segundo. Los registros iniciales están vacíos: no se fabrican aprobaciones, réplicas, cargas, liberaciones ni resultados de controles. Esto no impide realizar el piloto de caracterización necesario para obtenerlos.
 
-## 5. Resultados de la primera ejecución
+Docetaxel y gemcitabina siguen siendo hipótesis de formulación; OSI-027 requiere resolver su carga/liberación y conservación de actividad. La terna no representa tres categorías de unión distintas: los dos primeros comparten derivatización. Ningún candidato está confirmado por este cribado.
 
-### Identidad química
-
-De 295 `DRUG_ID` y 286 nombres en el subconjunto GBM/glioma se resolvieron **243 estructuras**, que corresponden a **233 identidades químicas únicas**. Quedan 59 filas en el informe de revisión.
-
-Los 52 nombres sin estructura son casi todos códigos internos de GDSC sin estructura pública, del tipo `IAP_5620`, `CDK9_5576` o `BDOCA000347a`. No es un fallo de la consulta: esos compuestos no están divulgados y no pueden evaluarse ni comprarse.
-
-### Embudo sobre los 280 fármacos ensayados en T98G
-
-| Filtro | Quedan |
-|---|---:|
-| Fármacos ensayados en T98G | 280 |
-| Con estructura química resuelta | 226 |
-| Con IC50 **medida** dentro del rango ensayado | 66 |
-| Con dosis alcanzable a 25 ppm (carga ≤ 10 % p/p) | 55 |
-| Con asa química práctica: **lista corta** | **24** |
-
-El filtro decisivo es el primero: 174 de los 280 fármacos tienen la IC50 extrapolada por encima de la concentración máxima ensayada. Son cotas inferiores de resistencia, no mediciones, y no sirven para elegir un compuesto que se va a comprar y conjugar.
-
-Otros 18 compuestos tienen potencia y dosis alcanzables pero ninguna asa reactiva práctica. Entre ellos están los dos más potentes de toda la línea, Romidepsina (IC50 4,1 nM) y Daporinad (4,9 nM). Son justamente el caso desfavorable que describió el laboratorio.
-
-### Reparto de rutas en la lista corta
-
-| Ruta | Candidatos |
-|---|---:|
-| `covalente_cooh_edc_nhs` | 2 |
-| `covalente_amina_requiere_activacion` | 5 |
-| `covalente_requiere_derivatizacion` | 17 |
-
-**Hallazgo principal, y conviene discutirlo con el laboratorio.** La química que el laboratorio prefiere, acoplamiento directo EDC/NHS sobre un carboxilo libre, sólo encaja con **2 de los 280 fármacos**: Mycophenolic acid y OSI-027. En el conjunto completo hay 15 compuestos con carboxilo libre, pero el resto no supera los filtros de potencia medida o de dosis alcanzable. Además, en ambos el carboxilo es su **único grupo ionizable**, de modo que conjugarlo altera precisamente el grupo que media la interacción con la diana. Es el riesgo que el propio laboratorio anticipó.
-
-La consecuencia práctica es que la vía más probable no es el acoplamiento directo, sino **derivatizar primero**, por ejemplo succinilando un hidroxilo para generar el carboxilo y después aplicar EDC/NHS. Esa ruta cubre 17 de los 24 candidatos.
-
-### Candidatos propuestos para discutir
-
-Los tres cubren rutas químicas distintas, para no apostar todo a un mecanismo de unión:
-
-| Candidato | IC50 libre en T98G | Carga requerida a 25 ppm | Ruta | Por qué |
-|---|---:|---:|---|---|
-| **Docetaxel** | 5,1 nM | 0,017 % | Derivatización de hidroxilo | Margen de dosis enorme: tres órdenes de magnitud por debajo del límite. La conjugación de taxanos por succinilación está establecida. Vigilar el éster |
-| **Gemcitabina** | 349 nM | 0,37 % | Derivatización | Margen amplio y química de conjugación muy documentada. Sin banderas de revisión |
-| **OSI-027** | 3,6 µM | 5,8 % | Carboxilo libre, EDC/NHS directo | Única opción, junto con Mycophenolic acid, para la química preferida del laboratorio. Carga por encima de lo reportado y carboxilo como único grupo ionizable: es el candidato de mayor riesgo y mayor valor informativo |
-
-Es una propuesta para decidir con un químico, no una selección cerrada. Tres advertencias sobre la lista:
-
-- **Bortezomib** aparece en el puesto 8 por potencia (5,1 nM) y margen, pero su ácido borónico es el grupo que inhibe el proteasoma. Derivatizarlo anularía la actividad. Está marcado y se desaconseja.
-- **Estaurosporina** es el más potente con asa amina (9,3 nM), pero es un inhibidor de quinasas de amplio espectro que se usa como reactivo de laboratorio, no como fármaco. Como citotóxico general, es mal candidato frente al criterio de toxicidad endotelial.
-- Once candidatos llevan la bandera `cationico_repele_superficie`: su amina queda protonada a pH fisiológico, igual que la superficie APTES. Para ellos la adsorción no es alternativa si falla la vía covalente.
-
-## 6. Lo que este cribado no decide
-
-- **Disponibilidad comercial y precio.** No se puede determinar desde los datos; la columna queda para el laboratorio.
-- **Toxicidad endotelial.** hCMEC/D3 no está en GDSC. Se incluye `t98g_vs_panel_ln`, que compara T98G con la línea mediana del panel completo de GDSC2, como señal de selectividad relativa. Un valor cercano a cero sugiere un citotóxico general, lo que es una precaución a considerar frente al criterio de hCMEC/D3, **no una medida de toxicidad en células sanas**.
-- **Comparabilidad con MTT.** Las IC50 de GDSC2 vienen de otro ensayo y otro protocolo. Ordenan candidatos por potencia relativa; no fijan las dosis del laboratorio.
-- **Si la conjugación conserva la actividad.** Ninguna anotación estructural lo determina. Es la pregunta que decide el éxito y se responde en el ensayo.
-
-## 7. Reproducción
+## Reproducción y trazabilidad
 
 ```bash
-.venv/bin/python scripts/build_compounds.py   # identidad química; usa caché local
-.venv/bin/python scripts/rank_candidates.py   # potencia, factibilidad y niveles
-.venv/bin/python -m pytest tests/test_chemistry.py -q
+.venv/bin/python scripts/build_compounds.py
+.venv/bin/python scripts/rank_candidates.py
+.venv/bin/python scripts/update_results_docs.py
+.venv/bin/python -m pytest -q
 ```
 
-Salidas: `data/processed/compounds.csv`, `reports/chemistry/` y `reports/candidates/`.
+Cada corrida guarda salidas separadas en `reports/runs/<etapa>/<run_id>/`, con `run_manifest.json`, hashes de entradas/salidas, snapshot de código/configuración y versiones. Química archiva además la caché de PubChem. Las rutas cortas son enlaces a la corrida actual; resultados anteriores se conservan, y un fallo no recupera silenciosamente métricas de una corrida previa. Para trasladar una investigación hay que conservar originales, corridas, caché y ZIP: Git sigue excluyendo los archivos grandes.
 
-## 8. Fuentes
-
-1. PubChem PUG REST, resolución de identidad química: https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest
-2. RDKit, perfilado de subestructuras con SMARTS: https://www.rdkit.org/docs/RDKit_Book.html
-3. Capacidad de carga en Fe₃O₄@SiO₂ funcionalizado con APTES, 51,86 µg/mg con doxorrubicina: https://pubs.rsc.org/ra/article/16/15/13708/1230727/APTES-functionalized-Gd0-18Fe2-82O4-SiO2
-4. Capacidad de carga de 34,6 mg/g en Fe₃O₄@SiO₂ con doxorrubicina: https://www.sciencedirect.com/science/article/abs/pii/S0928493119348726
-5. Nanotransportadores Fe₃O₄@SiO₂ para entrega de antitumorales: https://pubmed.ncbi.nlm.nih.gov/38797254
-6. GDSC, definiciones de respuesta y control de calidad: https://depmap.sanger.ac.uk/documentation/datasets/drug-sensitivity/
+Fuentes de implementación: [RDKit MolStandardize](https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html), [InChI](https://www.inchi-trust.org/technical-faq/), [química de pevonedistat](https://pubs.acs.org/doi/10.1021/bk-2016-1240.ch001), [definiciones de GDSC](https://depmap.sanger.ac.uk/documentation/datasets/drug-sensitivity/).

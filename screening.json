@@ -1,0 +1,13 @@
+{
+  "protocol_version": "screening-v2-exploratory",
+  "np_doses_ug_ml": [5, 10, 15, 20, 25],
+  "loading_scenarios_pct": [1, 3, 5, 10],
+  "released_fraction_scenarios": [0.1, 0.5, 1.0],
+  "reference_loading_pct": 5,
+  "reference_released_fraction": 1.0,
+  "screening_loading_limit_pct": 10,
+  "potency_summary": "maximum_ln_ic50_across_all_assays",
+  "range_policy": "all_assays_within_range",
+  "mass_basis": "active_parent_drug_mass_per_carrier_mass",
+  "interpretation": "Scenarios chosen for exploration; neither measured capacity nor universal feasibility limits. Same free-drug potency is assumed, not established."
+}

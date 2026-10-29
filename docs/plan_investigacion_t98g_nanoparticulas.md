@@ -34,7 +34,7 @@ El laboratorio ya cargó oxaliplatino sobre Fe₃O₄@SiO₂ unido previamente a
 
 Con aproximadamente 3 candidatos no existe un conjunto de entrenamiento de formulaciones. La fase computacional no entrena un predictor de citotoxicidad cargada (pregunta C): construye un **embudo de priorización** que combina potencia del fármaco libre, conjugabilidad y factibilidad, y propone una lista corta para que el laboratorio elija. Las preguntas C y D se responden con los ensayos, no con el modelo. Esto no modifica la sección 8; la reserva para cuando existan respuestas reales de fármaco cargado.
 
-El criterio de conjugabilidad exige la identidad química de los compuestos, que todavía no existe en el repositorio. Es el insumo que bloquea el embudo.
+La tabla química y el cribado corregido ya están implementados. Las cifras actuales están en [resultados_actuales.md](resultados_actuales.md), y las reglas en [quimica_candidatos.md](quimica_candidatos.md). Las identidades y rutas siguen pendientes de revisión química firmada; la estructura no demuestra carga, liberación ni actividad.
 
 ### Lo que sigue abierto
 
@@ -96,10 +96,10 @@ La dosis debe estar fijada o formar parte de la entrada. No existe una etiqueta 
 | `data/processed/glioma_flagged.parquet` y `glioma_qc.parquet` | Tablas derivadas del pipeline actual | Reutilizables con trazabilidad al origen |
 | `data/processed/line_split.csv` | Partición existente de 51 líneas: 40 en desarrollo y 11 en test | Protocolo de generalización a líneas reservadas; no evalúa química nueva |
 | `data/external/model_list_20260921.csv` | 2.266 registros y 98 columnas de metadatos | Correspondencia de identificadores y relaciones; no es expresión génica |
-| `data/external/rnaseq_all_20220624.zip` | Archivo descargado de unos 941 MB; contiene tablas de RNA-seq, TPM, FPKM y counts | Potencial fuente de expresión; falta preparar escala, orientación, unión y metadatos |
+| `data/external/rnaseq_all_20220624.zip` | Archivo descargado de unos 941 MB; contiene tablas de RNA-seq, TPM, FPKM y counts | Fuente procesada por `scripts/prepare_expression.py`: 50 SIDM emparejados, transformación log2(TPM+1) validada y procedencia por perfil |
 | Notebooks, modelos e informes existentes | Auditoría, referencias de metadatos y pipeline de expresión | Base reproducible; todavía no implementan el objetivo de nanopartículas |
 
-Los conteos del GDSC2 completo y de líneas proceden de la [auditoría existente](primer_resultado.md). En esta revisión se comprobaron las dimensiones de los CSV, los identificadores de T98G, la existencia de archivos y el directorio interno del ZIP; no se volvió a auditar íntegramente el XLSX ni se procesó la matriz de RNA-seq.
+Los conteos del GDSC2 completo y de líneas proceden de la [auditoría existente](primer_resultado.md). La revisión original sólo inspeccionó inventario/cabeceras. La corrección del 29 de octubre reproduce la auditoría completa y procesa el miembro TPM del ZIP; sus ejecuciones y resultados quedan identificados por run_id.
 
 ### Variables presentes en las tablas de respuesta
 
@@ -115,15 +115,15 @@ Las tablas tienen 16 columnas: `DATASET`, `NLME_RESULT_ID`, `NLME_CURVE_ID`, `CE
 
 | Dato | Estado local |
 |---|---|
-| SMILES e identificadores químicos verificados | No encontrados en las tablas disponibles |
+| SMILES e identificadores químicos | Tabla automatizada normalizada disponible; verificación manual por candidato pendiente |
 | Afinidad fármaco–nanopartícula | No encontrada |
 | Caracterización de nanopartículas y formulaciones | El tipo está definido (Fe₃O₄@SiO₂-APTES, sección 0); faltan los valores caracterizados del lote |
 | Carga efectiva y liberación del fármaco | No encontradas |
 | Viabilidad o muerte de T98G expuesta a formulaciones | No encontradas |
 | Curvas crudas por dosis y réplica | No encontradas en los adjuntos de respuesta ajustada |
-| Expresión en formato admitido por el pipeline | No existen `expression.csv` ni `expression_metadata.json`; sí existe el ZIP de origen |
+| Expresión en formato admitido por el pipeline | Matriz y metadatos preparados; 50 líneas, 37.602 genes; ausentes preservados para imputación dentro de CV |
 
-La documentación anterior describe expresión pendiente. El inventario actual precisa que el archivo de origen ya está descargado, pero todavía no equivale a una entrada molecular validada. El ZIP contiene una tabla de aproximadamente 5,32 GB sin comprimir y otras menores; conviene preparar la tabla adecuada sin cargar todo indiscriminadamente.
+La matriz TPM se preparó leyendo directamente su miembro del ZIP, sin extraer la tabla larga de 5,32 GB. Se conservan las fuentes Sanger/Broad de cada perfil, las sumas TPM y los genes ausentes. Ver [expresion.md](expresion.md). La identidad de bytes frente a una descarga oficial permanece sin verificar.
 
 ### Límites científicos ya detectados
 
@@ -352,4 +352,8 @@ La respuesta del laboratorio del 11 de octubre de 2026 cerró la mayoría de est
 | Criterio de toxicidad en hCMEC/D3 | **Abierta.** Esa línea no está en GDSC |
 | Tamaño de la lista corta previa a los 3 finalistas | **Abierta.** Depende del presupuesto de compra |
 
-**Siguiente paso recomendado:** construir la tabla de identidad química de los fármacos de T98G con SMILES verificados y anotación de grupos conjugables. Es el insumo que bloquea el embudo de priorización descrito en la sección 0. Después se combina la potencia del fármaco libre con el filtro químico para proponer una lista corta de la que el laboratorio elija 3. Cualquier predictor de citotoxicidad de formulaciones queda condicionado a disponer de respuestas reales de fármaco cargado.
+**Siguiente paso recomendado:** revisar las identidades y rutas de los finalistas y cerrar las decisiones de `pilot_protocol.json`. Medir carga, liberación y rango por formulación; verificar interferencia MTT, equivalencia de dosis y experimentos independientes. Registrar evidencia en `data/formulation_measurements.csv`. La priorización ya está implementada; sus salidas no sustituyen estos experimentos. Un predictor de citotoxicidad cargada sigue condicionado a disponer de respuestas de formulaciones.
+
+## Estado operativo después de la auditoría
+
+El contrato ejecutable del piloto es `pilot_protocol.json`. Sus campos nulos indican decisiones pendientes del laboratorio, no valores supuestos por el software. La revisión de candidato se registra en `data/candidate_reviews.csv`; las mediciones con archivo fuente y checksum en `data/formulation_measurements.csv`. La salida `formulation_readiness.csv` separa comparación T98G de soporte para afirmaciones de transporte. Los controles declarados como necesarios no se consideran ya realizados. Ver [seguimiento de correcciones](correcciones_auditoria_2026-10-29.md).

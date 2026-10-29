@@ -1,5 +1,7 @@
 # Primer resultado ejecutado
 
+> Registro histórico de la primera ejecución. El estado vigente está en [resultados_actuales.md](resultados_actuales.md) y [correcciones de auditoría](correcciones_auditoria_2026-10-29.md); las menciones a expresión ausente o salidas sobrescritas describen aquella versión.
+
 La explicación detallada de todas las métricas, el inventario de implementación y las instrucciones de reproducción están en el [informe completo](informe_completo.md).
 
 Ejecución con los cuatro adjuntos originales y los parámetros iniciales de config.json. Los notebooks conservan los outputs. Los resultados completos y el hash de entrada están en reports/metadata_baseline/.

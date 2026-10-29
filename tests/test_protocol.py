@@ -142,6 +142,14 @@ def test_molecular_end_to_end_on_synthetic_fixture(experiment):
     assert len(pred) == 8
     assert (root / "models/molecular.joblib").exists()
     assert scores.selected_by_cv.sum() == 1
+    # La segunda ejecución sin expresión no puede conservar métricas/modelos actuales.
+    previous_model = (root / 'models/molecular.joblib').resolve()
+    (root / 'data/external/expression.csv').unlink()
+    status, scores, pred = train_molecular(root)
+    assert status['status'] == 'missing_expression'
+    assert previous_model.exists()
+    assert not (root / 'models/molecular.joblib').exists()
+    assert not (root / 'reports/molecular/test_metrics.csv').exists()
 
 
 def test_bootstrap_uses_line_means_not_independent_curves():
