@@ -1,8 +1,52 @@
 # Plan de investigación: respuesta de T98G a fármacos y nanopartículas de óxido de hierro
 
-Fecha del inventario: 7 de octubre de 2026.
+Fecha del inventario: 7 de octubre de 2026. Definición experimental recibida del laboratorio: 11 de octubre de 2026.
 
 Estado: propuesta metodológica; no representa un modelo de nanopartículas entrenado ni una eficacia experimental demostrada. El inventario describe los archivos locales. Los datos que pueda tener el equipo fuera de este repositorio deben incorporarse y verificarse.
+
+## 0. Definición experimental acordada con el laboratorio
+
+El laboratorio respondió las preguntas abiertas de la sección 12. Lo siguiente queda fijado; lo que permanece abierto se lista al final de esta sección.
+
+| Elemento | Definición del laboratorio |
+|---|---|
+| Nanopartícula | Óxido de hierro superparamagnético recubierto de sílice (Fe₃O₄@SiO₂) y funcionalizado con APTES (3-aminopropiltrietoxisilano), que aporta grupos amino primarios en la superficie |
+| Mecanismo de unión preferente | Conjugación covalente: acoplamiento de un carboxilo del fármaco con las aminas del APTES mediante EDC/NHS para formar una amida |
+| Mecanismos alternativos | Adsorción electrostática u otras interacciones no covalentes, según el candidato. Las condiciones de carga y liberación se optimizan experimentalmente para cada uno |
+| Química favorable | Carboxilos accesibles para conjugación covalente; propiedades fisicoquímicas que permitan adsorción estable |
+| Química desfavorable | Ausencia de grupos reactivos accesibles; baja estabilidad acuosa; actividad dependiente de un grupo funcional que la conjugación modificaría |
+| Brazos del ensayo | Control sin tratamiento; fármaco libre; nanopartícula sin fármaco; nanopartícula cargada |
+| Resultado principal | Viabilidad celular por MTT en T98G, con estimación de IC50 |
+| Dosis y tiempos | 5, 10, 15, 20 y 25 ppm, a 24, 48 y 72 horas |
+| Objetivo | Demostrar actividad antitumoral en T98G y determinar si la nanoformulación mejora frente al fármaco libre |
+| Criterios adicionales | Toxicidad sobre células endoteliales hCMEC/D3 y transporte en modelo Transwell |
+| Capacidad experimental | Aproximadamente 3 candidatos, sujetos al resultado computacional, la compatibilidad química y la disponibilidad comercial |
+
+### Antecedente experimental y su alcance
+
+El laboratorio ya cargó oxaliplatino sobre Fe₃O₄@SiO₂ unido previamente a APTES, y reporta una IC50 de 15 ppm a 72 h para esas nanosondas en T98G. Es una referencia experimental útil para fijar el rango de dosis, con tres límites que conviene registrar:
+
+- **Las ppm son masa de nanopartícula, no de fármaco.** Sin la carga efectiva (µg de fármaco por mg de nanopartícula) esa cifra no se convierte a una concentración de fármaco ni se compara con una IC50 de fármaco libre.
+- **No acredita compatibilidad general con APTES.** Un caso exitoso no predice el comportamiento de otra química, como señala el propio laboratorio.
+- **El oxaliplatino libre no es potente en T98G según GDSC2.** Sus dos DRUG_ID registran LN_IC50 de 5,49 y 5,61, es decir, IC50 de unos 242 y 272 µM frente a máximos ensayados de 20 y 10 µM. Son extrapolaciones por encima del rango, con AUC de 0,98 y 0,99: en ese intervalo la línea se comporta como resistente. El antecedente respalda que la formulación es viable, no que el fármaco libre lo fuera.
+
+### Consecuencia para el diseño computacional
+
+Con aproximadamente 3 candidatos no existe un conjunto de entrenamiento de formulaciones. La fase computacional no entrena un predictor de citotoxicidad cargada (pregunta C): construye un **embudo de priorización** que combina potencia del fármaco libre, conjugabilidad y factibilidad, y propone una lista corta para que el laboratorio elija. Las preguntas C y D se responden con los ensayos, no con el modelo. Esto no modifica la sección 8; la reserva para cuando existan respuestas reales de fármaco cargado.
+
+El criterio de conjugabilidad exige la identidad química de los compuestos, que todavía no existe en el repositorio. Es el insumo que bloquea el embudo.
+
+### Lo que sigue abierto
+
+- Carga efectiva y eficiencia de carga del antecedente de oxaliplatino, en µg de fármaco por mg de nanopartícula.
+- Mecanismo de liberación previsto. Una amida es un enlace estable; si no se hidroliza en el entorno celular, el fármaco podría no liberarse. Para candidatos cuyo carboxilo participe en la actividad, conjugarlo puede anularla: es el caso desfavorable que el propio laboratorio describe.
+- Controles de interferencia del óxido de hierro con el MTT: pozos sin células con nanopartícula, en cada concentración y tiempo. Hay interferencia documentada (sección 10).
+- Criterio de toxicidad endotelial. hCMEC/D3 no está en GDSC; el filtro debe venir de los ensayos del laboratorio o de la literatura.
+- Número de finalistas que el laboratorio quiere evaluar antes de reducir a 3, y presupuesto de compra.
+
+### Comparabilidad con GDSC2
+
+Las IC50 de GDSC2 proceden de otro ensayo de viabilidad y otro protocolo, no de MTT. Sirven para **ordenar** candidatos por potencia relativa; no fijan las dosis del laboratorio ni se comparan numéricamente con una IC50 de MTT en ppm. Las series de dosis se ajustan a la potencia de cada medicamento, como indica el laboratorio.
 
 ## 1. Objetivo y alcance
 
@@ -73,7 +117,7 @@ Las tablas tienen 16 columnas: `DATASET`, `NLME_RESULT_ID`, `NLME_CURVE_ID`, `CE
 |---|---|
 | SMILES e identificadores químicos verificados | No encontrados en las tablas disponibles |
 | Afinidad fármaco–nanopartícula | No encontrada |
-| Caracterización de nanopartículas y formulaciones | No encontrada |
+| Caracterización de nanopartículas y formulaciones | El tipo está definido (Fe₃O₄@SiO₂-APTES, sección 0); faltan los valores caracterizados del lote |
 | Carga efectiva y liberación del fármaco | No encontradas |
 | Viabilidad o muerte de T98G expuesta a formulaciones | No encontradas |
 | Curvas crudas por dosis y réplica | No encontradas en los adjuntos de respuesta ajustada |
@@ -94,8 +138,8 @@ La documentación anterior describe expresión pendiente. El inventario actual p
 | Prioridad | Datos | Fuente o acción propuesta | Verificación necesaria |
 |---|---|---|---|
 | P0 | Identidad química y SMILES | Anotaciones oficiales de compuestos GDSC; contrastar con PubChem/ChEMBL o proveedor | Unir por identificadores; revisar isómeros, sales, mezclas, alias y discrepancias |
-| P0 | Definición de nanopartícula objetivo | Equipo experimental | Óxido, recubrimiento, superficie, tamaño y condiciones de uso |
-| P0 | Definición operacional de afinidad | Equipo experimental y literatura primaria de la misma superficie | Magnitud, método, unidades, pH, temperatura y medio |
+| ~~P0~~ | ~~Definición de nanopartícula objetivo~~ | **Recibida:** Fe₃O₄@SiO₂ con APTES (sección 0) | Faltan tamaño de núcleo, tamaño hidrodinámico, PDI y potencial zeta del lote |
+| P0 | Definición operacional de afinidad | Equipo experimental y literatura primaria de la misma superficie | Sin mediciones de interacción. El embudo actual usa conjugabilidad estructural; una afinidad numérica requeriría generar el dato |
 | P0 | Respuesta de T98G a libre/cargado | Generar un piloto experimental | Dosis equivalentes de fármaco, controles, réplicas y lotes |
 | P1 | Carga y liberación | Mediciones de las formulaciones | Fracción realmente cargada y curva de liberación en medios pertinentes |
 | P1 | Curvas crudas de respuesta | Buscar datos originales de GDSC y generar los del piloto | Dosis, tiempo, réplica, controles y trazabilidad del ensayo |
@@ -266,6 +310,8 @@ Comparar, bajo condiciones documentadas:
 4. Fármaco cargado en nanopartícula, con cuantificación de carga y dosis equivalente de fármaco.
 5. Cuando sea pertinente, mezcla física libre + nanopartícula para distinguirla de la formulación cargada.
 
+El laboratorio confirmó los brazos 1 a 4 (sección 0). El brazo 5 sigue siendo una sugerencia de este documento: sin él, un efecto de la formulación no se distingue de la suma de fármaco libre y nanopartícula coexistiendo en el pozo. Conviene decidirlo con el laboratorio antes del piloto.
+
 Usar una serie de dosis y tiempos preespecificados, aleatorización de posiciones, controles de placa y réplicas biológicas en experimentos independientes. El número de candidatos y réplicas se definirá a partir de variabilidad del piloto, precisión requerida y presupuesto; las réplicas técnicas no sustituyen a experimentos independientes.
 
 Validar el ensayo en presencia de las nanopartículas, con controles sin células y una medición complementaria adecuada. Se ha demostrado interferencia de óxido de hierro con ensayos de viabilidad: [estudio experimental](https://pmc.ncbi.nlm.nih.gov/articles/PMC10845919/). Annexin V/PI también requiere sus controles y compensación correspondientes.
@@ -287,14 +333,23 @@ Las etapas de preparación y búsqueda pueden avanzar en paralelo como actividad
 
 Este documento propone una ampliación del proyecto. No modifica el target, las exclusiones de variables ni la partición del [protocolo actual](metodologia.md). La inclusión de dosis y tiempo aquí corresponde a una nueva tarea de respuesta condicionada a exposición; requiere configuración y protocolo propios.
 
-## 12. Decisiones pendientes y siguiente paso concreto
+## 12. Decisiones y preguntas abiertas
 
-- ¿El objetivo principal será viabilidad, muerte celular o ambos con uno declarado primario?
-- ¿Se predice una molécula nueva, una formulación nueva o un nuevo lote de una formulación conocida?
-- ¿Qué óxido, recubrimiento y condiciones tendrán las nanopartículas?
-- ¿La afinidad está medida, calculada o aún debe generarse? ¿Con qué magnitud y unidades?
-- ¿Qué dosis, tiempos y ensayo se usarán? ¿Hay datos fuera del repositorio?
-- ¿Se exige mejorar frente al fármaco libre o basta alcanzar una actividad mínima?
-- ¿Cuántos candidatos puede confirmar el laboratorio y con qué precisión se requiere el ranking?
+La respuesta del laboratorio del 11 de octubre de 2026 cerró la mayoría de estas decisiones. La sección 0 recoge la definición completa.
 
-**Siguiente paso recomendado:** completar la definición experimental y construir la tabla de identidad química de los fármacos de T98G. Con ello se puede desarrollar un primer predictor de respuesta libre y seleccionar un piloto diverso. El predictor de formulaciones debe entrenarse y validarse después de disponer de respuestas reales de fármacos cargados.
+| Decisión | Estado |
+|---|---|
+| Resultado principal: ¿viabilidad o muerte celular? | **Resuelta.** Viabilidad por MTT con estimación de IC50. No se midió muerte celular; las afirmaciones se limitarán a viabilidad |
+| Óxido, recubrimiento y condiciones | **Resuelta.** Fe₃O₄@SiO₂ funcionalizado con APTES |
+| Mecanismo de unión | **Resuelta.** Covalente por EDC/NHS cuando haya carboxilo; si no, adsorción u otra interacción no covalente |
+| Dosis, tiempos y ensayo | **Resuelta.** MTT; 5–25 ppm; 24, 48 y 72 h |
+| ¿Actividad mínima o mejora frente al libre? | **Resuelta.** Ambas: actividad en T98G y comparación contra el fármaco libre |
+| Número de candidatos | **Resuelta.** Aproximadamente 3 |
+| ¿Qué se predice: molécula, formulación o lote? | **Replanteada.** Con 3 candidatos no se entrena un predictor de formulaciones. El entregable es una priorización de moléculas (sección 0) |
+| ¿La afinidad está medida o calculada? | **Abierta.** No hay mediciones de interacción. El embudo usa conjugabilidad estructural, no una afinidad numérica |
+| Carga efectiva del antecedente de oxaliplatino | **Abierta.** Necesaria para interpretar los 15 ppm |
+| Mecanismo de liberación previsto | **Abierta.** Determina si la conjugación covalente es adecuada para cada candidato |
+| Criterio de toxicidad en hCMEC/D3 | **Abierta.** Esa línea no está en GDSC |
+| Tamaño de la lista corta previa a los 3 finalistas | **Abierta.** Depende del presupuesto de compra |
+
+**Siguiente paso recomendado:** construir la tabla de identidad química de los fármacos de T98G con SMILES verificados y anotación de grupos conjugables. Es el insumo que bloquea el embudo de priorización descrito en la sección 0. Después se combina la potencia del fármaco libre con el filtro químico para proponer una lista corta de la que el laboratorio elija 3. Cualquier predictor de citotoxicidad de formulaciones queda condicionado a disponer de respuestas reales de fármaco cargado.

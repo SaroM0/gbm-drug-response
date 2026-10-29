@@ -8,7 +8,7 @@ Empezar por el [informe completo del proyecto y explicación de resultados](docs
 
 | Documento | Contenido |
 |---|---|
-| [Plan de investigación T98G y nanopartículas](docs/plan_investigacion_t98g_nanoparticulas.md) | Objetivo, inventario actualizado, datos faltantes, inputs/outputs y plan de validación probabilística, ML y deep learning. |
+| [Plan de investigación T98G y nanopartículas](docs/plan_investigacion_t98g_nanoparticulas.md) | Definición experimental acordada con el laboratorio (Fe₃O₄@SiO₂-APTES, MTT, 4 brazos), inventario, datos faltantes, inputs/outputs y plan de validación probabilística, ML y deep learning. |
 | [Informe completo](docs/informe_completo.md) | Trabajo realizado y lectura detallada de MAE, RMSE, R², Spearman, extrapolaciones y variación entre líneas. |
 | [Primer resultado](docs/primer_resultado.md) | Resumen de las métricas y conclusión de la primera ejecución. |
 | [Metodología](docs/metodologia.md) | Protocolo preespecificado, validación, QC y fuentes. |
