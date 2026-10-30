@@ -95,3 +95,17 @@ Protocolo, fuentes, limitaciones y decisiones: `docs/metodologia.md`. Formato mo
 Los escenarios están en `screening.json`; las decisiones pendientes del laboratorio en `pilot_protocol.json`. Identidad/ruta revisadas y mediciones reales se registran en `data/candidate_reviews.csv` y `data/formulation_measurements.csv`. Las listas son provisionales; un campo vacío no se convierte en un supuesto favorable.
 
 Cada etapa guarda un directorio distinto `reports/runs/<etapa>/<run_id>/` con snapshots y manifiesto. Las rutas cortas y modelos son enlaces a la corrida actual. Se preservan salidas anteriores; un fallo no vuelve a exponer automáticamente resultados viejos. Para reproducir en otro equipo hay que conservar también originales, ZIP y corridas, excluidos de Git.
+
+
+## Avance posterior: crudos y piloto
+
+La fase de pendientes adquirió el crudo oficial GDSC2 8.5 y verificó las 12.001 respuestas locales. El [avance con evidencia y curvas](docs/avance_pendientes.md) distingue anotaciones de pozos físicos y variación entre placas. La [propuesta del piloto](docs/piloto_para_revision.md) incluye controles, distribución aleatorizada de pozos y sensibilidad de tamaño muestral; sigue sin aprobación ni mediciones de formulación.
+
+```bash
+.venv/bin/python scripts/acquire_gdsc_sources.py
+.venv/bin/python scripts/prepare_gdsc_raw.py
+.venv/bin/python scripts/prepare_pilot.py
+.venv/bin/python scripts/report_pending_progress.py
+```
+
+La adquisición necesita conexión a Sanger. El ZIP se conserva en `data/external/gdsc_release8_5/`; la preparación lee su miembro completo sin extraer permanentemente el CSV de 2,11 GB. Puede reutilizar una extracción anterior con `--reuse-annotations <parquet>` sólo si su manifiesto, checksum del ZIP y cohortes coinciden. Los grupos de pozos/placas no se convierten automáticamente en campañas biológicas independientes.

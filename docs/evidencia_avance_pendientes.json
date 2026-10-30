@@ -1,0 +1,537 @@
+{
+  "run_id": "20261029T224816749521Z-ed344d72",
+  "verified_source_runs": {
+    "gdsc_source_acquisition": {
+      "run_id": "20261029T222632424083Z-0cbacdd7",
+      "kind": "gdsc_source_acquisition",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:26:32.424192+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/external/gdsc_release8_5/GDSC2_public_raw_data_27Oct23.csv.zip": {
+          "sha256": "7bc484eb0e859d58bfca30f72121cd353b26d35b28d18549464d496f3fc1bfc6",
+          "bytes": 122676850
+        },
+        "data/external/gdsc_release8_5/GDSC2_public_raw_data_27Oct23.csv.zip.receipt.json": {
+          "sha256": "ae16b503a90ccffa156b45f85d4665d9777cc7d2bc2ca107b8cd29f738855dd7",
+          "bytes": 472
+        },
+        "data/external/gdsc_release8_5/GDSC2_fitted_dose_response_27Oct23.xlsx": {
+          "sha256": "f950a7027be265f8a7a74220a27fd18cbd368485349bd8c2048e88bb1cd07560",
+          "bytes": 21330376
+        },
+        "data/external/gdsc_release8_5/GDSC2_fitted_dose_response_27Oct23.xlsx.receipt.json": {
+          "sha256": "817be7f5d3545e27e0c73642a1702eb8e361aa5371b0a448fc94aeae329a14b3",
+          "bytes": 472
+        },
+        "data/external/gdsc_release8_5/screened_compounds_rel_8.5.csv": {
+          "sha256": "d3cbb8b595980b36bf92d54af1da1dd995d2e2ce624c7cc70aacf2a754dce782",
+          "bytes": 46414
+        },
+        "data/external/gdsc_release8_5/screened_compounds_rel_8.5.csv.receipt.json": {
+          "sha256": "86af2bf1068c875adbc30241392252ee245ea94df135b776090438c714539992",
+          "bytes": 428
+        },
+        "data/external/gdsc_release8_5/GDSC_Raw_Data_Description.pdf": {
+          "sha256": "9ac8696eca9d51b737bd98337b86abac5c541c432fcd1a9ce84b8f56ae29b68e",
+          "bytes": 198066
+        },
+        "data/external/gdsc_release8_5/GDSC_Raw_Data_Description.pdf.receipt.json": {
+          "sha256": "3a86ca76a68f27f9cae51f429a601627edd418f77e5cf9ffe77ac75192fc3079",
+          "bytes": 427
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "5207ce2a97c0d9ef0ac7fbd9f139aca53255448e",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "3956fa1eba4a442c50a46950b19fe7ebddbe9e20568e94ea8c1566bb6e67ba2a",
+        "notebooks/03_expresion_pca_modelos.ipynb": "c57b241e91bcef17fa1453977442106974e655304ecd1ce317da63af996a0f68",
+        "pilot_design.json": "7b531739e9caded3bb1cf037a4514d19395e620cb520b6296564822db2700ad6",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/acquire_gdsc_sources.py": "86f71b3f2957673be4d1b465d9c25a8a96c7d1b17ba9ca4176ebb3159f9c6f85",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/prepare_pilot.py": "60cb035d44385978fab3679ebbe9eaafb9e4d184c5a52ff3aa2e06f0e5aacfb4",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "5fad2585fe7599cba6ca7c524d92126449d427452f84a2cf9051ab2846bd8bed",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/planning.py": "4ff6524071ed2c491d57007b3a7c72b0d41b639c4d0e1f34e5413da076565d43",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "eaf8ac37c9c40dc0a9f3f6295f7a17f8fda761fbc26dd10399752d6262ba7767",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:34:22.379902+00:00",
+      "outputs": {
+        "official_catalog.xml": "15616b6c817113ba33e3044b5aa58d12cb212ef4d6e8a44c4460463c539da025",
+        "source.tar.gz": "4f3085377bb2bfc08ec41851f386839e909238d3fc7fce9c112cf53bfd5f6739",
+        "sources.json": "9f65e2f8f1d6fe8a7b13c8f765d0e3fdab8f6cc7616bac6aab1560b221285162"
+      }
+    },
+    "gdsc_raw_preparation": {
+      "run_id": "20261029T224127325921Z-0112fa26",
+      "kind": "gdsc_raw_preparation",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:41:27.326017+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/external/gdsc_release8_5/GDSC2_public_raw_data_27Oct23.csv.zip": {
+          "sha256": "7bc484eb0e859d58bfca30f72121cd353b26d35b28d18549464d496f3fc1bfc6",
+          "bytes": 122676850
+        },
+        "data/external/gdsc_release8_5/GDSC2_fitted_dose_response_27Oct23.xlsx": {
+          "sha256": "f950a7027be265f8a7a74220a27fd18cbd368485349bd8c2048e88bb1cd07560",
+          "bytes": 21330376
+        },
+        "data/external/gdsc_release8_5/screened_compounds_rel_8.5.csv": {
+          "sha256": "d3cbb8b595980b36bf92d54af1da1dd995d2e2ce624c7cc70aacf2a754dce782",
+          "bytes": 46414
+        },
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "reports/runs/gdsc_raw_preparation/20261029T223557232170Z-0c3181ff/glioma_raw_annotations.parquet": {
+          "sha256": "4fa1af068ad3c1eda269c1e77cc4e4b179c45bb3034413dddabbe7e5e1754781",
+          "bytes": 1458981
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "5207ce2a97c0d9ef0ac7fbd9f139aca53255448e",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "3956fa1eba4a442c50a46950b19fe7ebddbe9e20568e94ea8c1566bb6e67ba2a",
+        "notebooks/03_expresion_pca_modelos.ipynb": "c57b241e91bcef17fa1453977442106974e655304ecd1ce317da63af996a0f68",
+        "pilot_design.json": "7b531739e9caded3bb1cf037a4514d19395e620cb520b6296564822db2700ad6",
+        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/acquire_gdsc_sources.py": "5d20064983be4af95e6c4b74daabc22376c450ab9f6daccbe3fc523f94f0f97c",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/prepare_gdsc_raw.py": "26de3203fc07eb6443b6b80ca603bd8ff6a35b98083842c1790780ab1ddc582a",
+        "scripts/prepare_pilot.py": "60cb035d44385978fab3679ebbe9eaafb9e4d184c5a52ff3aa2e06f0e5aacfb4",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "5fad2585fe7599cba6ca7c524d92126449d427452f84a2cf9051ab2846bd8bed",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/gdsc_raw.py": "43cb92e6ca3b99b1e280db4e68d427703f1d958e12526818e20e17daf7663361",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/planning.py": "4ff6524071ed2c491d57007b3a7c72b0d41b639c4d0e1f34e5413da076565d43",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_planning.py": "764829d18327417d3604cdd908d1a593d14f91f170ea318eea44946b6d1f8616",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "eaf8ac37c9c40dc0a9f3f6295f7a17f8fda761fbc26dd10399752d6262ba7767",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:44:20.302681+00:00",
+      "outputs": {
+        "empirical_curves.csv": "eea5bd958df8d9e1a4d32203070e2397a086da354336a991756b03134d6b97aa",
+        "fitted_comparison.json": "b5076169ddd8013f0dc92cda5a4c3ac63f5596046065f7588ca6c00afc294e80",
+        "fitted_conflicts.csv": "344c2bd60eb2deba62f074596471038d41582a3069c99be88fbb2e251c179503",
+        "glioma_normalized_wells.parquet": "0954adb0ab6ada78dee80c8676de8fe677657f7f66464c296f1ccfbdd7323d3b",
+        "glioma_raw_annotations.parquet": "4fa1af068ad3c1eda269c1e77cc4e4b179c45bb3034413dddabbe7e5e1754781",
+        "plate_controls.csv": "0e371cb500ac8a0386c3c0420e6c5cc9a7eac2cb74574520787cb971bf620579",
+        "run.json": "91a64964c4424c7d93a90bb0f7ca79a95bf7cd4867e98528669921cc927b1eae",
+        "source.tar.gz": "9dcf39633984e245264121ea33ce47c74423530ab8584fbb73602345d953d758",
+        "t98g_empirical_curves.csv": "389b3a16898e1eaed48e5da88aa9bbafbc4a09829fee596ff7e9d35087edd117",
+        "unmatched_lines.csv": "aff9d1f7cd60e736215310010db0eaa90bfbae247b02a62bd5713c191585e713"
+      }
+    },
+    "pilot_preparation": {
+      "run_id": "20261029T224743417167Z-c8e5a846",
+      "kind": "pilot_preparation",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:47:43.417318+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "pilot_design.json": {
+          "sha256": "7b531739e9caded3bb1cf037a4514d19395e620cb520b6296564822db2700ad6",
+          "bytes": 1758
+        },
+        "pilot_protocol.json": {
+          "sha256": "360f917d55b9c59aa51d3b58e18f93079a0d33d3cf53de37b467398f6c595217",
+          "bytes": 2980
+        },
+        "reports/candidates/ranking.csv": {
+          "sha256": "3fe69567e922bb9de6a1f384d23582c8abcaaf2c9cfc8ca339c7d7d07bf7435d",
+          "bytes": 265786
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "5207ce2a97c0d9ef0ac7fbd9f139aca53255448e",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "e1426083cafc561c5209424f9cf839dfeca85a83fb03f39482a24ba77becb3c0",
+        "docs/quimica_candidatos.md": "328988e6c6f19c1a191d01ff56313ac7e41b5e93ffbe7bc61ebcdd47eea1d89c",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "3956fa1eba4a442c50a46950b19fe7ebddbe9e20568e94ea8c1566bb6e67ba2a",
+        "notebooks/03_expresion_pca_modelos.ipynb": "c57b241e91bcef17fa1453977442106974e655304ecd1ce317da63af996a0f68",
+        "pilot_design.json": "7b531739e9caded3bb1cf037a4514d19395e620cb520b6296564822db2700ad6",
+        "pilot_protocol.json": "360f917d55b9c59aa51d3b58e18f93079a0d33d3cf53de37b467398f6c595217",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/acquire_gdsc_sources.py": "5d20064983be4af95e6c4b74daabc22376c450ab9f6daccbe3fc523f94f0f97c",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/prepare_gdsc_raw.py": "26de3203fc07eb6443b6b80ca603bd8ff6a35b98083842c1790780ab1ddc582a",
+        "scripts/prepare_pilot.py": "42418b6099ecb09e1e5e3a1cd39ee871d8cf29a80fe45170e80ee854fe7624ab",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/report_pending_progress.py": "97742fa130139a79e8c5197af24c17288c1cf2b85749bd36dd3dcfb567e9bfa2",
+        "scripts/run_notebooks.py": "5fad2585fe7599cba6ca7c524d92126449d427452f84a2cf9051ab2846bd8bed",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/gdsc_raw.py": "43cb92e6ca3b99b1e280db4e68d427703f1d958e12526818e20e17daf7663361",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/planning.py": "4ff6524071ed2c491d57007b3a7c72b0d41b639c4d0e1f34e5413da076565d43",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_planning.py": "764829d18327417d3604cdd908d1a593d14f91f170ea318eea44946b6d1f8616",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "f7647a7bd925dee949210bcb84b2beaa17d96d2af8af550e83245bd596cfef43",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:47:44.936858+00:00",
+      "outputs": {
+        "candidate_review_packet.csv": "71133d3b3d38832ada98755859f0ac6f56cb34ec09088c6cfe1847143d2eb6b4",
+        "plate_layout.csv": "ee22e58dc71c62102a5c3d244508f2c7b2d19890b78f5193ce8c23943b546ce0",
+        "run.json": "ebc2970d7eb884fa75627f15703dd7e64aef1371728584b78d6da8027969167a",
+        "sample_size_scenarios.csv": "358e15b8fc76c14424d0c5d4889723786a84800ebfb21d59bc7275ebfce57575",
+        "source.tar.gz": "db55e710d83c3d055e552ac28ed6cbeff94d563e8d2017093ee5e9e6724c90d0"
+      }
+    },
+    "candidates": {
+      "run_id": "20261029T224440566967Z-2c38f65f",
+      "kind": "candidates",
+      "status": "complete",
+      "started_utc": "2026-10-29T22:44:40.567106+00:00",
+      "python": "3.11.15",
+      "inputs": {
+        "data/raw/Aislados T98G - Hoja 1.csv": {
+          "sha256": "575f6ee3414bdcc81e57e509f9e9fd44b019fcd36c894b450e18ffec5845d377",
+          "bytes": 39175
+        },
+        "data/raw/GBMGliomafiltrado.csv": {
+          "sha256": "fd499a74664bfa0098957951d7e21bdfb9e86c902227967f41b79f523117b3cb",
+          "bytes": 1685689
+        },
+        "data/raw/GDSC2_fitted_dose_response_27Oct23.xlsx": {
+          "sha256": "0e99120a14a003dcbd3c27c020f1cfd35e38ee091067a2406f66c0d4dbc1c899",
+          "bytes": 22112537
+        },
+        "data/processed/compounds.csv": {
+          "sha256": "9318374a4059baacf57a7ed7c9cbb369a08e116e778da682cd66b1c2b7787ea4",
+          "bytes": 183686
+        },
+        "screening.json": {
+          "sha256": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+          "bytes": 623
+        },
+        "pilot_protocol.json": {
+          "sha256": "360f917d55b9c59aa51d3b58e18f93079a0d33d3cf53de37b467398f6c595217",
+          "bytes": 2980
+        },
+        "data/candidate_reviews.csv": {
+          "sha256": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+          "bytes": 110
+        },
+        "data/formulation_measurements.csv": {
+          "sha256": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+          "bytes": 385
+        }
+      },
+      "versions": {
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "scipy": "1.17.1",
+        "scikit-learn": "1.7.2",
+        "rdkit": "2026.9.1",
+        "requests": "2.34.2",
+        "pyarrow": "23.0.1"
+      },
+      "git_commit": "5207ce2a97c0d9ef0ac7fbd9f139aca53255448e",
+      "source_sha256": {
+        "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
+        "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
+        "data/formulation_measurements.csv": "895759769946e38cf34c078e6645d4130fb7bc43da57b6af62b43f2e4742a8a6",
+        "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
+        "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
+        "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "3956fa1eba4a442c50a46950b19fe7ebddbe9e20568e94ea8c1566bb6e67ba2a",
+        "notebooks/03_expresion_pca_modelos.ipynb": "c57b241e91bcef17fa1453977442106974e655304ecd1ce317da63af996a0f68",
+        "pilot_design.json": "7b531739e9caded3bb1cf037a4514d19395e620cb520b6296564822db2700ad6",
+        "pilot_protocol.json": "360f917d55b9c59aa51d3b58e18f93079a0d33d3cf53de37b467398f6c595217",
+        "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
+        "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/acquire_gdsc_sources.py": "5d20064983be4af95e6c4b74daabc22376c450ab9f6daccbe3fc523f94f0f97c",
+        "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
+        "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/prepare_gdsc_raw.py": "26de3203fc07eb6443b6b80ca603bd8ff6a35b98083842c1790780ab1ddc582a",
+        "scripts/prepare_pilot.py": "42418b6099ecb09e1e5e3a1cd39ee871d8cf29a80fe45170e80ee854fe7624ab",
+        "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
+        "scripts/run_notebooks.py": "5fad2585fe7599cba6ca7c524d92126449d427452f84a2cf9051ab2846bd8bed",
+        "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
+        "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
+        "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
+        "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/gdsc_raw.py": "43cb92e6ca3b99b1e280db4e68d427703f1d958e12526818e20e17daf7663361",
+        "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
+        "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
+        "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/planning.py": "4ff6524071ed2c491d57007b3a7c72b0d41b639c4d0e1f34e5413da076565d43",
+        "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
+        "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
+        "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
+        "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_planning.py": "764829d18327417d3604cdd908d1a593d14f91f170ea318eea44946b6d1f8616",
+        "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
+        "tests/test_screening.py": "f7647a7bd925dee949210bcb84b2beaa17d96d2af8af550e83245bd596cfef43",
+        "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
+      },
+      "finished_utc": "2026-10-29T22:46:00.576994+00:00",
+      "outputs": {
+        "assays.csv": "dd5c81610c01a33fc5aae95a385e1fb75e6d47b35e22e43e4086a796965b8d98",
+        "dose_scenarios.csv": "7d3732489047a3b4a650958e9ce92d1ae3346acc008a33e348c15c35d6d2f6e6",
+        "formulation_readiness.csv": "81d254328bd06f43d10f37cb5d3b8044388f11a44f9f443c26bd9d4a3a045798",
+        "funnel.csv": "90bdb48f673dc1fc88214110a15b10a054c1678a47b08ee628f095bcf21e03ac",
+        "ranking.csv": "3fe69567e922bb9de6a1f384d23582c8abcaaf2c9cfc8ca339c7d7d07bf7435d",
+        "run.json": "839c1b72e84ac37ebcd075b6366c9e457e892054888ca9e17f07ab5ae4bf4206",
+        "scenario_summary.csv": "01c0561cd6b74a62f184352fe9347ab537dd07a13f329d2c9a54597ee1b8c5d4",
+        "shortlist.csv": "f7c459c2c09f2164ec0f23e9494f6935fffadcc16f5117e9817122fb8a638d24",
+        "source.tar.gz": "ef2953a950cf5fa916a662d4b4f5dfbd41a03e3c42ad4d3819d618c77b6f7c72"
+      }
+    }
+  },
+  "raw": {
+    "run_id": "20261029T224127325921Z-0112fa26",
+    "source_release": "8.5",
+    "raw_annotation_rows_scanned": 15069449,
+    "selected_annotation_rows": 470780,
+    "selected_physical_wells": 428044,
+    "matched_lines": 51,
+    "selected_plates": 514,
+    "plates_with_explicit_usable_nc1_b": 514,
+    "empirical_plate_drug_series": 15238,
+    "fitted_comparison": {
+      "user_curves": 12001,
+      "matched_curve_keys": 12001,
+      "matching_response_curves": 12001,
+      "all_user_response_fields_match": true,
+      "tolerance_absolute": 1e-12,
+      "annotation_identity_claimed": false
+    },
+    "raw_zip_crc_checked_by_full_member_read": true,
+    "nlme_refit_performed": false,
+    "verified_annotation_reuse": "/home/saro/research/gbm-drug-response/reports/runs/gdsc_raw_preparation/20261029T223557232170Z-0c3181ff/glioma_raw_annotations.parquet",
+    "interpretation": "Descriptive raw-well diagnostics, preserving plate/campaign dependence; not a replacement for original NLME fitting, a calibrated censoring model, or validation of nanoformulations."
+  },
+  "candidate_support": [
+    {
+      "candidate": "Docetaxel",
+      "DRUG_ID": "1007",
+      "plate_drug_series": 5,
+      "series_with_points_on_both_sides_of_half": 4,
+      "series_all_above_half": 1,
+      "raw_max_conc_um_by_series": "0.0125"
+    },
+    {
+      "candidate": "Docetaxel",
+      "DRUG_ID": "1819",
+      "plate_drug_series": 1,
+      "series_with_points_on_both_sides_of_half": 1,
+      "series_all_above_half": 0,
+      "raw_max_conc_um_by_series": "3.0"
+    },
+    {
+      "candidate": "Gemcitabine",
+      "DRUG_ID": "1190",
+      "plate_drug_series": 3,
+      "series_with_points_on_both_sides_of_half": 2,
+      "series_all_above_half": 1,
+      "raw_max_conc_um_by_series": "0.1;1.0;10.0"
+    },
+    {
+      "candidate": "OSI-027",
+      "DRUG_ID": "1594",
+      "plate_drug_series": 3,
+      "series_with_points_on_both_sides_of_half": 2,
+      "series_all_above_half": 1,
+      "raw_max_conc_um_by_series": "4.0"
+    }
+  ],
+  "pilot": {
+    "run_id": "20261029T224743417167Z-c8e5a846",
+    "status": "planning_only_not_laboratory_approved",
+    "design": {
+      "version": "pilot-preparation-v1",
+      "status": "planning_only_not_laboratory_approved",
+      "candidate_names": [
+        "Docetaxel",
+        "Gemcitabine",
+        "OSI-027"
+      ],
+      "cell_model": "T98G",
+      "times_h": [
+        24,
+        48,
+        72
+      ],
+      "proposed_primary_time_h": 72,
+      "np_doses_ug_ml": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ],
+      "independent_experiments_for_variance_pilot": 3,
+      "technical_replicates": 3,
+      "include_physical_mixture": true,
+      "vehicle_wells": 6,
+      "positive_control_wells": 3,
+      "cell_free_blank_wells": 3,
+      "plate_rows": 8,
+      "plate_columns": 12,
+      "randomization_seed": 20261029,
+      "dose_equivalence": "Match free and mixture to measured nominal total active drug mass on the loaded carrier; released fraction and kinetics recorded separately. Numeric active-drug concentrations remain blank until loading is measured.",
+      "planning_assumptions": "96-well reader, three technical replicates and three independent campaigns are a proposal for feasibility and variance estimation, not a powered confirmatory sample size. Separate destructive assays per time and matching cell-free interference plates. Extra physical-mixture arm is proposed, not agreed by the laboratory.",
+      "power_scenarios": {
+        "endpoint": "paired natural-log IC50 loaded/free, only when both IC50 are identifiable",
+        "loaded_to_free_ic50_ratios": [
+          0.8,
+          0.7,
+          0.5
+        ],
+        "sd_of_paired_log_ratio": [
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0
+        ],
+        "familywise_alpha": 0.05,
+        "candidate_comparisons": 3,
+        "power_targets": [
+          0.8,
+          0.9
+        ],
+        "max_independent_experiments": 100,
+        "assumptions": "Independent normal paired log-ratios, common predeclared time; conservative Bonferroni planning across three candidates. Technical wells do not increase n. Values of effect and SD are hypothetical scenarios, not measurements."
+      }
+    },
+    "n_candidates": 3,
+    "n_plates": 54,
+    "planned_well_slots": 5184,
+    "planned_measurement_wells": 3888,
+    "independent_campaigns": 3,
+    "formal_power_claimed": false,
+    "observations_generated": 0,
+    "notes": [
+      "Numeric active-drug doses require measured loading, supplied separately.",
+      "A positive-control reagent and readout protocol require laboratory selection.",
+      "Matched cell-free controls diagnose interference, not guarantee additivity or valid subtraction.",
+      "This proposal does not approve candidates or modify the holdout or trained models."
+    ]
+  },
+  "protocol_readiness": {
+    "ready": false,
+    "missing_decisions": [
+      "minimum_relevant_improvement",
+      "independent_experiments",
+      "endothelial_acceptance_criterion",
+      "transwell_analyte",
+      "barrier_integrity_criterion",
+      "transport_mass_balance_criterion",
+      "approved_by",
+      "approved_at"
+    ],
+    "errors": [
+      "protocol_not_approved"
+    ],
+    "meaning": "Decisions only; not evidence that controls or measurements were performed."
+  },
+  "laboratory_observations_invented": 0,
+  "nlme_refit_performed": false,
+  "verification": {
+    "pytest_passed": 58,
+    "pytest_failed": 0,
+    "verified_run_manifests": [
+      "gdsc_source_acquisition",
+      "gdsc_raw_preparation",
+      "pilot_preparation",
+      "pending_progress",
+      "candidates"
+    ],
+    "originals_and_split_unchanged": true,
+    "plate_slots": 5184,
+    "plates": 54,
+    "laboratory_observations_generated": 0,
+    "nlme_refit_performed": false,
+    "figure_visually_inspected": true
+  }
+}

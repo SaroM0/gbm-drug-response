@@ -1213,10 +1213,10 @@
       }
     },
     "candidates": {
-      "run_id": "20261029T220755953647Z-8bdb6f15",
+      "run_id": "20261029T224440566967Z-2c38f65f",
       "kind": "candidates",
       "status": "complete",
-      "started_utc": "2026-10-29T22:07:55.953752+00:00",
+      "started_utc": "2026-10-29T22:44:40.567106+00:00",
       "python": "3.11.15",
       "inputs": {
         "data/raw/Aislados T98G - Hoja 1.csv": {
@@ -1240,8 +1240,8 @@
           "bytes": 623
         },
         "pilot_protocol.json": {
-          "sha256": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
-          "bytes": 1144
+          "sha256": "360f917d55b9c59aa51d3b58e18f93079a0d33d3cf53de37b467398f6c595217",
+          "bytes": 2980
         },
         "data/candidate_reviews.csv": {
           "sha256": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
@@ -1261,7 +1261,7 @@
         "requests": "2.34.2",
         "pyarrow": "23.0.1"
       },
-      "git_commit": "d98e37259b8a4008a50fd6e885b04318c4286098",
+      "git_commit": "5207ce2a97c0d9ef0ac7fbd9f139aca53255448e",
       "source_sha256": {
         "config.json": "0ac071ecb1a1c9b7b48b37151f5df3b434f16a97a0d141669a17edff081c6b7d",
         "data/candidate_reviews.csv": "4d95b3079cf5f3ee5e4fe32a1d9e2dcd0b57b2fe39f3dcd084653b2a40aa69d0",
@@ -1269,42 +1269,49 @@
         "docs/expresion.md": "a5f4ac1540c228c1ab3113a390f577a8b3a3a68d3494dfcdefa6040a92dd53e9",
         "docs/metodologia.md": "580270d6eeb6183dc1d88fa007779a28a022717aebc9751f354bb1ef7abe13c5",
         "docs/quimica_candidatos.md": "94f2f1d555e4564c81954e4b36c8a2474431ffb9ea208a133a889b6f1ed8393f",
-        "notebooks/01_auditoria_diccionario.ipynb": "f9ec18a515614e4ca5a8d59b182b7d04515c499ed4557640d54ad702733d4778",
-        "notebooks/02_baseline_metadatos.ipynb": "476769e08ec7ebb9675c2894e17911d225576741681a7d5bc2d7f7d6310a4fe7",
-        "notebooks/03_expresion_pca_modelos.ipynb": "34f63e02f14e2ab29b600faa1d681c0e87ebecff15e35a729bae661cf8830013",
-        "pilot_protocol.json": "c1530c36ace576b17462f80b769028f3183ec89b610e9035066a8e26f42d51da",
+        "notebooks/01_auditoria_diccionario.ipynb": "2db3bc95c4418306833ae085bc3e95319b4af12ab1c7e13cf36a6b56f02a66fe",
+        "notebooks/02_baseline_metadatos.ipynb": "3956fa1eba4a442c50a46950b19fe7ebddbe9e20568e94ea8c1566bb6e67ba2a",
+        "notebooks/03_expresion_pca_modelos.ipynb": "c57b241e91bcef17fa1453977442106974e655304ecd1ce317da63af996a0f68",
+        "pilot_design.json": "7b531739e9caded3bb1cf037a4514d19395e620cb520b6296564822db2700ad6",
+        "pilot_protocol.json": "360f917d55b9c59aa51d3b58e18f93079a0d33d3cf53de37b467398f6c595217",
         "pyproject.toml": "c036e117bc3b0f09c4e939656bda42d66d20791a84870ab76c92f6f2fa51501c",
         "screening.json": "61e8261fb3d29286413cac9948050cb1bd295fd538994cb50e98505d09dcb2ed",
+        "scripts/acquire_gdsc_sources.py": "5d20064983be4af95e6c4b74daabc22376c450ab9f6daccbe3fc523f94f0f97c",
         "scripts/build_compounds.py": "7a5433b0d790145afca2d79bbc29210d0dc80d974ca3582850629b8d0c8e0e17",
         "scripts/prepare_expression.py": "e226a3a66cda305a2d49fa0177da509344f29ed41618e0aeddad04f3beb58a08",
+        "scripts/prepare_gdsc_raw.py": "26de3203fc07eb6443b6b80ca603bd8ff6a35b98083842c1790780ab1ddc582a",
+        "scripts/prepare_pilot.py": "42418b6099ecb09e1e5e3a1cd39ee871d8cf29a80fe45170e80ee854fe7624ab",
         "scripts/rank_candidates.py": "e672ffcea0ee37b6608451e4fe4a0665f512988caeaf59cf902b44e4833156d3",
-        "scripts/run_notebooks.py": "dcb938f6f86f42057acbb581991666b16631295a5eecdbba3520e135aaad9772",
+        "scripts/run_notebooks.py": "5fad2585fe7599cba6ca7c524d92126449d427452f84a2cf9051ab2846bd8bed",
         "scripts/update_results_docs.py": "0b3a8edc59d1f6be8755a320d5f219aef6ec49556a0c9312419ff94d969ddc0f",
         "src/gbm_drug_response/__init__.py": "487a6dba97fe59e8f7cadd7cb444a0a54675242d08b246dbfd3140a21be5d194",
         "src/gbm_drug_response/chemistry.py": "d1004204a6d6483888a45cda4c3574f0f88c3f20326ec8d69a235d38e4313ece",
         "src/gbm_drug_response/data.py": "0b556e5e74c5e80008c0bbe69dbcee56fec00e579aac69c9746181948acd77f1",
+        "src/gbm_drug_response/gdsc_raw.py": "43cb92e6ca3b99b1e280db4e68d427703f1d958e12526818e20e17daf7663361",
         "src/gbm_drug_response/modeling.py": "79e53eef4350372f1b16a20c006f797cb5a680148d8249f00deb62375bda9a7a",
         "src/gbm_drug_response/molecular.py": "7972952bd28a6d42eff5cb52434fb2b0cf7e841360cdef2bf06e17e8de59c6dc",
         "src/gbm_drug_response/pilot.py": "d5e6477cd9f154c53db4781c2dfcf9f63d7efe7e7787edf6fdba109bbafd160f",
+        "src/gbm_drug_response/planning.py": "4ff6524071ed2c491d57007b3a7c72b0d41b639c4d0e1f34e5413da076565d43",
         "src/gbm_drug_response/runs.py": "3a38956040d0a5e0f0eb1397ab96ec7e7f0c70d613d0f7dff7be2565ca4aab85",
         "src/gbm_drug_response/screening.py": "a7dd4bbf8d0d07ff64b8ccefc68b8ebdf02d075d21be753e17389da8b99cf612",
         "src/gbm_drug_response/validation.py": "f4506a119a77fa070b20bf6e6b246c81fbc502cd451921050a446022d9db5153",
         "tests/test_chemistry.py": "853f40895f50b9957266d2c2d3a8c0b710dba27b9b5cdeb05ea984663856b7bc",
+        "tests/test_planning.py": "764829d18327417d3604cdd908d1a593d14f91f170ea318eea44946b6d1f8616",
         "tests/test_protocol.py": "981da8c4ff1634b02e9a19dfa5d5fd27fe9c0cac6b1c1ef931f54c15da20b3e4",
-        "tests/test_screening.py": "b87e5a88d53ece9e8970244c565829c55ff786ac26c3121edcd339c2d41a4511",
+        "tests/test_screening.py": "f7647a7bd925dee949210bcb84b2beaa17d96d2af8af550e83245bd596cfef43",
         "uv.lock": "1c8292a325bfd9474373d72b072b0fdd1ef03b01a585e8d3805dd5fdfa2e4c81"
       },
-      "finished_utc": "2026-10-29T22:08:39.259344+00:00",
+      "finished_utc": "2026-10-29T22:46:00.576994+00:00",
       "outputs": {
         "assays.csv": "dd5c81610c01a33fc5aae95a385e1fb75e6d47b35e22e43e4086a796965b8d98",
         "dose_scenarios.csv": "7d3732489047a3b4a650958e9ce92d1ae3346acc008a33e348c15c35d6d2f6e6",
         "formulation_readiness.csv": "81d254328bd06f43d10f37cb5d3b8044388f11a44f9f443c26bd9d4a3a045798",
         "funnel.csv": "90bdb48f673dc1fc88214110a15b10a054c1678a47b08ee628f095bcf21e03ac",
         "ranking.csv": "3fe69567e922bb9de6a1f384d23582c8abcaaf2c9cfc8ca339c7d7d07bf7435d",
-        "run.json": "17933f19619d437e964245a09daddcd6efa145be13afd8c4c8c204fd885e70a9",
+        "run.json": "839c1b72e84ac37ebcd075b6366c9e457e892054888ca9e17f07ab5ae4bf4206",
         "scenario_summary.csv": "01c0561cd6b74a62f184352fe9347ab537dd07a13f329d2c9a54597ee1b8c5d4",
         "shortlist.csv": "f7c459c2c09f2164ec0f23e9494f6935fffadcc16f5117e9817122fb8a638d24",
-        "source.tar.gz": "ced050d06212f2ede963036ebab28b75ee46da699600ead5af279ab806dd68e6"
+        "source.tar.gz": "ef2953a950cf5fa916a662d4b4f5dfbd41a03e3c42ad4d3819d618c77b6f7c72"
       }
     },
     "metadata_baseline": {
@@ -1631,7 +1638,7 @@
     }
   },
   "candidates": {
-    "run_id": "20261029T220755953647Z-8bdb6f15",
+    "run_id": "20261029T224440566967Z-2c38f65f",
     "protocol": {
       "protocol_version": "screening-v2-exploratory",
       "np_doses_ug_ml": [
@@ -1671,15 +1678,8 @@
     "pilot_protocol": {
       "ready": false,
       "missing_decisions": [
-        "primary_time_h",
         "minimum_relevant_improvement",
         "independent_experiments",
-        "sample_size_rationale",
-        "normalization_and_curve_model",
-        "multiple_comparisons_plan",
-        "randomization_and_plate_layout",
-        "orthogonal_assay",
-        "physical_mixture_control_decision",
         "endothelial_acceptance_criterion",
         "transwell_analyte",
         "barrier_integrity_criterion",
@@ -1921,33 +1921,5 @@
     ],
     "training_partition": "development_only",
     "scope": "Exploratorio in vitro, por fármaco conocido; no validación clínica ni externa"
-  },
-  "verification": {
-    "tests": {
-      "passed": 48,
-      "failed": 0
-    },
-    "notebooks": [
-      {
-        "file": "notebooks/01_auditoria_diccionario.ipynb",
-        "executed_code_cells": 6,
-        "errors": 0
-      },
-      {
-        "file": "notebooks/02_baseline_metadatos.ipynb",
-        "executed_code_cells": 5,
-        "errors": 0
-      },
-      {
-        "file": "notebooks/03_expresion_pca_modelos.ipynb",
-        "executed_code_cells": 5,
-        "errors": 0
-      }
-    ],
-    "all_six_run_manifests_and_outputs_verified": true,
-    "originals_and_split_unchanged": true,
-    "local_document_links_valid": true,
-    "shortlist_molecules": 23,
-    "all_t98g_assays_preserved": 280
   }
 }

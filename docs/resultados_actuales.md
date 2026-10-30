@@ -76,7 +76,7 @@ Los desgloses `outcome_diagnostics.csv` informan métricas con el mismo modelo e
 | kind | run_id | status |
 | --- | --- | --- |
 | chemistry | 20261029T220646789117Z-0264ec65 | complete |
-| candidates | 20261029T220755953647Z-8bdb6f15 | complete |
+| candidates | 20261029T224440566967Z-2c38f65f | complete |
 | metadata_baseline | 20261029T221151543898Z-00c7f9eb | complete |
 | molecular | 20261029T221250672376Z-0b91f133 | complete |
 | expression_preparation | 20261029T220647968006Z-d34a9c67 | complete |

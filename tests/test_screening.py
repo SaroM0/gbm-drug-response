@@ -110,7 +110,8 @@ def test_draft_protocol_and_empty_measurements_are_not_approval(tmp_path):
     p = json.loads((PROJECT / 'pilot_protocol.json').read_text())
     (tmp_path / 'pilot_protocol.json').write_text(json.dumps(p))
     assert not protocol_readiness(p)['ready']
-    assert 'primary_time_h' in protocol_readiness(p)['missing_decisions']
+    assert 'independent_experiments' in protocol_readiness(p)['missing_decisions']
+    assert p['primary_time_h'] == 72
     assert chemistry_reviews(tmp_path) == set()
     assert assess_formulations(tmp_path, set()).empty
 

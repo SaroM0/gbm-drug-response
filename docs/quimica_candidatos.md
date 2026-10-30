@@ -68,3 +68,8 @@ Docetaxel y gemcitabina siguen siendo hipótesis de formulación; OSI-027 requie
 Cada corrida guarda salidas separadas en `reports/runs/<etapa>/<run_id>/`, con `run_manifest.json`, hashes de entradas/salidas, snapshot de código/configuración y versiones. Química archiva además la caché de PubChem. Las rutas cortas son enlaces a la corrida actual; resultados anteriores se conservan, y un fallo no recupera silenciosamente métricas de una corrida previa. Para trasladar una investigación hay que conservar originales, corridas, caché y ZIP: Git sigue excluyendo los archivos grandes.
 
 Fuentes de implementación: [RDKit MolStandardize](https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html), [InChI](https://www.inchi-trust.org/technical-faq/), [química de pevonedistat](https://pubs.acs.org/doi/10.1021/bk-2016-1240.ch001), [definiciones de GDSC](https://depmap.sanger.ac.uk/documentation/datasets/drug-sensitivity/).
+
+
+## Evidencia cruda posterior al cribado
+
+La fuente pública GDSC2 8.5 ya fue adquirida y sus ajustes se contrastaron con las respuestas locales. El [avance de pendientes](avance_pendientes.md) muestra los candidatos por placa. `t98g_in_range` sigue significando dentro del intervalo **reportado por el ajuste**; no certifica que cada serie individual cruce 50%. Para gemcitabina hay placas con máximos de 0,1, 1 y 10 µM. Las medianas por dosis y placa son diagnósticos descriptivos, sin reajuste NLME ni incertidumbre de censura calibrada. La lista corta no cambia automáticamente en función de ese diagnóstico observado después del cribado.

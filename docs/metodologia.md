@@ -60,3 +60,10 @@ La matriz local TPM de 2022 se prepara con `scripts/prepare_expression.py`, pres
 `validation.py` comprueba la tabla local de modelos/donantes y componentes relacionados. En esta cohorte hay 51 patient_id distintos y ningún padre anotado compartido dentro de la cohorte. Si aparecen relaciones, viajan juntas en CV; si una familia cruza el holdout persistido, la ejecución falla y exige un protocolo de evaluación independiente, sin cambiar la semilla en busca de métricas favorables.
 
 Las ejecuciones conservan entradas, código, configuración, versiones y hashes en directorios separados; las rutas cortas apuntan a la ejecución actual. Un estado `missing_expression`, cobertura insuficiente o fallo no mantiene métricas/modelos antiguos como actuales. Los resúmenes científicos se generan sólo a partir de corridas completas con salidas verificadas. Ver [resultados actuales](resultados_actuales.md) y [correcciones](correcciones_auditoria_2026-10-29.md).
+
+
+## Fuentes crudas adquiridas tras la fase de correcciones
+
+La fuente oficial GDSC2 8.5 quedó disponible como ZIP de anotaciones por pozo, junto al ajuste publicado y su documentación. Las 12.001 respuestas locales coinciden con la fuente oficial en claves y cinco campos numéricos a tolerancia absoluta de 1e-12; no se afirma identidad de bytes ni de todas las anotaciones. La preparación preserva las 51 líneas, colapsa etiquetas de un mismo pozo sin sumar intensidades y reconoce que el tag DMSO puede tener DRUG_ID=4000. Se normaliza descriptivamente sólo con controles NC-1 y B explícitos, sin convertir PC-1 o UN-USED en blancos. `reports/gdsc_raw_preparation/` conserva anotaciones, pozos, controles, series por placa y comparación de ajustes.
+
+Este avance resuelve la ausencia local de la fuente cruda; no reproduce todavía el ajuste multilevel publicado ni proporciona intervalos calibrados para IC50 extrapoladas. Los rangos se verifican ahora también por placa para describir heterogeneidad. No se truncan readouts ni se etiquetan automáticamente categorías empíricas como censura cierta. Ver [avance](avance_pendientes.md).

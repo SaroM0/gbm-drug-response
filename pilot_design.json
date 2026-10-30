@@ -1,0 +1,30 @@
+{
+  "version": "pilot-preparation-v1",
+  "status": "planning_only_not_laboratory_approved",
+  "candidate_names": ["Docetaxel", "Gemcitabine", "OSI-027"],
+  "cell_model": "T98G",
+  "times_h": [24, 48, 72],
+  "proposed_primary_time_h": 72,
+  "np_doses_ug_ml": [5, 10, 15, 20, 25],
+  "independent_experiments_for_variance_pilot": 3,
+  "technical_replicates": 3,
+  "include_physical_mixture": true,
+  "vehicle_wells": 6,
+  "positive_control_wells": 3,
+  "cell_free_blank_wells": 3,
+  "plate_rows": 8,
+  "plate_columns": 12,
+  "randomization_seed": 20261029,
+  "dose_equivalence": "Match free and mixture to measured nominal total active drug mass on the loaded carrier; released fraction and kinetics recorded separately. Numeric active-drug concentrations remain blank until loading is measured.",
+  "planning_assumptions": "96-well reader, three technical replicates and three independent campaigns are a proposal for feasibility and variance estimation, not a powered confirmatory sample size. Separate destructive assays per time and matching cell-free interference plates. Extra physical-mixture arm is proposed, not agreed by the laboratory.",
+  "power_scenarios": {
+    "endpoint": "paired natural-log IC50 loaded/free, only when both IC50 are identifiable",
+    "loaded_to_free_ic50_ratios": [0.8, 0.7, 0.5],
+    "sd_of_paired_log_ratio": [0.2, 0.4, 0.6, 0.8, 1.0],
+    "familywise_alpha": 0.05,
+    "candidate_comparisons": 3,
+    "power_targets": [0.8, 0.9],
+    "max_independent_experiments": 100,
+    "assumptions": "Independent normal paired log-ratios, common predeclared time; conservative Bonferroni planning across three candidates. Technical wells do not increase n. Values of effect and SD are hypothetical scenarios, not measurements."
+  }
+}

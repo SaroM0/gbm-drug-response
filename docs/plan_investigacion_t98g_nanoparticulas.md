@@ -120,7 +120,7 @@ Las tablas tienen 16 columnas: `DATASET`, `NLME_RESULT_ID`, `NLME_CURVE_ID`, `CE
 | Caracterización de nanopartículas y formulaciones | El tipo está definido (Fe₃O₄@SiO₂-APTES, sección 0); faltan los valores caracterizados del lote |
 | Carga efectiva y liberación del fármaco | No encontradas |
 | Viabilidad o muerte de T98G expuesta a formulaciones | No encontradas |
-| Curvas crudas por dosis y réplica | No encontradas en los adjuntos de respuesta ajustada |
+| Curvas crudas por dosis y réplica | Adquirida fuente pública GDSC2 8.5; preparadas 51 líneas y diagnósticos por placa. Las curvas del laboratorio siguen pendientes |
 | Expresión en formato admitido por el pipeline | Matriz y metadatos preparados; 50 líneas, 37.602 genes; ausentes preservados para imputación dentro de CV |
 
 La matriz TPM se preparó leyendo directamente su miembro del ZIP, sin extraer la tabla larga de 5,32 GB. Se conservan las fuentes Sanger/Broad de cada perfil, las sumas TPM y los genes ausentes. Ver [expresion.md](expresion.md). La identidad de bytes frente a una descarga oficial permanece sin verificar.
@@ -357,3 +357,5 @@ La respuesta del laboratorio del 11 de octubre de 2026 cerró la mayoría de est
 ## Estado operativo después de la auditoría
 
 El contrato ejecutable del piloto es `pilot_protocol.json`. Sus campos nulos indican decisiones pendientes del laboratorio, no valores supuestos por el software. La revisión de candidato se registra en `data/candidate_reviews.csv`; las mediciones con archivo fuente y checksum en `data/formulation_measurements.csv`. La salida `formulation_readiness.csv` separa comparación T98G de soporte para afirmaciones de transporte. Los controles declarados como necesarios no se consideran ya realizados. Ver [seguimiento de correcciones](correcciones_auditoria_2026-10-29.md).
+
+La fase posterior de pendientes preparó una [propuesta concreta del piloto](piloto_para_revision.md), sin aprobarla en nombre del laboratorio, y un [informe de los datos crudos](avance_pendientes.md). El tamaño de muestra formal permanece pendiente de efecto relevante y variabilidad independiente medida.
