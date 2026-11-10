@@ -4,7 +4,7 @@
   "cell_model": "T98G",
   "nanoparticle": "Fe3O4@SiO2-APTES",
   "assay": "MTT",
-  "candidate_count_target": 3,
+  "candidate_count_target": 2,
   "planned_times_h": [
     24,
     48,
@@ -17,7 +17,7 @@
   "independent_experiments": null,
   "sample_size_rationale": "Three independent campaigns are proposed only for feasibility/variance estimation; confirmatory n remains unset until the relevant effect and paired SD are specified. See sample_size_scenarios.csv; technical wells do not increase independent n.",
   "normalization_and_curve_model": "Proposed: retain raw plate reads and controls; validate interference before normalization; fit dose-response per independent campaign only when supported; no forced extrapolated IC50 and no automatic truncation of normalized responses.",
-  "multiple_comparisons_plan": "Proposed: one predeclared main contrast per candidate at 72h, Holm familywise correction across three candidates; other times and endpoints descriptive unless separately prespecified.",
+  "multiple_comparisons_plan": "Pending reconciliation with the supplied protocol: prespecified comparisons with Holm adjustment; the historical three-candidate plan is superseded. Confirm endpoint families and primary time with the methodological advisor.",
   "randomization_and_plate_layout": "Proposed: reproducible 96-well paired cellular/cell-free layout from pilot_design.json; separate plates per destructive time point, fixed seed and all controls retained.",
   "vehicle_control": true,
   "empty_nanoparticle_control": true,

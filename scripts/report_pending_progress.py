@@ -80,6 +80,7 @@ def main(root=ROOT):
         shutil.copyfile(run.path / 'candidate_raw_curves.png', root / 'docs/figures/candidate_raw_curves.png')
         power = pd.read_csv(root / 'reports/pilot_preparation/sample_size_scenarios.csv')
         report = ['# Avance de los pendientes', '',
+            '> **Actualización:** la propuesta de 54 placas es histórica y corresponde a tres candidatos. El laboratorio autorizó comprar dos fármacos; selección y rediseño pendientes. Ver [mapa vigente](mapa_protocolo_pendientes.md).', '',
             'Se adquirieron fuentes oficiales y se preparó un piloto revisable. Las mediciones de las nuevas formulaciones siguen pendientes; no se fabricaron ni se aprobaron candidatos automáticamente.', '',
             '## Datos crudos y procedencia', '',
             f"Se descargó el ZIP público de GDSC2 8.5 y se leyeron {raw['raw_annotation_rows_scanned']:,} anotaciones sin extraer permanentemente el CSV de 2,11 GB. "

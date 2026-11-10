@@ -12,10 +12,14 @@ from gbm_drug_response.runs import ResearchRun, verify_run, write_json
 
 def main(root=ROOT):
     root = Path(root)
+    design = json.loads((root / 'pilot_design.json').read_text())
+    protocol = json.loads((root / 'pilot_protocol.json').read_text())
+    if (len(design['candidate_names']) != protocol['candidate_count_target'] or
+            design['power_scenarios']['candidate_comparisons'] != protocol['candidate_count_target']):
+        raise ValueError('Diseño histórico incompatible con el límite actual de candidatos; seleccionar y revisar dos candidatos y actualizar el diseño y sus escenarios antes de generar el piloto.')
     with ResearchRun(root, 'pilot_preparation') as run:
         verify_run(root / 'reports/candidates')
         run.inputs([root / 'pilot_design.json', root / 'pilot_protocol.json', root / 'reports/candidates/ranking.csv'])
-        design = json.loads((root / 'pilot_design.json').read_text())
         ranking = pd.read_csv(root / 'reports/candidates/ranking.csv')
         candidates = ranking[ranking.drug_name.isin(design['candidate_names'])].copy()
         if len(candidates) != len(design['candidate_names']) or not candidates.compound_id.is_unique:

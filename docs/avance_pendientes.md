@@ -1,5 +1,7 @@
 # Avance de los pendientes
 
+> **Actualización:** la propuesta de 54 placas es histórica y corresponde a tres candidatos. El laboratorio autorizó comprar dos fármacos; selección y rediseño pendientes. Ver [mapa vigente](mapa_protocolo_pendientes.md).
+
 Se adquirieron fuentes oficiales y se preparó un piloto revisable. Las mediciones de las nuevas formulaciones siguen pendientes; no se fabricaron ni se aprobaron candidatos automáticamente.
 
 ## Datos crudos y procedencia

@@ -4,6 +4,8 @@ Auditoría reproducible de GDSC2, predicción exploratoria de `LN_IC50` con expr
 
 ## Documentación
 
+**Decisión vigente:** el laboratorio autorizó la compra de dos fármacos; todavía no se han seleccionado. El [mapa del protocolo y pendientes](docs/mapa_protocolo_pendientes.md) reúne las instrucciones actuales, brechas y responsables. El diseño histórico de tres candidatos no debe utilizarse para compras ni generar un nuevo piloto hasta actualizarlo.
+
 Empezar por los [resultados actuales generados](docs/resultados_actuales.md) y el [seguimiento de las correcciones de auditoría](docs/correcciones_auditoria_2026-10-29.md). El [informe de la primera ejecución](docs/informe_completo.md) queda como registro histórico.
 
 | Documento | Contenido |

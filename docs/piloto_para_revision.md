@@ -1,5 +1,7 @@
 # Piloto preparado para revisión del laboratorio
 
+> **Propuesta histórica, no vigente para ejecución:** este diseño y sus 54 placas corresponden a tres candidatos. El límite confirmado es de dos fármacos; aún no se han seleccionado ni recalculado placas o potencia. Véase el [mapa vigente](mapa_protocolo_pendientes.md).
+
 Estado: propuesta de caracterización y estimación de variabilidad, **sin aprobación ni resultados experimentales**. Se preparó a partir de las condiciones recibidas (T98G, Fe₃O₄@SiO₂-APTES, MTT, 5–25 ppm, 24/48/72 h y unos tres candidatos). Los supuestos añadidos están en `pilot_design.json`; no sustituyen decisiones del laboratorio ni cambian el estado pendiente de `pilot_protocol.json`.
 
 ## 1. Qué está listo

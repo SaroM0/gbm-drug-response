@@ -1,5 +1,7 @@
 # Plan de investigación: respuesta de T98G a fármacos y nanopartículas de óxido de hierro
 
+> **Actualización de alcance:** el laboratorio autorizó comprar **dos**, no tres fármacos. Las referencias a tres candidatos y a un predictor de formulaciones en este plan son históricas o propuestas de ampliación. Prevalece el [mapa vigente de decisiones y pendientes](mapa_protocolo_pendientes.md). Los dos candidatos aún no están seleccionados.
+
 Fecha del inventario: 7 de octubre de 2026. Definición experimental recibida del laboratorio: 11 de octubre de 2026.
 
 Estado: propuesta metodológica; no representa un modelo de nanopartículas entrenado ni una eficacia experimental demostrada. El inventario describe los archivos locales. Los datos que pueda tener el equipo fuera de este repositorio deben incorporarse y verificarse.
